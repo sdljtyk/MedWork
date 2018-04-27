@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.BacksMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.Backs">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="YYID" jdbcType="INTEGER" property="yyid" />
+    <result column="YYLxr" jdbcType="VARCHAR" property="yylxr" />
+    <result column="BackJdr" jdbcType="VARCHAR" property="backjdr" />
+    <result column="BackCreat" jdbcType="VARCHAR" property="backcreat" />
+    <result column="BackAlter" jdbcType="VARCHAR" property="backalter" />
+    <result column="BackSub" jdbcType="VARCHAR" property="backsub" />
+    <result column="BackOther" jdbcType="VARCHAR" property="backother" />
+    <result column="BackState" jdbcType="INTEGER" property="backstate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, YYID, YYLxr, BackJdr, BackCreat, BackAlter, BackSub, BackOther, BackState
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.BacksExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from backs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from backs
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from backs
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.BacksExample">
+    delete from backs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.Backs">
+    insert into backs (ID, YYID, YYLxr, 
+      BackJdr, BackCreat, BackAlter, 
+      BackSub, BackOther, BackState
+      )
+    values (#{id,jdbcType=INTEGER}, #{yyid,jdbcType=INTEGER}, #{yylxr,jdbcType=VARCHAR}, 
+      #{backjdr,jdbcType=VARCHAR}, #{backcreat,jdbcType=VARCHAR}, #{backalter,jdbcType=VARCHAR}, 
+      #{backsub,jdbcType=VARCHAR}, #{backother,jdbcType=VARCHAR}, #{backstate,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.Backs">
+    insert into backs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="yyid != null">
+        YYID,
+      </if>
+      <if test="yylxr != null">
+        YYLxr,
+      </if>
+      <if test="backjdr != null">
+        BackJdr,
+      </if>
+      <if test="backcreat != null">
+        BackCreat,
+      </if>
+      <if test="backalter != null">
+        BackAlter,
+      </if>
+      <if test="backsub != null">
+        BackSub,
+      </if>
+      <if test="backother != null">
+        BackOther,
+      </if>
+      <if test="backstate != null">
+        BackState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="yyid != null">
+        #{yyid,jdbcType=INTEGER},
+      </if>
+      <if test="yylxr != null">
+        #{yylxr,jdbcType=VARCHAR},
+      </if>
+      <if test="backjdr != null">
+        #{backjdr,jdbcType=VARCHAR},
+      </if>
+      <if test="backcreat != null">
+        #{backcreat,jdbcType=VARCHAR},
+      </if>
+      <if test="backalter != null">
+        #{backalter,jdbcType=VARCHAR},
+      </if>
+      <if test="backsub != null">
+        #{backsub,jdbcType=VARCHAR},
+      </if>
+      <if test="backother != null">
+        #{backother,jdbcType=VARCHAR},
+      </if>
+      <if test="backstate != null">
+        #{backstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.BacksExample" resultType="java.lang.Long">
+    select count(*) from backs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update backs
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.yyid != null">
+        YYID = #{record.yyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.yylxr != null">
+        YYLxr = #{record.yylxr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backjdr != null">
+        BackJdr = #{record.backjdr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backcreat != null">
+        BackCreat = #{record.backcreat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backalter != null">
+        BackAlter = #{record.backalter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backsub != null">
+        BackSub = #{record.backsub,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backother != null">
+        BackOther = #{record.backother,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backstate != null">
+        BackState = #{record.backstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update backs
+    set ID = #{record.id,jdbcType=INTEGER},
+      YYID = #{record.yyid,jdbcType=INTEGER},
+      YYLxr = #{record.yylxr,jdbcType=VARCHAR},
+      BackJdr = #{record.backjdr,jdbcType=VARCHAR},
+      BackCreat = #{record.backcreat,jdbcType=VARCHAR},
+      BackAlter = #{record.backalter,jdbcType=VARCHAR},
+      BackSub = #{record.backsub,jdbcType=VARCHAR},
+      BackOther = #{record.backother,jdbcType=VARCHAR},
+      BackState = #{record.backstate,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.Backs">
+    update backs
+    <set>
+      <if test="yyid != null">
+        YYID = #{yyid,jdbcType=INTEGER},
+      </if>
+      <if test="yylxr != null">
+        YYLxr = #{yylxr,jdbcType=VARCHAR},
+      </if>
+      <if test="backjdr != null">
+        BackJdr = #{backjdr,jdbcType=VARCHAR},
+      </if>
+      <if test="backcreat != null">
+        BackCreat = #{backcreat,jdbcType=VARCHAR},
+      </if>
+      <if test="backalter != null">
+        BackAlter = #{backalter,jdbcType=VARCHAR},
+      </if>
+      <if test="backsub != null">
+        BackSub = #{backsub,jdbcType=VARCHAR},
+      </if>
+      <if test="backother != null">
+        BackOther = #{backother,jdbcType=VARCHAR},
+      </if>
+      <if test="backstate != null">
+        BackState = #{backstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Backs">
+    update backs
+    set YYID = #{yyid,jdbcType=INTEGER},
+      YYLxr = #{yylxr,jdbcType=VARCHAR},
+      BackJdr = #{backjdr,jdbcType=VARCHAR},
+      BackCreat = #{backcreat,jdbcType=VARCHAR},
+      BackAlter = #{backalter,jdbcType=VARCHAR},
+      BackSub = #{backsub,jdbcType=VARCHAR},
+      BackOther = #{backother,jdbcType=VARCHAR},
+      BackState = #{backstate,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

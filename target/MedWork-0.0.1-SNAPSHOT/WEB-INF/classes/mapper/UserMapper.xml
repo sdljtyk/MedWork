@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.User">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="UserNumber" jdbcType="VARCHAR" property="usernumber" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="UserPass" jdbcType="VARCHAR" property="userpass" />
+    <result column="UserPhone" jdbcType="VARCHAR" property="userphone" />
+    <result column="UserEmail" jdbcType="VARCHAR" property="useremail" />
+    <result column="UserAddr" jdbcType="VARCHAR" property="useraddr" />
+    <result column="UserSex" jdbcType="VARCHAR" property="usersex" />
+    <result column="UserState" jdbcType="INTEGER" property="userstate" />
+    <result column="UserCreate" jdbcType="VARCHAR" property="usercreate" />
+    <result column="UserAlter" jdbcType="VARCHAR" property="useralter" />
+    <result column="GroupID" jdbcType="INTEGER" property="groupid" />
+    <result column="UnitID" jdbcType="INTEGER" property="unitid" />
+    <result column="Others" jdbcType="VARCHAR" property="others" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, UserNumber, UserName, UserPass, UserPhone, UserEmail, UserAddr, UserSex, UserState, 
+    UserCreate, UserAlter, GroupID, UnitID, Others
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.User">
+    insert into user (ID, UserNumber, UserName, 
+      UserPass, UserPhone, UserEmail, 
+      UserAddr, UserSex, UserState, 
+      UserCreate, UserAlter, GroupID, 
+      UnitID, Others)
+    values (#{id,jdbcType=INTEGER}, #{usernumber,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userpass,jdbcType=VARCHAR}, #{userphone,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, 
+      #{useraddr,jdbcType=VARCHAR}, #{usersex,jdbcType=VARCHAR}, #{userstate,jdbcType=INTEGER}, 
+      #{usercreate,jdbcType=VARCHAR}, #{useralter,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER}, 
+      #{unitid,jdbcType=INTEGER}, #{others,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="usernumber != null">
+        UserNumber,
+      </if>
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="userpass != null">
+        UserPass,
+      </if>
+      <if test="userphone != null">
+        UserPhone,
+      </if>
+      <if test="useremail != null">
+        UserEmail,
+      </if>
+      <if test="useraddr != null">
+        UserAddr,
+      </if>
+      <if test="usersex != null">
+        UserSex,
+      </if>
+      <if test="userstate != null">
+        UserState,
+      </if>
+      <if test="usercreate != null">
+        UserCreate,
+      </if>
+      <if test="useralter != null">
+        UserAlter,
+      </if>
+      <if test="groupid != null">
+        GroupID,
+      </if>
+      <if test="unitid != null">
+        UnitID,
+      </if>
+      <if test="others != null">
+        Others,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="usernumber != null">
+        #{usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null">
+        #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null">
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null">
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddr != null">
+        #{useraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        #{usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="userstate != null">
+        #{userstate,jdbcType=INTEGER},
+      </if>
+      <if test="usercreate != null">
+        #{usercreate,jdbcType=VARCHAR},
+      </if>
+      <if test="useralter != null">
+        #{useralter,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="unitid != null">
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="others != null">
+        #{others,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.usernumber != null">
+        UserNumber = #{record.usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        UserName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpass != null">
+        UserPass = #{record.userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userphone != null">
+        UserPhone = #{record.userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useremail != null">
+        UserEmail = #{record.useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useraddr != null">
+        UserAddr = #{record.useraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersex != null">
+        UserSex = #{record.usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userstate != null">
+        UserState = #{record.userstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.usercreate != null">
+        UserCreate = #{record.usercreate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useralter != null">
+        UserAlter = #{record.useralter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupid != null">
+        GroupID = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitid != null">
+        UnitID = #{record.unitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.others != null">
+        Others = #{record.others,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set ID = #{record.id,jdbcType=INTEGER},
+      UserNumber = #{record.usernumber,jdbcType=VARCHAR},
+      UserName = #{record.username,jdbcType=VARCHAR},
+      UserPass = #{record.userpass,jdbcType=VARCHAR},
+      UserPhone = #{record.userphone,jdbcType=VARCHAR},
+      UserEmail = #{record.useremail,jdbcType=VARCHAR},
+      UserAddr = #{record.useraddr,jdbcType=VARCHAR},
+      UserSex = #{record.usersex,jdbcType=VARCHAR},
+      UserState = #{record.userstate,jdbcType=INTEGER},
+      UserCreate = #{record.usercreate,jdbcType=VARCHAR},
+      UserAlter = #{record.useralter,jdbcType=VARCHAR},
+      GroupID = #{record.groupid,jdbcType=INTEGER},
+      UnitID = #{record.unitid,jdbcType=INTEGER},
+      Others = #{record.others,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.User">
+    update user
+    <set>
+      <if test="usernumber != null">
+        UserNumber = #{usernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpass != null">
+        UserPass = #{userpass,jdbcType=VARCHAR},
+      </if>
+      <if test="userphone != null">
+        UserPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null">
+        UserEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="useraddr != null">
+        UserAddr = #{useraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        UserSex = #{usersex,jdbcType=VARCHAR},
+      </if>
+      <if test="userstate != null">
+        UserState = #{userstate,jdbcType=INTEGER},
+      </if>
+      <if test="usercreate != null">
+        UserCreate = #{usercreate,jdbcType=VARCHAR},
+      </if>
+      <if test="useralter != null">
+        UserAlter = #{useralter,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        GroupID = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="unitid != null">
+        UnitID = #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="others != null">
+        Others = #{others,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.User">
+    update user
+    set UserNumber = #{usernumber,jdbcType=VARCHAR},
+      UserName = #{username,jdbcType=VARCHAR},
+      UserPass = #{userpass,jdbcType=VARCHAR},
+      UserPhone = #{userphone,jdbcType=VARCHAR},
+      UserEmail = #{useremail,jdbcType=VARCHAR},
+      UserAddr = #{useraddr,jdbcType=VARCHAR},
+      UserSex = #{usersex,jdbcType=VARCHAR},
+      UserState = #{userstate,jdbcType=INTEGER},
+      UserCreate = #{usercreate,jdbcType=VARCHAR},
+      UserAlter = #{useralter,jdbcType=VARCHAR},
+      GroupID = #{groupid,jdbcType=INTEGER},
+      UnitID = #{unitid,jdbcType=INTEGER},
+      Others = #{others,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.OrderinfoMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.Orderinfo">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="OrderID" jdbcType="INTEGER" property="orderid" />
+    <result column="MedID" jdbcType="INTEGER" property="medid" />
+    <result column="GHSID" jdbcType="INTEGER" property="ghsid" />
+    <result column="MedDJ" jdbcType="REAL" property="meddj" />
+    <result column="Mednum" jdbcType="INTEGER" property="mednum" />
+    <result column="MedSum" jdbcType="REAL" property="medsum" />
+    <result column="GHState" jdbcType="INTEGER" property="ghstate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, OrderID, MedID, GHSID, MedDJ, Mednum, MedSum, GHState
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.OrderinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.OrderinfoExample">
+    delete from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.Orderinfo">
+    insert into orderinfo (ID, OrderID, MedID, 
+      GHSID, MedDJ, Mednum, 
+      MedSum, GHState)
+    values (#{id,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{medid,jdbcType=INTEGER}, 
+      #{ghsid,jdbcType=INTEGER}, #{meddj,jdbcType=REAL}, #{mednum,jdbcType=INTEGER}, 
+      #{medsum,jdbcType=REAL}, #{ghstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.Orderinfo">
+    insert into orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderid != null">
+        OrderID,
+      </if>
+      <if test="medid != null">
+        MedID,
+      </if>
+      <if test="ghsid != null">
+        GHSID,
+      </if>
+      <if test="meddj != null">
+        MedDJ,
+      </if>
+      <if test="mednum != null">
+        Mednum,
+      </if>
+      <if test="medsum != null">
+        MedSum,
+      </if>
+      <if test="ghstate != null">
+        GHState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="medid != null">
+        #{medid,jdbcType=INTEGER},
+      </if>
+      <if test="ghsid != null">
+        #{ghsid,jdbcType=INTEGER},
+      </if>
+      <if test="meddj != null">
+        #{meddj,jdbcType=REAL},
+      </if>
+      <if test="mednum != null">
+        #{mednum,jdbcType=INTEGER},
+      </if>
+      <if test="medsum != null">
+        #{medsum,jdbcType=REAL},
+      </if>
+      <if test="ghstate != null">
+        #{ghstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.OrderinfoExample" resultType="java.lang.Long">
+    select count(*) from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orderinfo
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderid != null">
+        OrderID = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.medid != null">
+        MedID = #{record.medid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ghsid != null">
+        GHSID = #{record.ghsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.meddj != null">
+        MedDJ = #{record.meddj,jdbcType=REAL},
+      </if>
+      <if test="record.mednum != null">
+        Mednum = #{record.mednum,jdbcType=INTEGER},
+      </if>
+      <if test="record.medsum != null">
+        MedSum = #{record.medsum,jdbcType=REAL},
+      </if>
+      <if test="record.ghstate != null">
+        GHState = #{record.ghstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orderinfo
+    set ID = #{record.id,jdbcType=INTEGER},
+      OrderID = #{record.orderid,jdbcType=INTEGER},
+      MedID = #{record.medid,jdbcType=INTEGER},
+      GHSID = #{record.ghsid,jdbcType=INTEGER},
+      MedDJ = #{record.meddj,jdbcType=REAL},
+      Mednum = #{record.mednum,jdbcType=INTEGER},
+      MedSum = #{record.medsum,jdbcType=REAL},
+      GHState = #{record.ghstate,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.Orderinfo">
+    update orderinfo
+    <set>
+      <if test="orderid != null">
+        OrderID = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="medid != null">
+        MedID = #{medid,jdbcType=INTEGER},
+      </if>
+      <if test="ghsid != null">
+        GHSID = #{ghsid,jdbcType=INTEGER},
+      </if>
+      <if test="meddj != null">
+        MedDJ = #{meddj,jdbcType=REAL},
+      </if>
+      <if test="mednum != null">
+        Mednum = #{mednum,jdbcType=INTEGER},
+      </if>
+      <if test="medsum != null">
+        MedSum = #{medsum,jdbcType=REAL},
+      </if>
+      <if test="ghstate != null">
+        GHState = #{ghstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Orderinfo">
+    update orderinfo
+    set OrderID = #{orderid,jdbcType=INTEGER},
+      MedID = #{medid,jdbcType=INTEGER},
+      GHSID = #{ghsid,jdbcType=INTEGER},
+      MedDJ = #{meddj,jdbcType=REAL},
+      Mednum = #{mednum,jdbcType=INTEGER},
+      MedSum = #{medsum,jdbcType=REAL},
+      GHState = #{ghstate,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

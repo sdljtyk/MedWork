@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.MedinfoMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.Medinfo">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="MedNumber" jdbcType="VARCHAR" property="mednumber" />
+    <result column="MedMake" jdbcType="VARCHAR" property="medmake" />
+    <result column="MedName" jdbcType="VARCHAR" property="medname" />
+    <result column="MedPic" jdbcType="VARCHAR" property="medpic" />
+    <result column="MedPz" jdbcType="VARCHAR" property="medpz" />
+    <result column="MedJk" jdbcType="INTEGER" property="medjk" />
+    <result column="MedZl" jdbcType="VARCHAR" property="medzl" />
+    <result column="MedAbout" jdbcType="VARCHAR" property="medabout" />
+    <result column="MedState" jdbcType="INTEGER" property="medstate" />
+    <result column="MedDw" jdbcType="VARCHAR" property="meddw" />
+    <result column="MedGg" jdbcType="VARCHAR" property="medgg" />
+    <result column="MedJx" jdbcType="VARCHAR" property="medjx" />
+    <result column="MedClass" jdbcType="INTEGER" property="medclass" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, MedNumber, MedMake, MedName, MedPic, MedPz, MedJk, MedZl, MedAbout, MedState, 
+    MedDw, MedGg, MedJx, MedClass
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.MedinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from medinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from medinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from medinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.MedinfoExample">
+    delete from medinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.Medinfo">
+    insert into medinfo (ID, MedNumber, MedMake, 
+      MedName, MedPic, MedPz, 
+      MedJk, MedZl, MedAbout, 
+      MedState, MedDw, MedGg, 
+      MedJx, MedClass)
+    values (#{id,jdbcType=INTEGER}, #{mednumber,jdbcType=VARCHAR}, #{medmake,jdbcType=VARCHAR}, 
+      #{medname,jdbcType=VARCHAR}, #{medpic,jdbcType=VARCHAR}, #{medpz,jdbcType=VARCHAR}, 
+      #{medjk,jdbcType=INTEGER}, #{medzl,jdbcType=VARCHAR}, #{medabout,jdbcType=VARCHAR}, 
+      #{medstate,jdbcType=INTEGER}, #{meddw,jdbcType=VARCHAR}, #{medgg,jdbcType=VARCHAR}, 
+      #{medjx,jdbcType=VARCHAR}, #{medclass,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.Medinfo">
+    insert into medinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="mednumber != null">
+        MedNumber,
+      </if>
+      <if test="medmake != null">
+        MedMake,
+      </if>
+      <if test="medname != null">
+        MedName,
+      </if>
+      <if test="medpic != null">
+        MedPic,
+      </if>
+      <if test="medpz != null">
+        MedPz,
+      </if>
+      <if test="medjk != null">
+        MedJk,
+      </if>
+      <if test="medzl != null">
+        MedZl,
+      </if>
+      <if test="medabout != null">
+        MedAbout,
+      </if>
+      <if test="medstate != null">
+        MedState,
+      </if>
+      <if test="meddw != null">
+        MedDw,
+      </if>
+      <if test="medgg != null">
+        MedGg,
+      </if>
+      <if test="medjx != null">
+        MedJx,
+      </if>
+      <if test="medclass != null">
+        MedClass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mednumber != null">
+        #{mednumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medmake != null">
+        #{medmake,jdbcType=VARCHAR},
+      </if>
+      <if test="medname != null">
+        #{medname,jdbcType=VARCHAR},
+      </if>
+      <if test="medpic != null">
+        #{medpic,jdbcType=VARCHAR},
+      </if>
+      <if test="medpz != null">
+        #{medpz,jdbcType=VARCHAR},
+      </if>
+      <if test="medjk != null">
+        #{medjk,jdbcType=INTEGER},
+      </if>
+      <if test="medzl != null">
+        #{medzl,jdbcType=VARCHAR},
+      </if>
+      <if test="medabout != null">
+        #{medabout,jdbcType=VARCHAR},
+      </if>
+      <if test="medstate != null">
+        #{medstate,jdbcType=INTEGER},
+      </if>
+      <if test="meddw != null">
+        #{meddw,jdbcType=VARCHAR},
+      </if>
+      <if test="medgg != null">
+        #{medgg,jdbcType=VARCHAR},
+      </if>
+      <if test="medjx != null">
+        #{medjx,jdbcType=VARCHAR},
+      </if>
+      <if test="medclass != null">
+        #{medclass,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.MedinfoExample" resultType="java.lang.Long">
+    select count(*) from medinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update medinfo
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mednumber != null">
+        MedNumber = #{record.mednumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medmake != null">
+        MedMake = #{record.medmake,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medname != null">
+        MedName = #{record.medname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medpic != null">
+        MedPic = #{record.medpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medpz != null">
+        MedPz = #{record.medpz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medjk != null">
+        MedJk = #{record.medjk,jdbcType=INTEGER},
+      </if>
+      <if test="record.medzl != null">
+        MedZl = #{record.medzl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medabout != null">
+        MedAbout = #{record.medabout,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medstate != null">
+        MedState = #{record.medstate,jdbcType=INTEGER},
+      </if>
+      <if test="record.meddw != null">
+        MedDw = #{record.meddw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medgg != null">
+        MedGg = #{record.medgg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medjx != null">
+        MedJx = #{record.medjx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.medclass != null">
+        MedClass = #{record.medclass,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update medinfo
+    set ID = #{record.id,jdbcType=INTEGER},
+      MedNumber = #{record.mednumber,jdbcType=VARCHAR},
+      MedMake = #{record.medmake,jdbcType=VARCHAR},
+      MedName = #{record.medname,jdbcType=VARCHAR},
+      MedPic = #{record.medpic,jdbcType=VARCHAR},
+      MedPz = #{record.medpz,jdbcType=VARCHAR},
+      MedJk = #{record.medjk,jdbcType=INTEGER},
+      MedZl = #{record.medzl,jdbcType=VARCHAR},
+      MedAbout = #{record.medabout,jdbcType=VARCHAR},
+      MedState = #{record.medstate,jdbcType=INTEGER},
+      MedDw = #{record.meddw,jdbcType=VARCHAR},
+      MedGg = #{record.medgg,jdbcType=VARCHAR},
+      MedJx = #{record.medjx,jdbcType=VARCHAR},
+      MedClass = #{record.medclass,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.Medinfo">
+    update medinfo
+    <set>
+      <if test="mednumber != null">
+        MedNumber = #{mednumber,jdbcType=VARCHAR},
+      </if>
+      <if test="medmake != null">
+        MedMake = #{medmake,jdbcType=VARCHAR},
+      </if>
+      <if test="medname != null">
+        MedName = #{medname,jdbcType=VARCHAR},
+      </if>
+      <if test="medpic != null">
+        MedPic = #{medpic,jdbcType=VARCHAR},
+      </if>
+      <if test="medpz != null">
+        MedPz = #{medpz,jdbcType=VARCHAR},
+      </if>
+      <if test="medjk != null">
+        MedJk = #{medjk,jdbcType=INTEGER},
+      </if>
+      <if test="medzl != null">
+        MedZl = #{medzl,jdbcType=VARCHAR},
+      </if>
+      <if test="medabout != null">
+        MedAbout = #{medabout,jdbcType=VARCHAR},
+      </if>
+      <if test="medstate != null">
+        MedState = #{medstate,jdbcType=INTEGER},
+      </if>
+      <if test="meddw != null">
+        MedDw = #{meddw,jdbcType=VARCHAR},
+      </if>
+      <if test="medgg != null">
+        MedGg = #{medgg,jdbcType=VARCHAR},
+      </if>
+      <if test="medjx != null">
+        MedJx = #{medjx,jdbcType=VARCHAR},
+      </if>
+      <if test="medclass != null">
+        MedClass = #{medclass,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Medinfo">
+    update medinfo
+    set MedNumber = #{mednumber,jdbcType=VARCHAR},
+      MedMake = #{medmake,jdbcType=VARCHAR},
+      MedName = #{medname,jdbcType=VARCHAR},
+      MedPic = #{medpic,jdbcType=VARCHAR},
+      MedPz = #{medpz,jdbcType=VARCHAR},
+      MedJk = #{medjk,jdbcType=INTEGER},
+      MedZl = #{medzl,jdbcType=VARCHAR},
+      MedAbout = #{medabout,jdbcType=VARCHAR},
+      MedState = #{medstate,jdbcType=INTEGER},
+      MedDw = #{meddw,jdbcType=VARCHAR},
+      MedGg = #{medgg,jdbcType=VARCHAR},
+      MedJx = #{medjx,jdbcType=VARCHAR},
+      MedClass = #{medclass,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

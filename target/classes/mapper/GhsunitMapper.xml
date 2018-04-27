@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.GhsunitMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.Ghsunit">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="GHSName" jdbcType="VARCHAR" property="ghsname" />
+    <result column="GHSLb" jdbcType="VARCHAR" property="ghslb" />
+    <result column="GHSLxr" jdbcType="VARCHAR" property="ghslxr" />
+    <result column="GHSPhone" jdbcType="VARCHAR" property="ghsphone" />
+    <result column="GHSXkz" jdbcType="VARCHAR" property="ghsxkz" />
+    <result column="GHSJyfw" jdbcType="VARCHAR" property="ghsjyfw" />
+    <result column="GHSHome" jdbcType="VARCHAR" property="ghshome" />
+    <result column="GHSAddr" jdbcType="VARCHAR" property="ghsaddr" />
+    <result column="GHSZzc" jdbcType="VARCHAR" property="ghszzc" />
+    <result column="GHSFr" jdbcType="VARCHAR" property="ghsfr" />
+    <result column="GHSZczj" jdbcType="VARCHAR" property="ghszczj" />
+    <result column="GHSJj" jdbcType="VARCHAR" property="ghsjj" />
+    <result column="GHSother" jdbcType="VARCHAR" property="ghsother" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, GHSName, GHSLb, GHSLxr, GHSPhone, GHSXkz, GHSJyfw, GHSHome, GHSAddr, GHSZzc, 
+    GHSFr, GHSZczj, GHSJj, GHSother
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.GhsunitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ghsunit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ghsunit
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ghsunit
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.GhsunitExample">
+    delete from ghsunit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.Ghsunit">
+    insert into ghsunit (ID, GHSName, GHSLb, 
+      GHSLxr, GHSPhone, GHSXkz, 
+      GHSJyfw, GHSHome, GHSAddr, 
+      GHSZzc, GHSFr, GHSZczj, 
+      GHSJj, GHSother)
+    values (#{id,jdbcType=INTEGER}, #{ghsname,jdbcType=VARCHAR}, #{ghslb,jdbcType=VARCHAR}, 
+      #{ghslxr,jdbcType=VARCHAR}, #{ghsphone,jdbcType=VARCHAR}, #{ghsxkz,jdbcType=VARCHAR}, 
+      #{ghsjyfw,jdbcType=VARCHAR}, #{ghshome,jdbcType=VARCHAR}, #{ghsaddr,jdbcType=VARCHAR}, 
+      #{ghszzc,jdbcType=VARCHAR}, #{ghsfr,jdbcType=VARCHAR}, #{ghszczj,jdbcType=VARCHAR}, 
+      #{ghsjj,jdbcType=VARCHAR}, #{ghsother,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.Ghsunit">
+    insert into ghsunit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="ghsname != null">
+        GHSName,
+      </if>
+      <if test="ghslb != null">
+        GHSLb,
+      </if>
+      <if test="ghslxr != null">
+        GHSLxr,
+      </if>
+      <if test="ghsphone != null">
+        GHSPhone,
+      </if>
+      <if test="ghsxkz != null">
+        GHSXkz,
+      </if>
+      <if test="ghsjyfw != null">
+        GHSJyfw,
+      </if>
+      <if test="ghshome != null">
+        GHSHome,
+      </if>
+      <if test="ghsaddr != null">
+        GHSAddr,
+      </if>
+      <if test="ghszzc != null">
+        GHSZzc,
+      </if>
+      <if test="ghsfr != null">
+        GHSFr,
+      </if>
+      <if test="ghszczj != null">
+        GHSZczj,
+      </if>
+      <if test="ghsjj != null">
+        GHSJj,
+      </if>
+      <if test="ghsother != null">
+        GHSother,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ghsname != null">
+        #{ghsname,jdbcType=VARCHAR},
+      </if>
+      <if test="ghslb != null">
+        #{ghslb,jdbcType=VARCHAR},
+      </if>
+      <if test="ghslxr != null">
+        #{ghslxr,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsphone != null">
+        #{ghsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsxkz != null">
+        #{ghsxkz,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsjyfw != null">
+        #{ghsjyfw,jdbcType=VARCHAR},
+      </if>
+      <if test="ghshome != null">
+        #{ghshome,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsaddr != null">
+        #{ghsaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="ghszzc != null">
+        #{ghszzc,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsfr != null">
+        #{ghsfr,jdbcType=VARCHAR},
+      </if>
+      <if test="ghszczj != null">
+        #{ghszczj,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsjj != null">
+        #{ghsjj,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsother != null">
+        #{ghsother,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.GhsunitExample" resultType="java.lang.Long">
+    select count(*) from ghsunit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ghsunit
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ghsname != null">
+        GHSName = #{record.ghsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghslb != null">
+        GHSLb = #{record.ghslb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghslxr != null">
+        GHSLxr = #{record.ghslxr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsphone != null">
+        GHSPhone = #{record.ghsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsxkz != null">
+        GHSXkz = #{record.ghsxkz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsjyfw != null">
+        GHSJyfw = #{record.ghsjyfw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghshome != null">
+        GHSHome = #{record.ghshome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsaddr != null">
+        GHSAddr = #{record.ghsaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghszzc != null">
+        GHSZzc = #{record.ghszzc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsfr != null">
+        GHSFr = #{record.ghsfr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghszczj != null">
+        GHSZczj = #{record.ghszczj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsjj != null">
+        GHSJj = #{record.ghsjj,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ghsother != null">
+        GHSother = #{record.ghsother,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ghsunit
+    set ID = #{record.id,jdbcType=INTEGER},
+      GHSName = #{record.ghsname,jdbcType=VARCHAR},
+      GHSLb = #{record.ghslb,jdbcType=VARCHAR},
+      GHSLxr = #{record.ghslxr,jdbcType=VARCHAR},
+      GHSPhone = #{record.ghsphone,jdbcType=VARCHAR},
+      GHSXkz = #{record.ghsxkz,jdbcType=VARCHAR},
+      GHSJyfw = #{record.ghsjyfw,jdbcType=VARCHAR},
+      GHSHome = #{record.ghshome,jdbcType=VARCHAR},
+      GHSAddr = #{record.ghsaddr,jdbcType=VARCHAR},
+      GHSZzc = #{record.ghszzc,jdbcType=VARCHAR},
+      GHSFr = #{record.ghsfr,jdbcType=VARCHAR},
+      GHSZczj = #{record.ghszczj,jdbcType=VARCHAR},
+      GHSJj = #{record.ghsjj,jdbcType=VARCHAR},
+      GHSother = #{record.ghsother,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.Ghsunit">
+    update ghsunit
+    <set>
+      <if test="ghsname != null">
+        GHSName = #{ghsname,jdbcType=VARCHAR},
+      </if>
+      <if test="ghslb != null">
+        GHSLb = #{ghslb,jdbcType=VARCHAR},
+      </if>
+      <if test="ghslxr != null">
+        GHSLxr = #{ghslxr,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsphone != null">
+        GHSPhone = #{ghsphone,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsxkz != null">
+        GHSXkz = #{ghsxkz,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsjyfw != null">
+        GHSJyfw = #{ghsjyfw,jdbcType=VARCHAR},
+      </if>
+      <if test="ghshome != null">
+        GHSHome = #{ghshome,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsaddr != null">
+        GHSAddr = #{ghsaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="ghszzc != null">
+        GHSZzc = #{ghszzc,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsfr != null">
+        GHSFr = #{ghsfr,jdbcType=VARCHAR},
+      </if>
+      <if test="ghszczj != null">
+        GHSZczj = #{ghszczj,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsjj != null">
+        GHSJj = #{ghsjj,jdbcType=VARCHAR},
+      </if>
+      <if test="ghsother != null">
+        GHSother = #{ghsother,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Ghsunit">
+    update ghsunit
+    set GHSName = #{ghsname,jdbcType=VARCHAR},
+      GHSLb = #{ghslb,jdbcType=VARCHAR},
+      GHSLxr = #{ghslxr,jdbcType=VARCHAR},
+      GHSPhone = #{ghsphone,jdbcType=VARCHAR},
+      GHSXkz = #{ghsxkz,jdbcType=VARCHAR},
+      GHSJyfw = #{ghsjyfw,jdbcType=VARCHAR},
+      GHSHome = #{ghshome,jdbcType=VARCHAR},
+      GHSAddr = #{ghsaddr,jdbcType=VARCHAR},
+      GHSZzc = #{ghszzc,jdbcType=VARCHAR},
+      GHSFr = #{ghsfr,jdbcType=VARCHAR},
+      GHSZczj = #{ghszczj,jdbcType=VARCHAR},
+      GHSJj = #{ghsjj,jdbcType=VARCHAR},
+      GHSother = #{ghsother,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

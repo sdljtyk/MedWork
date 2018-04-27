@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.JdunitMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.Jdunit">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="JDName" jdbcType="VARCHAR" property="jdname" />
+    <result column="JDAddr" jdbcType="VARCHAR" property="jdaddr" />
+    <result column="JDYZ" jdbcType="VARCHAR" property="jdyz" />
+    <result column="JDLXR" jdbcType="VARCHAR" property="jdlxr" />
+    <result column="JDPhone" jdbcType="VARCHAR" property="jdphone" />
+    <result column="JDDqId" jdbcType="INTEGER" property="jddqid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, JDName, JDAddr, JDYZ, JDLXR, JDPhone, JDDqId
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.JdunitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jdunit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jdunit
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jdunit
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.JdunitExample">
+    delete from jdunit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.Jdunit">
+    insert into jdunit (ID, JDName, JDAddr, 
+      JDYZ, JDLXR, JDPhone, 
+      JDDqId)
+    values (#{id,jdbcType=INTEGER}, #{jdname,jdbcType=VARCHAR}, #{jdaddr,jdbcType=VARCHAR}, 
+      #{jdyz,jdbcType=VARCHAR}, #{jdlxr,jdbcType=VARCHAR}, #{jdphone,jdbcType=VARCHAR}, 
+      #{jddqid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.Jdunit">
+    insert into jdunit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="jdname != null">
+        JDName,
+      </if>
+      <if test="jdaddr != null">
+        JDAddr,
+      </if>
+      <if test="jdyz != null">
+        JDYZ,
+      </if>
+      <if test="jdlxr != null">
+        JDLXR,
+      </if>
+      <if test="jdphone != null">
+        JDPhone,
+      </if>
+      <if test="jddqid != null">
+        JDDqId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jdname != null">
+        #{jdname,jdbcType=VARCHAR},
+      </if>
+      <if test="jdaddr != null">
+        #{jdaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="jdyz != null">
+        #{jdyz,jdbcType=VARCHAR},
+      </if>
+      <if test="jdlxr != null">
+        #{jdlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="jdphone != null">
+        #{jdphone,jdbcType=VARCHAR},
+      </if>
+      <if test="jddqid != null">
+        #{jddqid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.JdunitExample" resultType="java.lang.Long">
+    select count(*) from jdunit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jdunit
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.jdname != null">
+        JDName = #{record.jdname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jdaddr != null">
+        JDAddr = #{record.jdaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jdyz != null">
+        JDYZ = #{record.jdyz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jdlxr != null">
+        JDLXR = #{record.jdlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jdphone != null">
+        JDPhone = #{record.jdphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jddqid != null">
+        JDDqId = #{record.jddqid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jdunit
+    set ID = #{record.id,jdbcType=INTEGER},
+      JDName = #{record.jdname,jdbcType=VARCHAR},
+      JDAddr = #{record.jdaddr,jdbcType=VARCHAR},
+      JDYZ = #{record.jdyz,jdbcType=VARCHAR},
+      JDLXR = #{record.jdlxr,jdbcType=VARCHAR},
+      JDPhone = #{record.jdphone,jdbcType=VARCHAR},
+      JDDqId = #{record.jddqid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.Jdunit">
+    update jdunit
+    <set>
+      <if test="jdname != null">
+        JDName = #{jdname,jdbcType=VARCHAR},
+      </if>
+      <if test="jdaddr != null">
+        JDAddr = #{jdaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="jdyz != null">
+        JDYZ = #{jdyz,jdbcType=VARCHAR},
+      </if>
+      <if test="jdlxr != null">
+        JDLXR = #{jdlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="jdphone != null">
+        JDPhone = #{jdphone,jdbcType=VARCHAR},
+      </if>
+      <if test="jddqid != null">
+        JDDqId = #{jddqid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Jdunit">
+    update jdunit
+    set JDName = #{jdname,jdbcType=VARCHAR},
+      JDAddr = #{jdaddr,jdbcType=VARCHAR},
+      JDYZ = #{jdyz,jdbcType=VARCHAR},
+      JDLXR = #{jdlxr,jdbcType=VARCHAR},
+      JDPhone = #{jdphone,jdbcType=VARCHAR},
+      JDDqId = #{jddqid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
