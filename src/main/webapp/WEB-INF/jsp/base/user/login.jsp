@@ -85,7 +85,7 @@ $(document).ready(function(){
 		if (type == 1) {
 			setTimeout(tofirst, 1000);
 		} else {
-			$.messager.alert("消息",data.message);
+			$.messager.alert("系统提示消息",data.message);
 			randomcode_refresh();
 		} 
 
@@ -98,21 +98,21 @@ $(document).ready(function(){
 		
 		if(parent.parent.parent){
 		
-			parent.parent.parent.location='${baseurl}/user/first.action';
+			parent.parent.parent.location='${baseurl}/first.action';
 		}else if(parent.parent){
 		
-			parent.parent.location='${baseurl}/user/first.action';
+			parent.parent.location='${baseurl}/first.action';
 		}else if(parent){
-			parent.location='${baseurl}/user/first.action';
+			parent.location='${baseurl}/first.action';
 		}else{
 		
-			window.location='${baseurl}/user/first.action';
+			window.location='${baseurl}/first.action';
 		}
 	}
 </SCRIPT>
 </HEAD>
 <BODY style="background: #f6fdff url(${baseurl}/images/login/bg1.jpg) repeat-x;">
-	<FORM id="loginform" name="loginform" action="${baseurl}/user/login.action"
+	<FORM id="loginform" name="loginform" action="${baseurl}/login.action"
 		method="post">
 		<DIV class="logincon">
 

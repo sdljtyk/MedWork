@@ -39,5 +39,20 @@ public class UserService {
 			
 		}
 	}
+	public int updatePwd(String oldpwd, String newpwd, String userid) {
+		User user = userMapper.selectByPrimaryKey(Integer.parseInt(userid));
+		String oldPwd = new MD5().getMD5ofStr(oldpwd);
+		String newPwd = new MD5().getMD5ofStr(newpwd);
+		if(!oldPwd.equals(user.getUserpass()))
+			return 0;
+		else {
+			user.setUserpass(newPwd);
+			int result = userMapper.updateByPrimaryKey(user);
+			if(result==1)
+				return 1;
+			else 
+				return 2;
+		}
+	}
 	
 }

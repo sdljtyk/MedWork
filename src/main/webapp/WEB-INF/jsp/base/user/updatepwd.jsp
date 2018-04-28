@@ -59,14 +59,14 @@
 	});
 	function saveapwdsubmit() {
 		if ($.formValidator.pageIsValid()) {
-			jquerySubByFId('saveapwdform', saveapwd_commit_callback, null,
-					"json");
+			jquerySubByFId('saveapwdform', saveapwd_commit_callback, null,"json");
 		}
 
 	}
 	function saveapwd_commit_callback(data) {
-		var result = getCallbackData(data);
-		_alert(result);
+		$.messager.alert("系统提示消息",data.message);
+		if(data.type==1)
+			reset()
 	}
 	function reset() {
 		document.all('saveapwdform').reset()
@@ -75,12 +75,12 @@
 </HEAD>
 <BODY>
 	<form id="saveapwdform" name="saveapwdform"
-		action="${baseurl}/saveapwd.action" method="post">
+		action="${baseurl}/user/saveapwd.action" method="post">
 		<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%"
 			bgColor=#c4d8ed>
 			<TBODY>
 				<TR>
-					<TD background=images/r_0.gif width="100%">
+					<TD background=${baseurl}/images/r_0.gif width="100%">
 						<TABLE cellSpacing=0 cellPadding=0 width="100%">
 							<TBODY>
 								<TR>
@@ -119,7 +119,7 @@
 									<TD height=30 align=right>重复新密码：</TD>
 									<TD class=category>
 										<div>
-											<input type="password" id="pwdrepeat" name="newpwd" />
+											<input type="password" id="pwdrepeat" name="renewpwd" />
 										</div>
 										<div id="pwdrepeatTip"></div>
 									</TD>
@@ -127,9 +127,9 @@
 
 								<TR>
 									<TD height=30>&nbsp;</TD>
-									<TD class=category><a id="submitbtn" href="#"
-										onclick="saveapwdsubmit()">提交</a> <a id="resetbtn" href="#"
-										onclick="reset()">重置</a></TD>
+									<TD class=category>
+										<a id="submitbtn" href="#" onclick="saveapwdsubmit()">提交</a> 
+										<a id="resetbtn" href="#" onclick="reset()">重置</a></TD>
 								</TR>
 
 							</TBODY>

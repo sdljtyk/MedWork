@@ -11,8 +11,13 @@ import com.tyk.service.UserService;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.ActiveUser;
 
+/**
+ * 
+ * @author sdljtyk
+ * 登录相关校验以及用户拦截
+ *
+ */
 @Controller
-@RequestMapping("/user")
 public class Login {
 	
 	@Autowired
@@ -27,6 +32,7 @@ public class Login {
 			return "/base/first";
 	}
 	
+	//登录校验
 	@RequestMapping("/login.action")
 	@ResponseBody
 	public ResultInfo login(HttpSession session,String userpass,String usernumber,String randomcode)
@@ -51,12 +57,14 @@ public class Login {
 		}
 	}
 	
+	//欢迎界面
 	@RequestMapping("/welcome.action")
 	public String welcome()
 	{
 		return "/base/welcome";
 	}
 	
+	//登出
 	@RequestMapping("/logout.action")
 	public String logout(HttpSession session)
 	{

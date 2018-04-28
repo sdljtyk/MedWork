@@ -33,7 +33,7 @@
 
 		$('#tabs').tabs('add', {
 			title : '欢迎使用',
-			content : createFrame('${baseurl}/user/welcome.action')
+			content : createFrame('${baseurl}/welcome.action')
 		}).tabs({
 			onSelect : function(title) {
 				var currTab = $('#tabs').tabs('getTab', title);
@@ -60,7 +60,7 @@
 	function logout() {
 		_confirm('您确定要退出本系统吗?',null,
 				function(){
-					location.href = '${baseurl}/user/logout.action';
+					location.href = '${baseurl}/logout.action';
 				}
 		)
 	}

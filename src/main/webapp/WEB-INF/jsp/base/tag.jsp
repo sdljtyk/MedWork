@@ -4,4 +4,4 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 %>
-<c:set value="<%=basePath %>" var="baseurl" />
+<c:set value="http://localhost:8080" var="baseurl" />

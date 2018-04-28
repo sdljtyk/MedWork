@@ -16,12 +16,18 @@ import com.tyk.pojo.MenuExample;
 import com.tyk.vo.ActiveUser;
 import com.tyk.vo.MenuVo;
 
+/**
+ * 
+ * @author sdljtyk
+ *
+ */
 @Controller
 public class MenuAction {
 
 	@Autowired
 	private MenuMapper menuMapper;
 	
+	//菜单栏加载
 	@RequestMapping("/menu.action")
 	@ResponseBody
 	public List<MenuVo> getMenus(HttpSession session)
@@ -35,7 +41,6 @@ public class MenuAction {
 			.andMenuparentEqualTo(0);
 		List<Menu> menus= menuMapper.selectByExample(menuExample);
 		for (Menu menu : menus) {
-			System.out.println("MenuName:"+menu.getMenuname());
 			MenuVo temp = new MenuVo();
 			temp.setMenuid(menu.getId().toString());
 			temp.setMenuname(menu.getMenuname());
@@ -48,7 +53,6 @@ public class MenuAction {
 			List<Menu> tempMenu = menuMapper.selectByExample(menuExample2);
 			List<MenuVo> tempMenuVo = new ArrayList<MenuVo>();
 			for (Menu tempm : tempMenu) {
-				System.out.println("++++MenuName:"+tempm.getMenuname());
 				MenuVo tempvo = new MenuVo();
 				tempvo.setMenuid(tempm.getId().toString());
 				tempvo.setMenuname(tempm.getMenuname());
