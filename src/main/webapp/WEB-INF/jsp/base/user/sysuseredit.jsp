@@ -139,7 +139,7 @@
 								<select name="sysuser.groupid" id="sysuser_groupid">
 									<option value="">请选择</option>
 									<c:forEach items="${usergroupList}" var="value">
-									   <option value="${value.dictcode}" <c:if test="${sysuser.groupid== value.dictcode}">selected</c:if>>${value.info}</option>
+									   <option value="${value.id}" <c:if test="${sysuser.groupid== value.id}">selected</c:if>>${value.info}</option>
 									</c:forEach>
 									
 								</select>

@@ -17,6 +17,9 @@
     <result column="MedJx" jdbcType="VARCHAR" property="medjx" />
     <result column="MedClass" jdbcType="INTEGER" property="medclass" />
   </resultMap>
+  
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

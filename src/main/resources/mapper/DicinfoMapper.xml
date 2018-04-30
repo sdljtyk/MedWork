@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tyk.mapper.DicinfoMapper">
+  <resultMap id="BaseResultMap" type="com.tyk.pojo.Dicinfo">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="DicCode" jdbcType="INTEGER" property="diccode" />
+    <result column="DicType" jdbcType="VARCHAR" property="dictype" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="Orthers" jdbcType="VARCHAR" property="orthers" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DicCode, DicType, info, Orthers
+  </sql>
+  <select id="selectByExample" parameterType="com.tyk.pojo.DicinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dicinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dicinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dicinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tyk.pojo.DicinfoExample">
+    delete from dicinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tyk.pojo.Dicinfo">
+    insert into dicinfo (ID, DicCode, DicType, 
+      info, Orthers)
+    values (#{id,jdbcType=INTEGER}, #{diccode,jdbcType=INTEGER}, #{dictype,jdbcType=VARCHAR}, 
+      #{info,jdbcType=VARCHAR}, #{orthers,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tyk.pojo.Dicinfo">
+    insert into dicinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="diccode != null">
+        DicCode,
+      </if>
+      <if test="dictype != null">
+        DicType,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="orthers != null">
+        Orthers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="diccode != null">
+        #{diccode,jdbcType=INTEGER},
+      </if>
+      <if test="dictype != null">
+        #{dictype,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="orthers != null">
+        #{orthers,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tyk.pojo.DicinfoExample" resultType="java.lang.Long">
+    select count(*) from dicinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dicinfo
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.diccode != null">
+        DicCode = #{record.diccode,jdbcType=INTEGER},
+      </if>
+      <if test="record.dictype != null">
+        DicType = #{record.dictype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.info != null">
+        info = #{record.info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orthers != null">
+        Orthers = #{record.orthers,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dicinfo
+    set ID = #{record.id,jdbcType=INTEGER},
+      DicCode = #{record.diccode,jdbcType=INTEGER},
+      DicType = #{record.dictype,jdbcType=VARCHAR},
+      info = #{record.info,jdbcType=VARCHAR},
+      Orthers = #{record.orthers,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tyk.pojo.Dicinfo">
+    update dicinfo
+    <set>
+      <if test="diccode != null">
+        DicCode = #{diccode,jdbcType=INTEGER},
+      </if>
+      <if test="dictype != null">
+        DicType = #{dictype,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="orthers != null">
+        Orthers = #{orthers,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Dicinfo">
+    update dicinfo
+    set DicCode = #{diccode,jdbcType=INTEGER},
+      DicType = #{dictype,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      Orthers = #{orthers,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

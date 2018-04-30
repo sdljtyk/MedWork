@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,6 +36,7 @@ public class UserAction {
 	@RequestMapping("/saveapwd.action")
 	@ResponseBody
 	public ResultInfo SavePwd(HttpSession session,String oldpwd,String newpwd)
+
 	{
 		ResultInfo ri = new ResultInfo();
 		System.out.println(oldpwd+"+++"+newpwd);
@@ -55,4 +57,34 @@ public class UserAction {
 		}
 		return ri;
 	}
+	
+	@RequestMapping("/userjdquery")
+	public String userjdquery(Model model)throws Exception{
+		return "/base/user/userjdquery";
+	}
+
+	@RequestMapping("/useryyquery")
+	public String useryyquery(Model model)throws Exception{
+		
+		//医院类型
+//		List yyjbList =  baseServiceFacade.getSystemConfigService().findDicttypeinfolist("005");
+//		List yylbList =  baseServiceFacade.getSystemConfigService().findDicttypeinfolist("006");
+//		model.addAttribute("yyjbList", yyjbList);
+//		model.addAttribute("yylbList", yylbList);
+		return "/base/user/useryyquery";
+	}
+	
+	
+	@RequestMapping("/usergysquery")
+	public String usergysquery(Model model)throws Exception{
+		return "/base/user/usergysquery";
+	}
+	
+	@RequestMapping("/sysuserquery")
+	public String sysuserquery(Model model)throws Exception{
+		//List usergroupList =  baseServiceFacade.getSystemConfigService().findDicttypeinfolist("s01");
+		//model.addAttribute("usergroupList", usergroupList);
+		return "/base/user/sysuserquery";
+	}
+	
 }

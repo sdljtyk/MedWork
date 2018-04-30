@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 用户身份信息，存入session
- *
+ * @author sdljtyk
  */
 public class ActiveUser  implements java.io.Serializable {
 	private String userid;//用户编号

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/jsp/base/tag.jsp"%>
-<html> 
+<html>
 <head>
 <title>药品信息查询</title>
 <meta http-equiv="pragma" content="no-cache">
@@ -26,9 +26,7 @@ var ypxxexport = function(){
 };
 
 function ypxxexport_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
-	
+	$.messager.alert("系统提示消息",data.message);
 }
 var ypxxdelList = function(){
 	_confirm('您确定要执行删除操作吗?',null,
@@ -40,7 +38,6 @@ var ypxxdelList = function(){
 		}
 		if(ids.length>0){
 			$("#ypxxdelid").val(ids.join(','));
-			//alert($("#ypxxdelid").val());
 			jquerySubByFId('ypxxdelForm', ypxxdel_callback, null, "json");
 		}else{
 			alert_warn("请选择要删除的项目");
@@ -59,8 +56,7 @@ var ypxxdel = function(id){
 	)
 };
 function ypxxdel_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	ypxxquery();
 }
 var ypxxedit = function (id){
@@ -68,17 +64,8 @@ var ypxxedit = function (id){
 	var sendUrl = "${baseurl}/ypml/ypxxedit.action?editid="+id;
 	
 	createmodalwindow("药品信息修改", 900, 500, sendUrl);
-	/* 
-	var ajaxOption = new AjaxOption();
-			ajaxOption._initPostRequest(true,sendUrl,"json","html");
-			_ajaxPostRequest(ajaxOption, '', ypxxedit_callback);  */
 };
 
-/* function ypxxedit_callback(redata){
-	$('#ypxxquery_div').css("display","none");
-	$("#ypxxedit_div").css("display","block");
-	$("#ypxxedit_div").html(redata);
-} */
 function ypxxinfo(id){
 var sendUrl = "${baseurl}/ypml/ypxxview.action?id="+id;
 	
@@ -134,36 +121,32 @@ var columns = [ [{
 	title : '',
 	checkbox:true
 },{
-	field : 'bm',
+	field : 'mednumber',
 	title : '流水号',
 	width : 80
 },{
-	field : 'mc',
-	title : '通用名',
+	field : 'medname',
+	title : '商品名称',
 	width : 130
 },{
-	field : 'jx',
+	field : 'medjx',
 	title : '剂型',
 	width : 80
 },{
-	field : 'gg',
+	field : 'medgg',
 	title : '规格',
 	width : 100
 },{
-	field : 'zhxs',
-	title : '转换系数',
-	width : 50
-},{
-	field : 'scqymc',
+	field : 'medmake',
 	title : '生产企业',
 	width : 180
 },{
-	field : 'spmc',
-	title : '商品名称',
+	field : 'zlccmc',
+	title : '质量层次',
 	width : 150
 },{
-	field : 'zbjg',
-	title : '中标价',
+	field : 'lbmc',
+	title : '药品类别',
 	width : 50
 },{
 	field : 'jyztmc',
@@ -235,94 +218,79 @@ function initGrid(){
 </script>
 </HEAD>
 <BODY>
-<div id="ypxxquery_div">
-    <form id="ypxxqueryForm" name="ypxxqueryForm" action="${baseurl}/ypml/ypxxexport.action" method="post">
-			<TABLE  class="table_search">
+	<div id="ypxxquery_div">
+		<form id="ypxxqueryForm" name="ypxxqueryForm"
+			action="${baseurl}/ypml/ypxxexport.action" method="post">
+			<TABLE class="table_search">
 				<TBODY>
 					<TR>
-						
-						<TD class="left">通用名：</td>
-						<td><INPUT type="text"  name="ypxxCustom.mc" /></TD>
+
+						<TD class="left">商品名称：</td>
+						<td><INPUT type="text" name="medname" /></TD>
 						<TD class="left">剂型：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.jx" /></td>
+						<td><INPUT type="text" name="medjx" /></td>
 						<TD class="left">规格：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.gg" /></td>
-						<TD class="left">转换系数：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.zhxs" /></td>
+						<td><INPUT type="text" name="medgg" /></td>
+
 					</TR>
 					<TR>
+						<TD class="left">药品单位：</TD>
+						<td><INPUT type="text" name="meddw" /></td>
 						<TD class="left">流水号：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.bm" /></td>
+						<td><INPUT type="text" name="mednumber" /></td>
 						<TD class="left">生产企业：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.scqymc" /></td>
-						<TD class="left">商品名称：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.spmc" /></td>
-						 <td class="left">价格范围：</td>
-				  		<td>
-				      		<INPUT id="ypxxCustom.zbjglower" name="ypxxCustom.zbjglower" style="width:70px"/>
-							至
-							<INPUT id="ypxxCustom.zbjgupper" name="ypxxCustom.zbjgupper" style="width:70px"/>
-							
-				 		 </td>
+						<td><INPUT type="text" name="medmake" /></td>
 					</tr>
 					<tr>
-					  
+
 						<TD class="left">药品类别：</TD>
-						<td >
-							<select id="ypxxCustom.lb" name="ypxxCustom.lb" style="width:150px">
+						<td><select id="ypxxCustom.medclass" name="medclass"
+							style="width: 150px">
 								<option value="">全部</option>
 								<c:forEach items="${yplbList}" var="value">
 									<option value="${value.id}">${value.info}</option>
 								</c:forEach>
-							</select>
-						</td>
+						</select></td>
 						<TD class="left">交易状态：</TD>
-						<td >
-							<select id="ypxxCustom.jyzt" name="ypxxCustom.jyzt" style="width:150px">
+						<td><select id="ypxxCustom.medstate" name="medstate"
+							style="width: 150px">
 								<option value="">全部</option>
 								<c:forEach items="${ypjyztList}" var="value">
-									<option value="${value.dictcode}">${value.info}</option>
+									<option value="${value.id}">${value.info}</option>
 								</c:forEach>
-							</select>
-							
-						</td>
-						
-				 		 <td class="left" height="25">质量层次：</td>
-				  		<td>
-				  		<select id="ypxxCustom.zlcc" name="ypxxCustom.zlcc" style="width:150px">
+						</select></td>
+
+						<td class="left" height="25">质量层次：</td>
+						<td><select id="ypxxCustom.medzl" name="medzl"
+							style="width: 150px">
 								<option value="">全部</option>
 								<c:forEach items="${ypzlccList}" var="value">
 									<option value="${value.id}">${value.info}</option>
 								</c:forEach>
-						</select>
-					
-				  		</td>
-						<td colspan=2 >
-							<a id="btn" href="#" onclick="ypxxquery()" class="easyui-linkbutton" iconCls='icon-search'>查询</a>
-						</td>
+						</select></td>
+						<td colspan=2><a id="btn" href="#" onclick="ypxxquery()"
+							class="easyui-linkbutton" iconCls='icon-search'>查询</a></td>
 					</TR>
-					
+
 				</TBODY>
 			</TABLE>
-	    </form>
+		</form>
 		<TABLE border=0 cellSpacing=0 cellPadding=0 width="99%" align=center>
-		<TBODY>
-			<TR>
-				<TD>
-					<table id="ypxxlist"></table>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-</div>
-<div id="ypxximport_div">
-</div>
-<div id="ypxxedit_div">
-
-</div>
-<form id="ypxxdelForm" name="ypxxdelForm" action="${baseurl}/ypml/ypxxdel.action" method="post">
-<input type="hidden" id="ypxxdelid" name="ypxxdelid"/>
-</form>
+			<TBODY>
+				<TR>
+					<TD>
+						<table id="ypxxlist"></table>
+					</TD>
+				</TR>
+			</TBODY>
+		</TABLE>
+	</div>
+	<div id="ypxximport_div"></div>
+	<div id="ypxxedit_div"></div>
+	<form id="ypxxdelForm" name="ypxxdelForm"
+		action="${baseurl}/ypml/ypxxdel.action" method="post">
+		<input type="hidden" id="ypxxdelid" name="ypxxdelid" />
+	</form>
 </BODY>
 </HTML>
 

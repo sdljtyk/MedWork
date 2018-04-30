@@ -156,7 +156,7 @@
 							<select name="sysuser.groupid">
 								<option value="">请选择</option>
 								<c:forEach items="${usergroupList}" var="group">
-								  <option value="${group.dictcode}">${group.info}</option>
+								  <option value="${group.id}">${group.info}</option>
 								</c:forEach>
 								
 							</select>

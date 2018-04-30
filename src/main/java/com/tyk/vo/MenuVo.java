@@ -2,6 +2,11 @@ package com.tyk.vo;
 
 import java.util.List;
 
+/**
+ * 
+ * @author sdljtyk
+ *
+ */
 public class MenuVo {
 
 	//二级菜单

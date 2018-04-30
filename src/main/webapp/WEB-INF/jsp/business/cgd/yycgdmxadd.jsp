@@ -222,7 +222,7 @@ function initGrid(){
 							<select id="ypxxCustom.jyzt" name="ypxxCustom.jyzt" style="width:150px">
 								<option value="">全部</option>
 								<c:forEach items="${ypjyztList}" var="value">
-									<option value="${value.dictcode}" <c:if test="${value.dictcode =='1'}">selected</c:if> >${value.info}</option>
+									<option value="${value.id}" <c:if test="${value.diccode =='1'}">selected</c:if> >${value.info}</option>
 								</c:forEach>
 							</select>
 							

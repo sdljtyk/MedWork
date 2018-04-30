@@ -70,7 +70,7 @@
 							<select id="yycgdCustom.cgzt" name="yycgdCustom.cgzt" style="width:150px">
 								<option value="">全部</option>
 								<c:forEach items="${cgztList}" var="value">
-									<option value="${value.dictcode}">${value.info}</option>
+									<option value="${value.id}">${value.info}</option>
 								</c:forEach>
 							</select>
 							<a id="btn" href="#" onclick="cgjequery()" class="easyui-linkbutton" iconCls='icon-search'>统计</a>
