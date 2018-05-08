@@ -22,6 +22,8 @@ public class Yyunit implements Serializable {
 
     private String yyphone;
 
+    private String yycz;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -88,6 +90,14 @@ public class Yyunit implements Serializable {
         this.yyphone = yyphone;
     }
 
+    public String getYycz() {
+        return yycz;
+    }
+
+    public void setYycz(String yycz) {
+        this.yycz = yycz;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -107,7 +117,8 @@ public class Yyunit implements Serializable {
             && (this.getYyjb() == null ? other.getYyjb() == null : this.getYyjb().equals(other.getYyjb()))
             && (this.getYycws() == null ? other.getYycws() == null : this.getYycws().equals(other.getYycws()))
             && (this.getYylxr() == null ? other.getYylxr() == null : this.getYylxr().equals(other.getYylxr()))
-            && (this.getYyphone() == null ? other.getYyphone() == null : this.getYyphone().equals(other.getYyphone()));
+            && (this.getYyphone() == null ? other.getYyphone() == null : this.getYyphone().equals(other.getYyphone()))
+            && (this.getYycz() == null ? other.getYycz() == null : this.getYycz().equals(other.getYycz()));
     }
 
     @Override
@@ -122,6 +133,7 @@ public class Yyunit implements Serializable {
         result = prime * result + ((getYycws() == null) ? 0 : getYycws().hashCode());
         result = prime * result + ((getYylxr() == null) ? 0 : getYylxr().hashCode());
         result = prime * result + ((getYyphone() == null) ? 0 : getYyphone().hashCode());
+        result = prime * result + ((getYycz() == null) ? 0 : getYycz().hashCode());
         return result;
     }
 
@@ -139,6 +151,7 @@ public class Yyunit implements Serializable {
         sb.append(", yycws=").append(yycws);
         sb.append(", yylxr=").append(yylxr);
         sb.append(", yyphone=").append(yyphone);
+        sb.append(", yycz=").append(yycz);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

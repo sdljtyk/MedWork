@@ -27,27 +27,14 @@
 		});
 	};
 	function useryydel_callback(data) {
-		var result = getCallbackData(data);
-		_alert(result);
+		$.messager.alert("系统提示消息",data.message);
 		useryyquery();
 	}
 	var useryyedit = function(id) {
 		//alert(id);
 		var sendUrl = "${baseurl}/user/useryyedit.action?editid=" + id;
 		createmodalwindow("修改医院信息", 800, 300, sendUrl);
-
-		/* 		editwindow = new modalwindow("修改医院信息",500,400,sendUrl);
-		 editwindow.createWindow(); */
-		/* var ajaxOption = new AjaxOption();
-		ajaxOption._initPostRequest(true, sendUrl, "json", "html");
-		_ajaxPostRequest(ajaxOption, '', useryyedit_callback); */
 	};
-
-	/* function useryyedit_callback(redata) {
-		$('#useryyquery_div').css("display", "none");
-		$("#useryyedit_div").css("display", "block");
-		$("#useryyedit_div").html(redata);
-	} */
 	function useryyview(id) {
 		var sendUrl = "${baseurl}/user/useryyview.action?editid=" + id;
 		createmodalwindow("查看医院信息", 800, 300, sendUrl);
@@ -68,12 +55,12 @@
 
 	var frozenColumns;
 
-	var columns = [ [ /* {
+	var columns = [ [{
 		field : 'id',
 		title : '',
 		checkbox : true
-	}, */ {
-		field : 'mc',
+	},  {
+		field : 'yyname',
 		title : '名称',
 		width : 180
 	}, {
@@ -81,22 +68,18 @@
 		title : '所属地区',
 		width : 130
 	}, {
-		field : 'ypsr',
-		title : '上年度药品收入',
-		width : 80
-	}, {
-		field : 'ywsr',
-		title : '上年度业务收入',
-		width : 80
-	}, {
 		field : 'jbmc',
 		title : '医院级别',
 		width : 100
-	}, {
-		field : 'lbmc',
-		title : '医院类型',
+	},  {
+		field : 'yylxr',
+		title : '医院联系人',
 		width : 100
 	}, {
+		field : 'yycws',
+		title : '医院床位数',
+		width : 100
+	},{
 		field : 'opt1',
 		title : '修改',
 		width : 60,
@@ -122,15 +105,9 @@
 	function initGrid() {
 		$('#useryylist').datagrid({
 			title : '医院信息列表',
-			//nowrap : false,
 			striped : true,
-			//collapsible : true,
 			url : '${baseurl}/user/useryyquery_result.action',
-			//sortName : 'code',
-			//sortOrder : 'desc',
-			//remoteSort : false,
 			idField : 'id',
-			//frozenColumns : frozenColumns,
 			columns : columns,
 			pagination : true,
 			rownumbers : true,
@@ -145,18 +122,17 @@
 	}
 	$(function() {
 		initGrid();
-		tree= new createSyncTree("queryAreaTree_content","queryAreaTree","useryyCustom_dqmc","useryyCustom_dq",setting,null,null,"onClick");
+		//tree= new createSyncTree("queryAreaTree_content","queryAreaTree","useryyCustom_dqmc","useryyCustom_dq",setting,null,null,"onClick");
 	});
 
 	function useryyquery() {
 
 		var formdata = $("#useryyqueryForm").serializeJson();
-		//alert(formdata);
 		$('#useryylist').datagrid('unselectAll');
 		$('#useryylist').datagrid('load', formdata);
 	}
 
-	//******区域树**********
+	/* //******区域树**********
 
 	var setting = {
 		view : {
@@ -178,7 +154,7 @@
 	var tree;
 	function showAreaTree() {
 		tree.showMenu();
-	}
+	} */
 </script>
 </HEAD>
 <BODY>
@@ -188,29 +164,27 @@
 				<TBODY>
 					<TR>
 						<TD class="left">医院名称：</td>
-						<td><INPUT type="text" name="useryyCustom.mc" /></TD>
+						<td><INPUT type="text" name="yyname" /></TD>
 						<TD class="left">医院类型：</td>
 						<td>
-						<select name="useryyCustom.lb">
-							<option value="">请选择</option>
+						<select name="yyjb">
+							<option value="0">请选择</option>
 							<c:forEach items="${yylbList}" var="value"> 
 							  <option value="${value.id}" <c:if test="${useryy.lb ==value.id }">selected</c:if> >${value.info }</option>
 							</c:forEach>
 						</select>
 						</TD>
 						<TD class="left">所属地区：</TD>
-						<td><INPUT type="text" id="useryyCustom_dqmc" readonly
-							onclick="showAreaTree()" />
-							<div id="queryAreaTree_content" class="zTreeDemoBackground left"
-								style="z-index: 1; position: absolute; background-color: #ccc; overflow: scroll; HEIGHT: 300px; width: 200px; display: none;">
-								<ul id="queryAreaTree" class="ztree"></ul>
-							</div> <input type="hidden" name="useryyCustom.dq" id="useryyCustom_dq" />
+						<td><select name="yydpid" style="width: 146px;">
+							<option value="0">请选择</option>
+							<c:forEach items="${xzqy}" var="value"> 
+							  <option value="${value.id}" <c:if test="${useryy.yydqid ==value.id }">selected</c:if> >${value.name }</option>
+							</c:forEach>
+						</select>
 						</td>
 						<td colspan=4><a id="btn" href="#" onclick="useryyquery()"
 							class="easyui-linkbutton" iconCls='icon-search'>查询</a></td>
 					</TR>
-
-
 				</TBODY>
 			</TABLE>
 		</form>

@@ -653,6 +653,76 @@ public class YyunitExample {
             addCriterion("YYPhone not between", value1, value2, "yyphone");
             return (Criteria) this;
         }
+
+        public Criteria andYyczIsNull() {
+            addCriterion("YYCz is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczIsNotNull() {
+            addCriterion("YYCz is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczEqualTo(String value) {
+            addCriterion("YYCz =", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczNotEqualTo(String value) {
+            addCriterion("YYCz <>", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczGreaterThan(String value) {
+            addCriterion("YYCz >", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczGreaterThanOrEqualTo(String value) {
+            addCriterion("YYCz >=", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczLessThan(String value) {
+            addCriterion("YYCz <", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczLessThanOrEqualTo(String value) {
+            addCriterion("YYCz <=", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczLike(String value) {
+            addCriterion("YYCz like", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczNotLike(String value) {
+            addCriterion("YYCz not like", value, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczIn(List<String> values) {
+            addCriterion("YYCz in", values, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczNotIn(List<String> values) {
+            addCriterion("YYCz not in", values, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczBetween(String value1, String value2) {
+            addCriterion("YYCz between", value1, value2, "yycz");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyczNotBetween(String value1, String value2) {
+            addCriterion("YYCz not between", value1, value2, "yycz");
+            return (Criteria) this;
+        }
     }
 
     /**

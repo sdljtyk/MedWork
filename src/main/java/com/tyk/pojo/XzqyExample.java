@@ -314,63 +314,63 @@ public class XzqyExample {
             return (Criteria) this;
         }
 
-        public Criteria andLeaveIsNull() {
-            addCriterion("Leave is null");
+        public Criteria andLevelIsNull() {
+            addCriterion("Level is null");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveIsNotNull() {
-            addCriterion("Leave is not null");
+        public Criteria andLevelIsNotNull() {
+            addCriterion("Level is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveEqualTo(Integer value) {
-            addCriterion("Leave =", value, "leave");
+        public Criteria andLevelEqualTo(Integer value) {
+            addCriterion("Level =", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveNotEqualTo(Integer value) {
-            addCriterion("Leave <>", value, "leave");
+        public Criteria andLevelNotEqualTo(Integer value) {
+            addCriterion("Level <>", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveGreaterThan(Integer value) {
-            addCriterion("Leave >", value, "leave");
+        public Criteria andLevelGreaterThan(Integer value) {
+            addCriterion("Level >", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveGreaterThanOrEqualTo(Integer value) {
-            addCriterion("Leave >=", value, "leave");
+        public Criteria andLevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("Level >=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveLessThan(Integer value) {
-            addCriterion("Leave <", value, "leave");
+        public Criteria andLevelLessThan(Integer value) {
+            addCriterion("Level <", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveLessThanOrEqualTo(Integer value) {
-            addCriterion("Leave <=", value, "leave");
+        public Criteria andLevelLessThanOrEqualTo(Integer value) {
+            addCriterion("Level <=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveIn(List<Integer> values) {
-            addCriterion("Leave in", values, "leave");
+        public Criteria andLevelIn(List<Integer> values) {
+            addCriterion("Level in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveNotIn(List<Integer> values) {
-            addCriterion("Leave not in", values, "leave");
+        public Criteria andLevelNotIn(List<Integer> values) {
+            addCriterion("Level not in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveBetween(Integer value1, Integer value2) {
-            addCriterion("Leave between", value1, value2, "leave");
+        public Criteria andLevelBetween(Integer value1, Integer value2) {
+            addCriterion("Level between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andLeaveNotBetween(Integer value1, Integer value2) {
-            addCriterion("Leave not between", value1, value2, "leave");
+        public Criteria andLevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("Level not between", value1, value2, "level");
             return (Criteria) this;
         }
 

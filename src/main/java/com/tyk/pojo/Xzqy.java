@@ -12,7 +12,7 @@ public class Xzqy implements Serializable {
 
     private Integer code;
 
-    private Integer leave;
+    private Integer level;
 
     private Integer parentid;
 
@@ -42,12 +42,12 @@ public class Xzqy implements Serializable {
         this.code = code;
     }
 
-    public Integer getLeave() {
-        return leave;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setLeave(Integer leave) {
-        this.leave = leave;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public Integer getParentid() {
@@ -73,7 +73,7 @@ public class Xzqy implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getCode() == null ? other.getCode() == null : this.getCode().equals(other.getCode()))
-            && (this.getLeave() == null ? other.getLeave() == null : this.getLeave().equals(other.getLeave()))
+            && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()))
             && (this.getParentid() == null ? other.getParentid() == null : this.getParentid().equals(other.getParentid()));
     }
 
@@ -84,7 +84,7 @@ public class Xzqy implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getCode() == null) ? 0 : getCode().hashCode());
-        result = prime * result + ((getLeave() == null) ? 0 : getLeave().hashCode());
+        result = prime * result + ((getLevel() == null) ? 0 : getLevel().hashCode());
         result = prime * result + ((getParentid() == null) ? 0 : getParentid().hashCode());
         return result;
     }
@@ -98,7 +98,7 @@ public class Xzqy implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", code=").append(code);
-        sb.append(", leave=").append(leave);
+        sb.append(", level=").append(level);
         sb.append(", parentid=").append(parentid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

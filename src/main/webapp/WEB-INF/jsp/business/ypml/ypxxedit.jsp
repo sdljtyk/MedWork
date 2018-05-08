@@ -63,7 +63,7 @@
 	function ypxxsave_callback(data) {
 		$.messager.alert("系统提示消息", data.message);
 		parent.closemodalwindow();
-		parent.ypxxquery();
+		parent.useryyquery();
 
 	}
 </script>

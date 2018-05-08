@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tyk.pojo.User;
 import com.tyk.service.UserService;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.ActiveUser;
@@ -62,18 +61,6 @@ public class UserAction {
 	public String userjdquery(Model model)throws Exception{
 		return "/base/user/userjdquery";
 	}
-
-	@RequestMapping("/useryyquery")
-	public String useryyquery(Model model)throws Exception{
-		
-		//医院类型
-//		List yyjbList =  baseServiceFacade.getSystemConfigService().findDicttypeinfolist("005");
-//		List yylbList =  baseServiceFacade.getSystemConfigService().findDicttypeinfolist("006");
-//		model.addAttribute("yyjbList", yyjbList);
-//		model.addAttribute("yylbList", yylbList);
-		return "/base/user/useryyquery";
-	}
-	
 	
 	@RequestMapping("/usergysquery")
 	public String usergysquery(Model model)throws Exception{

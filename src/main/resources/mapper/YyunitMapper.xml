@@ -10,6 +10,7 @@
     <result column="YYCws" jdbcType="INTEGER" property="yycws" />
     <result column="YYLXR" jdbcType="VARCHAR" property="yylxr" />
     <result column="YYPhone" jdbcType="VARCHAR" property="yyphone" />
+    <result column="YYCz" jdbcType="VARCHAR" property="yycz" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, YYName, YYaddr, YYDqId, YYJb, YYCws, YYLXR, YYPhone
+    ID, YYName, YYaddr, YYDqId, YYJb, YYCws, YYLXR, YYPhone, YYCz
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.YyunitExample" resultMap="BaseResultMap">
     select
@@ -113,10 +114,12 @@
   <insert id="insert" parameterType="com.tyk.pojo.Yyunit">
     insert into yyunit (ID, YYName, YYaddr, 
       YYDqId, YYJb, YYCws, 
-      YYLXR, YYPhone)
+      YYLXR, YYPhone, YYCz
+      )
     values (#{id,jdbcType=INTEGER}, #{yyname,jdbcType=VARCHAR}, #{yyaddr,jdbcType=VARCHAR}, 
       #{yydqid,jdbcType=INTEGER}, #{yyjb,jdbcType=VARCHAR}, #{yycws,jdbcType=INTEGER}, 
-      #{yylxr,jdbcType=VARCHAR}, #{yyphone,jdbcType=VARCHAR})
+      #{yylxr,jdbcType=VARCHAR}, #{yyphone,jdbcType=VARCHAR}, #{yycz,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Yyunit">
     insert into yyunit
@@ -145,6 +148,9 @@
       <if test="yyphone != null">
         YYPhone,
       </if>
+      <if test="yycz != null">
+        YYCz,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -170,6 +176,9 @@
       </if>
       <if test="yyphone != null">
         #{yyphone,jdbcType=VARCHAR},
+      </if>
+      <if test="yycz != null">
+        #{yycz,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -206,6 +215,9 @@
       <if test="record.yyphone != null">
         YYPhone = #{record.yyphone,jdbcType=VARCHAR},
       </if>
+      <if test="record.yycz != null">
+        YYCz = #{record.yycz,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -220,7 +232,8 @@
       YYJb = #{record.yyjb,jdbcType=VARCHAR},
       YYCws = #{record.yycws,jdbcType=INTEGER},
       YYLXR = #{record.yylxr,jdbcType=VARCHAR},
-      YYPhone = #{record.yyphone,jdbcType=VARCHAR}
+      YYPhone = #{record.yyphone,jdbcType=VARCHAR},
+      YYCz = #{record.yycz,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -249,6 +262,9 @@
       <if test="yyphone != null">
         YYPhone = #{yyphone,jdbcType=VARCHAR},
       </if>
+      <if test="yycz != null">
+        YYCz = #{yycz,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -260,7 +276,8 @@
       YYJb = #{yyjb,jdbcType=VARCHAR},
       YYCws = #{yycws,jdbcType=INTEGER},
       YYLXR = #{yylxr,jdbcType=VARCHAR},
-      YYPhone = #{yyphone,jdbcType=VARCHAR}
+      YYPhone = #{yyphone,jdbcType=VARCHAR},
+      YYCz = #{yycz,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

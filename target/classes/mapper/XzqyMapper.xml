@@ -5,7 +5,7 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Code" jdbcType="INTEGER" property="code" />
-    <result column="Leave" jdbcType="INTEGER" property="leave" />
+    <result column="Level" jdbcType="INTEGER" property="level" />
     <result column="ParentID" jdbcType="INTEGER" property="parentid" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, Name, Code, Leave, ParentID
+    ID, Name, Code, Level, ParentID
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.XzqyExample" resultMap="BaseResultMap">
     select
@@ -109,9 +109,9 @@
   </delete>
   <insert id="insert" parameterType="com.tyk.pojo.Xzqy">
     insert into xzqy (ID, Name, Code, 
-      Leave, ParentID)
+      Level, ParentID)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=INTEGER}, 
-      #{leave,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER})
+      #{level,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Xzqy">
     insert into xzqy
@@ -125,8 +125,8 @@
       <if test="code != null">
         Code,
       </if>
-      <if test="leave != null">
-        Leave,
+      <if test="level != null">
+        Level,
       </if>
       <if test="parentid != null">
         ParentID,
@@ -142,8 +142,8 @@
       <if test="code != null">
         #{code,jdbcType=INTEGER},
       </if>
-      <if test="leave != null">
-        #{leave,jdbcType=INTEGER},
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
       </if>
       <if test="parentid != null">
         #{parentid,jdbcType=INTEGER},
@@ -168,8 +168,8 @@
       <if test="record.code != null">
         Code = #{record.code,jdbcType=INTEGER},
       </if>
-      <if test="record.leave != null">
-        Leave = #{record.leave,jdbcType=INTEGER},
+      <if test="record.level != null">
+        Level = #{record.level,jdbcType=INTEGER},
       </if>
       <if test="record.parentid != null">
         ParentID = #{record.parentid,jdbcType=INTEGER},
@@ -184,7 +184,7 @@
     set ID = #{record.id,jdbcType=INTEGER},
       Name = #{record.name,jdbcType=VARCHAR},
       Code = #{record.code,jdbcType=INTEGER},
-      Leave = #{record.leave,jdbcType=INTEGER},
+      Level = #{record.level,jdbcType=INTEGER},
       ParentID = #{record.parentid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -199,8 +199,8 @@
       <if test="code != null">
         Code = #{code,jdbcType=INTEGER},
       </if>
-      <if test="leave != null">
-        Leave = #{leave,jdbcType=INTEGER},
+      <if test="level != null">
+        Level = #{level,jdbcType=INTEGER},
       </if>
       <if test="parentid != null">
         ParentID = #{parentid,jdbcType=INTEGER},
@@ -212,7 +212,7 @@
     update xzqy
     set Name = #{name,jdbcType=VARCHAR},
       Code = #{code,jdbcType=INTEGER},
-      Leave = #{leave,jdbcType=INTEGER},
+      Level = #{level,jdbcType=INTEGER},
       ParentID = #{parentid,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
