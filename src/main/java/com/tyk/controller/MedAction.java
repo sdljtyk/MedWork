@@ -1,5 +1,6 @@
 package com.tyk.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tyk.pojo.Dicinfo;
+import com.tyk.pojo.Ghsmed;
 import com.tyk.pojo.Medinfo;
 import com.tyk.service.BaseService;
 import com.tyk.service.MedService;
 import com.tyk.util.DataGridResultInfo;
 import com.tyk.util.ResultInfo;
+import com.tyk.vo.GysypmlCustom;
 import com.tyk.vo.YpxxCustom;
 
 @Controller
@@ -25,22 +28,27 @@ public class MedAction {
 	@Autowired
 	private BaseService baseService;
 
+	//查询药品外键信息
 	public String MedmlShow(Model model, String url) {
 		List<Dicinfo> yplbList = baseService.FindDicByType("001");
+		List<Dicinfo> ypghztList = baseService.FindDicByType("002");
 		List<Dicinfo> ypjyztList = baseService.FindDicByType("003");
 		List<Dicinfo> ypzlccList = baseService.FindDicByType("004");
 		model.addAttribute("yplbList", yplbList);
+		model.addAttribute("ypghztList", ypghztList);
 		model.addAttribute("ypzlccList", ypzlccList);
 		model.addAttribute("ypjyztList", ypjyztList);
 		return url;
 	}
-
+	
+	//药品信息页面跳转
 	@RequestMapping("/ypxxquery.action")
 	public String ypxxquery(Model model) throws Exception {
 		String url = "/business/ypml/ypxxquery";
 		return MedmlShow(model, url);
 	}
 
+	//药品信息管理页面跳转
 	@RequestMapping("/ypxxmanager.action")
 	public String ypxxmanager(Model model) throws Exception {
 		model.addAttribute("ismanager", "1");
@@ -48,10 +56,10 @@ public class MedAction {
 
 	}
 
+	//药品信息查询结果
 	@RequestMapping("/ypxxquery_result.action")
 	@ResponseBody
 	public DataGridResultInfo ypxxquery_result(YpxxCustom ypxxCustom, int page, int rows) throws Exception {
-
 		if (ypxxCustom == null) {
 			ypxxCustom = new YpxxCustom();
 		}
@@ -72,13 +80,15 @@ public class MedAction {
 		return queryResultInfo;
 	}
 
+	//药品详细信息显示
 	@RequestMapping("/ypxxview.action")
 	public String ypxxview(String id,Model model) throws Exception{
 		YpxxCustom ypxx = medService.FindCustomByID(id);
 		model.addAttribute("ypxx", ypxx);
 		return "/business/ypml/ypxxview";
 	}
-
+	
+	//保存药品信息至数据库
 	@RequestMapping("/ypxxsave.action")
 	@ResponseBody
 	public ResultInfo ypxxsave(Medinfo info) throws Exception{
@@ -94,6 +104,7 @@ public class MedAction {
 		
 	}
 	
+	//修改添加药品信息页面跳转
 	@RequestMapping("/ypxxedit.action")
 	public String ypxxedit(String editid, Model model) throws Exception {
 		if (editid != null) {
@@ -103,6 +114,7 @@ public class MedAction {
 		return MedmlShow(model, "/business/ypml/ypxxedit");
 	}
 
+	//删除药品信息
 	@RequestMapping("/ypxxdel.action")
 	@ResponseBody
 	public ResultInfo ypxxdel(String ypxxdelid) throws Exception {
@@ -119,7 +131,6 @@ public class MedAction {
 		for (int i = 0; i < idAtt.length; i++) {
 			try {
 				del_success += medService.DelMedByID(idAtt[i]);
-				;
 			} catch (Exception e) {
 				del_fail++;
 				e.printStackTrace();
@@ -129,22 +140,73 @@ public class MedAction {
 		ri.setMessage("成功删除" + del_success + "条信息。\n删除失败" + del_fail + "条信息");
 		return ri;
 	}
-
-	// 导入药品信息信息
-	@RequestMapping("/ypxximport.action")
-	public String ypxximport() throws Exception {
-
-		return "/business/ypml/ypxximport";
+	
+	//跳转供货商供药状态控制页面
+	@RequestMapping("/gysypmlcontrolquery.action")
+	public String gysypmlcontrolquery(Model model) throws Exception {
+		model.addAttribute("iscontrol", "1");// 控制标记，在页面进行判断
+		String url = "/business/ypml/gysypmlcontrolquery";
+		return MedmlShow(model, url);
 	}
 
+	@RequestMapping("/gysypmlcontrolquery_result.action")
+	@ResponseBody
+	public DataGridResultInfo gysypmlcontrolquery_result(GysypmlCustom gysypmlCustom, int page, int rows)
+	{
+		int count = 0;
+		try {
+			count = medService.FindCountByGysCustom(gysypmlCustom);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<GysypmlCustom> list = medService.FindListByGysCustom(gysypmlCustom);
+		ResultInfo ri = new ResultInfo(1, "查询成功");
+		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
+		queryResultInfo.setRows(list);
+		queryResultInfo.setTotal(count);
+		return queryResultInfo;
+	}
+	
+	@RequestMapping("/gysypmlcontrolsubmit.action")
+	@ResponseBody
+	public ResultInfo gysypmlcontrolsubmit(String indexs,String states)
+	{
+		System.out.println("indexs:"+indexs);
+		System.out.println("states:"+states);
+		ResultInfo ri = new ResultInfo();
+		if (states == null || indexs == null) {
+			ri.setType(0);
+			ri.setMessage("修改失败，请重新选择修改状态！");
+			return ri;
+		}
+		
+		String[] index = indexs.split(",");
+		String[] state = states.split(",");
+		
+		int upt_success = 0;
+		int upt_fail = 0;
+		for(int i=0;i<index.length;i++)
+		{
+			try {
+				if(state[i]!="0")
+					upt_success+=medService.UpGhStateByID(index[i],state[i]);;
+			} catch (Exception e) {
+				upt_fail++;
+			}
+		}
+		ri.setType(1);
+		ri.setMessage("成功修改" + upt_success + "条信息。\n修改失败" + upt_fail + "条信息");
+		return ri;
+	}
+	
+	/*// 导入药品信息信息
+	@RequestMapping("/ypxximport.action")
+	public String ypxximport() throws Exception {
+		return "/business/ypml/ypxximport";
+	}
 	@RequestMapping("/yyypmlquery.action")
 	public String yyypmlquery(Model model) {
 		return "/business/ypml/yyypmlquery";
 	}
-
-	@RequestMapping("/gysypmlcontrolquery")
-	public String gysypmlcontrolquery(Model model) throws Exception {
-		model.addAttribute("iscontrol", "1");// 控制标记，在页面进行判断
-		return "/business/ypml/gysypmlcontrolquery";
-	}
+	*/
 }

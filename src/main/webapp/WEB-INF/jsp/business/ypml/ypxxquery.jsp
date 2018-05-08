@@ -182,15 +182,9 @@ var columns = [ [{
 function initGrid(){
 	$('#ypxxlist').datagrid({
 		title : '药品信息列表',
-		//nowrap : false,
 		striped : true,
-		//collapsible : true,
 		url : '${baseurl}/ypml/ypxxquery_result.action',
-		//sortName : 'code',
-		//sortOrder : 'desc',
-		//remoteSort : false,
 		idField : 'id',
-		//frozenColumns : frozenColumns,
 		columns : columns,
 		pagination : true,
 		rownumbers : true,
@@ -224,14 +218,12 @@ function initGrid(){
 			<TABLE class="table_search">
 				<TBODY>
 					<TR>
-
 						<TD class="left">商品名称：</td>
 						<td><INPUT type="text" name="medname" /></TD>
 						<TD class="left">剂型：</TD>
 						<td><INPUT type="text" name="medjx" /></td>
 						<TD class="left">规格：</TD>
 						<td><INPUT type="text" name="medgg" /></td>
-
 					</TR>
 					<TR>
 						<TD class="left">药品单位：</TD>

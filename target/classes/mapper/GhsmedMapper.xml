@@ -6,6 +6,7 @@
     <result column="GHSUnitID" jdbcType="INTEGER" property="ghsunitid" />
     <result column="MedID" jdbcType="INTEGER" property="medid" />
     <result column="MedDj" jdbcType="REAL" property="meddj" />
+    <result column="GHSMedState" jdbcType="INTEGER" property="ghsmedstate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, GHSUnitID, MedID, MedDj
+    ID, GHSUnitID, MedID, MedDj, GHSMedState
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.GhsmedExample" resultMap="BaseResultMap">
     select
@@ -108,9 +109,9 @@
   </delete>
   <insert id="insert" parameterType="com.tyk.pojo.Ghsmed">
     insert into ghsmed (ID, GHSUnitID, MedID, 
-      MedDj)
+      MedDj, GHSMedState)
     values (#{id,jdbcType=INTEGER}, #{ghsunitid,jdbcType=INTEGER}, #{medid,jdbcType=INTEGER}, 
-      #{meddj,jdbcType=REAL})
+      #{meddj,jdbcType=REAL}, #{ghsmedstate,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Ghsmed">
     insert into ghsmed
@@ -127,6 +128,9 @@
       <if test="meddj != null">
         MedDj,
       </if>
+      <if test="ghsmedstate != null">
+        GHSMedState,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -140,6 +144,9 @@
       </if>
       <if test="meddj != null">
         #{meddj,jdbcType=REAL},
+      </if>
+      <if test="ghsmedstate != null">
+        #{ghsmedstate,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -164,6 +171,9 @@
       <if test="record.meddj != null">
         MedDj = #{record.meddj,jdbcType=REAL},
       </if>
+      <if test="record.ghsmedstate != null">
+        GHSMedState = #{record.ghsmedstate,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -174,7 +184,8 @@
     set ID = #{record.id,jdbcType=INTEGER},
       GHSUnitID = #{record.ghsunitid,jdbcType=INTEGER},
       MedID = #{record.medid,jdbcType=INTEGER},
-      MedDj = #{record.meddj,jdbcType=REAL}
+      MedDj = #{record.meddj,jdbcType=REAL},
+      GHSMedState = #{record.ghsmedstate,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -191,6 +202,9 @@
       <if test="meddj != null">
         MedDj = #{meddj,jdbcType=REAL},
       </if>
+      <if test="ghsmedstate != null">
+        GHSMedState = #{ghsmedstate,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -198,7 +212,8 @@
     update ghsmed
     set GHSUnitID = #{ghsunitid,jdbcType=INTEGER},
       MedID = #{medid,jdbcType=INTEGER},
-      MedDj = #{meddj,jdbcType=REAL}
+      MedDj = #{meddj,jdbcType=REAL},
+      GHSMedState = #{ghsmedstate,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

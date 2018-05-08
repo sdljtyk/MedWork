@@ -7,11 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tyk.mapper.DicinfoMapper;
+import com.tyk.mapper.GhsmedMapper;
+import com.tyk.mapper.GhsunitMapper;
 import com.tyk.mapper.MedinfoMapper;
 import com.tyk.pojo.Dicinfo;
+import com.tyk.pojo.Ghsmed;
+import com.tyk.pojo.GhsmedExample;
+import com.tyk.pojo.Ghsunit;
 import com.tyk.pojo.Medinfo;
 import com.tyk.pojo.MedinfoExample;
 import com.tyk.pojo.MedinfoExample.Criteria;
+import com.tyk.vo.GysypmlCustom;
 import com.tyk.vo.YpxxCustom;
 
 @Service
@@ -21,6 +27,10 @@ public class MedService {
 	private MedinfoMapper medinfoMapper;
 	@Autowired
 	private DicinfoMapper dicinfoMapper;
+	@Autowired
+	private GhsmedMapper ghsmedMapper;
+	@Autowired
+	private GhsunitMapper ghsunitMapper;
 
 	public YpxxCustom FindCusByMed(Medinfo medinfo) {
 		YpxxCustom temp = new YpxxCustom();
@@ -43,6 +53,35 @@ public class MedService {
 		temp.setLbmc(lbmc);
 		temp.setZlccmc(zlccmc);
 		temp.setJyztmc(jyztmc);
+		return temp;
+	}
+	
+	public GysypmlCustom FindGhsCusByGhsMedAndMed(Ghsmed ghsmed,Medinfo medinfo)
+	{
+		GysypmlCustom temp = new GysypmlCustom();
+		String lbmc = dicinfoMapper.selectByPrimaryKey(medinfo.getMedclass()).getInfo();
+		String zlccmc = dicinfoMapper.selectByPrimaryKey(Integer.parseInt(medinfo.getMedzl())).getInfo();
+		String jyztmc = dicinfoMapper.selectByPrimaryKey(medinfo.getMedstate()).getInfo();
+		String controlmc = dicinfoMapper.selectByPrimaryKey(ghsmed.getGhsmedstate()).getInfo();
+		String gHSName = ghsunitMapper.selectByPrimaryKey(ghsmed.getGhsunitid()).getGhsname();
+		temp.setId(ghsmed.getId());
+		temp.setControlmc(controlmc);
+		temp.setGhsmedstate(ghsmed.getGhsmedstate());
+		temp.setGHSName(gHSName);
+		temp.setGhsunitid(ghsmed.getGhsunitid());
+		temp.setJyztmc(jyztmc);
+		temp.setLbmc(lbmc);
+		temp.setMedclass(medinfo.getMedclass());
+		temp.setMeddj(ghsmed.getMeddj());
+		temp.setMedgg(medinfo.getMedgg());
+		temp.setMedid(ghsmed.getMedid());
+		temp.setMedjx(medinfo.getMedjx());
+		temp.setMedmake(medinfo.getMedmake());
+		temp.setMedname(medinfo.getMedname());
+		temp.setMednumber(medinfo.getMednumber());
+		temp.setMedstate(medinfo.getMedstate());
+		temp.setZlccmc(zlccmc);
+		
 		return temp;
 	}
 
@@ -71,7 +110,6 @@ public class MedService {
 		medinfos = medinfoMapper.selectByExample(example);
 		for (Medinfo medinfo : medinfos) {
 			YpxxCustom temp = this.FindCusByMed(medinfo);
-			System.out.println("temp：" + temp.toString());
 			list.add(temp);
 		}
 		return list;
@@ -105,5 +143,60 @@ public class MedService {
 	public int InsertMed(Medinfo info) {
 		return medinfoMapper.insertSelective(info);
 	}
+	
+	public List<GysypmlCustom> FindListByGysCustom(GysypmlCustom gysypmlCustom) {
+		List <GysypmlCustom> list = new ArrayList<GysypmlCustom>();
+		List<Medinfo> medinfos = new ArrayList<Medinfo>();
+		List<Ghsmed> ghsmeds = new ArrayList<Ghsmed>();
+		MedinfoExample example = new MedinfoExample();
+		GhsmedExample ghsexample = new GhsmedExample();
+		
+		if (gysypmlCustom != null) {
+			Criteria criteria = example.createCriteria();
+			criteria.andMednameLike("%" + (gysypmlCustom.getMedname()==null ? "" : gysypmlCustom.getMedname()) + "%")
+					.andMedjxLike("%" + (gysypmlCustom.getMedjx()==null ? "" : gysypmlCustom.getMedjx()) + "%")
+					.andMedggLike("%" + (gysypmlCustom.getMedgg()==null ? "" : gysypmlCustom.getMedgg()) + "%")
+					.andMedmakeLike("%" + (gysypmlCustom.getMedmake()==null ? "" : gysypmlCustom.getMedmake()) + "%");
+			if (gysypmlCustom.getMedclass() != 0) {
+				criteria.andMedclassEqualTo(gysypmlCustom.getMedclass());
+			}
+			if (gysypmlCustom.getMedstate() != 0) {
+				criteria.andMedstateEqualTo(gysypmlCustom.getMedstate());
+			}
+			com.tyk.pojo.GhsmedExample.Criteria criteria2 = ghsexample.createCriteria();
+			if(gysypmlCustom.getMeddj()!= null)
+				criteria2.andMeddjLessThanOrEqualTo(gysypmlCustom.getMeddj());
+			if(gysypmlCustom.getGhsmedstate()!= null && gysypmlCustom.getGhsmedstate()!= 0)
+				criteria2.andGhsmedstateEqualTo(gysypmlCustom.getGhsmedstate());
+		}
+		medinfos = medinfoMapper.selectByExample(example);
+		ghsmeds = ghsmedMapper.selectByExample(ghsexample);
+		
+		for (Ghsmed ghsmed : ghsmeds) {
+			for (Medinfo  medinfo : medinfos) {
+				GysypmlCustom temp = new GysypmlCustom();
+				if(ghsmed.getMedid() == medinfo.getId())
+				{
+					temp = this.FindGhsCusByGhsMedAndMed(ghsmed,medinfo);
+					
+					list.add(temp);
+				}
+			}
+		}
+		return list;
+	}
 
+	
+	public int FindCountByGysCustom(GysypmlCustom gysypmlCustom) {
+		int count = FindListByGysCustom(gysypmlCustom).size();
+		return count;
+	}
+
+	public int UpGhStateByID(String string, String string2) {
+		Ghsmed ghsmed = ghsmedMapper.selectByPrimaryKey(Integer.parseInt(string));
+		ghsmed.setGhsmedstate(Integer.parseInt(string2));
+		return ghsmedMapper.updateByPrimaryKeySelective(ghsmed);
+	}
+
+	
 }

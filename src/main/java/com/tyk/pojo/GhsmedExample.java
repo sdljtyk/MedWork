@@ -363,6 +363,66 @@ public class GhsmedExample {
             addCriterion("MedDj not between", value1, value2, "meddj");
             return (Criteria) this;
         }
+
+        public Criteria andGhsmedstateIsNull() {
+            addCriterion("GHSMedState is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateIsNotNull() {
+            addCriterion("GHSMedState is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateEqualTo(Integer value) {
+            addCriterion("GHSMedState =", value, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateNotEqualTo(Integer value) {
+            addCriterion("GHSMedState <>", value, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateGreaterThan(Integer value) {
+            addCriterion("GHSMedState >", value, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("GHSMedState >=", value, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateLessThan(Integer value) {
+            addCriterion("GHSMedState <", value, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateLessThanOrEqualTo(Integer value) {
+            addCriterion("GHSMedState <=", value, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateIn(List<Integer> values) {
+            addCriterion("GHSMedState in", values, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateNotIn(List<Integer> values) {
+            addCriterion("GHSMedState not in", values, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateBetween(Integer value1, Integer value2) {
+            addCriterion("GHSMedState between", value1, value2, "ghsmedstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsmedstateNotBetween(Integer value1, Integer value2) {
+            addCriterion("GHSMedState not between", value1, value2, "ghsmedstate");
+            return (Criteria) this;
+        }
     }
 
     /**

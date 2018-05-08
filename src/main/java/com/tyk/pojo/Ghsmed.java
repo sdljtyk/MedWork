@@ -14,6 +14,8 @@ public class Ghsmed implements Serializable {
 
     private Float meddj;
 
+    private Integer ghsmedstate;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -48,6 +50,14 @@ public class Ghsmed implements Serializable {
         this.meddj = meddj;
     }
 
+    public Integer getGhsmedstate() {
+        return ghsmedstate;
+    }
+
+    public void setGhsmedstate(Integer ghsmedstate) {
+        this.ghsmedstate = ghsmedstate;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -63,7 +73,8 @@ public class Ghsmed implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getGhsunitid() == null ? other.getGhsunitid() == null : this.getGhsunitid().equals(other.getGhsunitid()))
             && (this.getMedid() == null ? other.getMedid() == null : this.getMedid().equals(other.getMedid()))
-            && (this.getMeddj() == null ? other.getMeddj() == null : this.getMeddj().equals(other.getMeddj()));
+            && (this.getMeddj() == null ? other.getMeddj() == null : this.getMeddj().equals(other.getMeddj()))
+            && (this.getGhsmedstate() == null ? other.getGhsmedstate() == null : this.getGhsmedstate().equals(other.getGhsmedstate()));
     }
 
     @Override
@@ -74,6 +85,7 @@ public class Ghsmed implements Serializable {
         result = prime * result + ((getGhsunitid() == null) ? 0 : getGhsunitid().hashCode());
         result = prime * result + ((getMedid() == null) ? 0 : getMedid().hashCode());
         result = prime * result + ((getMeddj() == null) ? 0 : getMeddj().hashCode());
+        result = prime * result + ((getGhsmedstate() == null) ? 0 : getGhsmedstate().hashCode());
         return result;
     }
 
@@ -87,6 +99,7 @@ public class Ghsmed implements Serializable {
         sb.append(", ghsunitid=").append(ghsunitid);
         sb.append(", medid=").append(medid);
         sb.append(", meddj=").append(meddj);
+        sb.append(", ghsmedstate=").append(ghsmedstate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
