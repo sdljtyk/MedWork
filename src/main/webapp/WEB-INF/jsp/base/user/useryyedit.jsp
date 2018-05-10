@@ -68,51 +68,6 @@
 		parent.useryyquery();
 	}
 
-	/* //******区域树**********
-
-	var setting = {
-		view : {
-			selectedMulti : false
-		},
-		data : {
-			simpleData : {
-				enable : true,
-				idKey : "id",
-				pIdKey : "parentid",
-				rootPId : 0
-			}
-		},
-		callback : {
-			onClick : null
-		}
-	};
-
-	var zNodes;
-	var tree;
-	function showAreaTree() {
-		tree.showMenu();//显示树
-	}
-
-	$(document).ready(
-			function() {
-				//通过ajax获取树的结点
-				var sendUrl = "${baseurl}/areaload/sync.action?areaid=1.";
-				var ajaxOption = new AjaxOption();
-				ajaxOption._initPostRequest(false, sendUrl, "pame", "json");
-				_ajaxPostRequest(ajaxOption, '', areaload_callback);
-				tree = new createSyncTree("areaTreeContent", "areaTree",
-						"useryy_dqmc", "useryy_dq", setting, zNodes, 2,
-						"onClick");
-			});
-
-	function areaload_callback(redata) {
-		try {
-			zNodes = redata;
-		} catch (e) {
-			//alert(e);
-		}
-		return;
-	} */
 </script>
 </HEAD>
 <BODY>

@@ -117,7 +117,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tyk.pojo.Ghsunit">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.tyk.pojo.Ghsunit">
     insert into ghsunit (ID, GHSName, GHSLb, 
       GHSLxr, GHSPhone, GHSXkz, 
       GHSJyfw, GHSHome, GHSAddr, 
@@ -129,7 +129,7 @@
       #{ghszzc,jdbcType=VARCHAR}, #{ghsfr,jdbcType=VARCHAR}, #{ghszczj,jdbcType=VARCHAR}, 
       #{ghsjj,jdbcType=VARCHAR}, #{ghsother,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.tyk.pojo.Ghsunit">
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="id" parameterType="com.tyk.pojo.Ghsunit">
     insert into ghsunit
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

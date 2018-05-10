@@ -4,13 +4,16 @@
   <resultMap id="BaseResultMap" type="com.tyk.pojo.Orders">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="YYID" jdbcType="INTEGER" property="yyid" />
-    <result column="OrderCreateP" jdbcType="VARCHAR" property="ordercreatep" />
+    <result column="OrderCreatePerson" jdbcType="VARCHAR" property="ordercreateperson" />
     <result column="OrderCtime" jdbcType="VARCHAR" property="orderctime" />
     <result column="OrderSub" jdbcType="VARCHAR" property="ordersub" />
     <result column="OrderOther" jdbcType="VARCHAR" property="orderother" />
     <result column="OrderState" jdbcType="INTEGER" property="orderstate" />
     <result column="OrderAdvice" jdbcType="VARCHAR" property="orderadvice" />
     <result column="OrderWatime" jdbcType="VARCHAR" property="orderwatime" />
+    <result column="OrserPhone" jdbcType="VARCHAR" property="orserphone" />
+    <result column="OrderName" jdbcType="VARCHAR" property="ordername" />
+    <result column="OrderNumber" jdbcType="VARCHAR" property="ordernumber" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, YYID, OrderCreateP, OrderCtime, OrderSub, OrderOther, OrderState, OrderAdvice, 
-    OrderWatime
+    ID, YYID, OrderCreatePerson, OrderCtime, OrderSub, OrderOther, OrderState, OrderAdvice, 
+    OrderWatime, OrserPhone, OrderName, OrderNumber
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.OrdersExample" resultMap="BaseResultMap">
     select
@@ -113,13 +116,15 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tyk.pojo.Orders">
-    insert into orders (ID, YYID, OrderCreateP, 
+    insert into orders (ID, YYID, OrderCreatePerson, 
       OrderCtime, OrderSub, OrderOther, 
-      OrderState, OrderAdvice, OrderWatime
+      OrderState, OrderAdvice, OrderWatime, 
+      OrserPhone, OrderName, OrderNumber
       )
-    values (#{id,jdbcType=INTEGER}, #{yyid,jdbcType=INTEGER}, #{ordercreatep,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{yyid,jdbcType=INTEGER}, #{ordercreateperson,jdbcType=VARCHAR}, 
       #{orderctime,jdbcType=VARCHAR}, #{ordersub,jdbcType=VARCHAR}, #{orderother,jdbcType=VARCHAR}, 
-      #{orderstate,jdbcType=INTEGER}, #{orderadvice,jdbcType=VARCHAR}, #{orderwatime,jdbcType=VARCHAR}
+      #{orderstate,jdbcType=INTEGER}, #{orderadvice,jdbcType=VARCHAR}, #{orderwatime,jdbcType=VARCHAR}, 
+      #{orserphone,jdbcType=VARCHAR}, #{ordername,jdbcType=VARCHAR}, #{ordernumber,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Orders">
@@ -131,8 +136,8 @@
       <if test="yyid != null">
         YYID,
       </if>
-      <if test="ordercreatep != null">
-        OrderCreateP,
+      <if test="ordercreateperson != null">
+        OrderCreatePerson,
       </if>
       <if test="orderctime != null">
         OrderCtime,
@@ -152,6 +157,15 @@
       <if test="orderwatime != null">
         OrderWatime,
       </if>
+      <if test="orserphone != null">
+        OrserPhone,
+      </if>
+      <if test="ordername != null">
+        OrderName,
+      </if>
+      <if test="ordernumber != null">
+        OrderNumber,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -160,8 +174,8 @@
       <if test="yyid != null">
         #{yyid,jdbcType=INTEGER},
       </if>
-      <if test="ordercreatep != null">
-        #{ordercreatep,jdbcType=VARCHAR},
+      <if test="ordercreateperson != null">
+        #{ordercreateperson,jdbcType=VARCHAR},
       </if>
       <if test="orderctime != null">
         #{orderctime,jdbcType=VARCHAR},
@@ -181,6 +195,15 @@
       <if test="orderwatime != null">
         #{orderwatime,jdbcType=VARCHAR},
       </if>
+      <if test="orserphone != null">
+        #{orserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="ordername != null">
+        #{ordername,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null">
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.tyk.pojo.OrdersExample" resultType="java.lang.Long">
@@ -198,8 +221,8 @@
       <if test="record.yyid != null">
         YYID = #{record.yyid,jdbcType=INTEGER},
       </if>
-      <if test="record.ordercreatep != null">
-        OrderCreateP = #{record.ordercreatep,jdbcType=VARCHAR},
+      <if test="record.ordercreateperson != null">
+        OrderCreatePerson = #{record.ordercreateperson,jdbcType=VARCHAR},
       </if>
       <if test="record.orderctime != null">
         OrderCtime = #{record.orderctime,jdbcType=VARCHAR},
@@ -219,6 +242,15 @@
       <if test="record.orderwatime != null">
         OrderWatime = #{record.orderwatime,jdbcType=VARCHAR},
       </if>
+      <if test="record.orserphone != null">
+        OrserPhone = #{record.orserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordername != null">
+        OrderName = #{record.ordername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordernumber != null">
+        OrderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -228,13 +260,16 @@
     update orders
     set ID = #{record.id,jdbcType=INTEGER},
       YYID = #{record.yyid,jdbcType=INTEGER},
-      OrderCreateP = #{record.ordercreatep,jdbcType=VARCHAR},
+      OrderCreatePerson = #{record.ordercreateperson,jdbcType=VARCHAR},
       OrderCtime = #{record.orderctime,jdbcType=VARCHAR},
       OrderSub = #{record.ordersub,jdbcType=VARCHAR},
       OrderOther = #{record.orderother,jdbcType=VARCHAR},
       OrderState = #{record.orderstate,jdbcType=INTEGER},
       OrderAdvice = #{record.orderadvice,jdbcType=VARCHAR},
-      OrderWatime = #{record.orderwatime,jdbcType=VARCHAR}
+      OrderWatime = #{record.orderwatime,jdbcType=VARCHAR},
+      OrserPhone = #{record.orserphone,jdbcType=VARCHAR},
+      OrderName = #{record.ordername,jdbcType=VARCHAR},
+      OrderNumber = #{record.ordernumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -245,8 +280,8 @@
       <if test="yyid != null">
         YYID = #{yyid,jdbcType=INTEGER},
       </if>
-      <if test="ordercreatep != null">
-        OrderCreateP = #{ordercreatep,jdbcType=VARCHAR},
+      <if test="ordercreateperson != null">
+        OrderCreatePerson = #{ordercreateperson,jdbcType=VARCHAR},
       </if>
       <if test="orderctime != null">
         OrderCtime = #{orderctime,jdbcType=VARCHAR},
@@ -266,19 +301,31 @@
       <if test="orderwatime != null">
         OrderWatime = #{orderwatime,jdbcType=VARCHAR},
       </if>
+      <if test="orserphone != null">
+        OrserPhone = #{orserphone,jdbcType=VARCHAR},
+      </if>
+      <if test="ordername != null">
+        OrderName = #{ordername,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null">
+        OrderNumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Orders">
     update orders
     set YYID = #{yyid,jdbcType=INTEGER},
-      OrderCreateP = #{ordercreatep,jdbcType=VARCHAR},
+      OrderCreatePerson = #{ordercreateperson,jdbcType=VARCHAR},
       OrderCtime = #{orderctime,jdbcType=VARCHAR},
       OrderSub = #{ordersub,jdbcType=VARCHAR},
       OrderOther = #{orderother,jdbcType=VARCHAR},
       OrderState = #{orderstate,jdbcType=INTEGER},
       OrderAdvice = #{orderadvice,jdbcType=VARCHAR},
-      OrderWatime = #{orderwatime,jdbcType=VARCHAR}
+      OrderWatime = #{orderwatime,jdbcType=VARCHAR},
+      OrserPhone = #{orserphone,jdbcType=VARCHAR},
+      OrderName = #{ordername,jdbcType=VARCHAR},
+      OrderNumber = #{ordernumber,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -18,6 +18,18 @@
 		<script type="text/javascript">
 		
 	$(function (){
+		var data = ${xzqy}
+		$('#qwert').combobox({
+		    required:true,
+		    multiple:true,
+		    valueField: 'id',
+		    textField: 'name',
+		    data:data
+		});
+		
+		var dqs = ${dqs}
+		$('#qwert').combobox('setValues',dqs);
+		
 		//***********按钮**************
 		$('#submitbtn').linkbutton({   
     		iconCls: 'icon-ok'  
@@ -43,7 +55,7 @@
 			onError : "请输入医院名称(最长50个字符)"
 		});
 		//医院地区
-		$("#usergys_dq").formValidator({
+		$("#adsf").formValidator({
 			onShow : "",
 			onCorrect:"&nbsp;"
 		}).inputValidator({
@@ -55,76 +67,32 @@
 	});
 	function usergyssave(){
 		if($.formValidator.pageIsValid()){
+			var dqids = $('#qwert').combobox('getValues');
+			$('#dqids').val(dqids);
 			jquerySubByFId('usergyseditform',usergyssave_callback,null,"json");
 		}
 
 	}
 	function usergyssave_callback(data){
-		var result = getCallbackData(data);
-		var type = result.type;
-		_alert(result);
-		/* if (TYPE_RESULT_SUCCESS == type) {
-			parent.usergysquery();
+		$.messager.alert("系统提示消息",data.message);
+		
+		if(data.type == 1){
 			parent.closemodalwindow();
-		} 	 */
+			parent.usergysquery();
+		}
+		
 	}
 	
-	//******区域树**********
-
-		var setting = {
-				view: {
-					selectedMulti: false
-				},
-				check: {
-					enable: true,
-					chkStyle: "checkbox",
-					chkboxType: { "Y": "ps", "N": "ps" }
-				},
-				data: {
-					simpleData: {
-						enable: true,
-						idKey: "id",
-						pIdKey: "parentid",
-						rootPId: 0
-					}
-				},
-				callback: {
-					onClick: null
-				}
-			};
-	
-			var zNodes;
-			var tree;
-			function showAreaTree() {
-				tree.showMenu();
-			}
-
-			$(document).ready(function(){
-				//通过ajax获取树的结点
-				var sendUrl = "${baseurl}/areaload/sync.action?areaid=1.&arealevel=2";
-				var ajaxOption = new AjaxOption();
-					ajaxOption._initPostRequest(false,sendUrl,"pame","json");
-					_ajaxPostRequest(ajaxOption, '', areaload_callback);	
-					tree = new createSyncTree("areaTreeContent","areaTree","usergysghdq","usergysghdqid",setting,zNodes,1,"onCheck",'${usergysghdqid}');	
-			});
-			
-			function areaload_callback(redata){
-				try{
-				zNodes = redata;
-				}catch(e){
-					//alert(e);
-				}
-				return ;
-			}
 	</script>
  </HEAD>
 <BODY>
 <form id="usergyseditform" name="usergyseditform" action="${baseurl}/user/usergyssave.action" method="post">
-<input type="hidden" name="usergys.id" value="${usergys.id}"/>
+<input type="hidden" name="id" value="${usergys.id}"/>
+<input type="hidden" name="dqids" id="dqids" value=""/>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%" bgColor=#c4d8ed>
 		<TBODY>
 			<TR>
-				<TD background=images/r_0.gif width="100%">
+				<TD background=${baseurl}/images/r_0.gif width="100%">
 					<TABLE cellSpacing=0 cellPadding=0 width="100%">
 						<TBODY>
 							<TR>
@@ -145,77 +113,77 @@
 								<TD height=30 width="15%" align=right >企业名称：</TD>
 								<TD class=category width="35%">
 								<div>
-								<input type="text" id="usergys_mc" name="usergys.mc" value="${usergys.mc}"   />
+								<input type="text" id="usergys_mc" name="ghsname" value="${usergys.ghsname}"   />
 								</div>
 								<div id="usergys_mcTip"></div>
 								</TD>
 								<TD height=30 width="15%" align=right> 供货地区：</TD>
 								<TD class=category width="35%">
-								<div>
-								<input type="text" id="usergysghdq" value="${usergysghdq}" onclick="showAreaTree()"/>
-								<input type="hidden" id="usergysghdqid" name="usergysghdqid" value="${usergysghdqid}"/>
-								</div>
-								<div id="areaTreeContent" class="zTreeDemoBackground left ztree_customcss" >
-									<ul id="areaTree" class="ztree"></ul>
-								</div>
-								<div id="usergys_dqTip"></div>
+								<input id="qwert" />
 								</TD>
 							</TR>
 							<TR>
 								<TD height=30 width="15%" align=right >经营范围：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.jyfw" value="${usergys.jyfw}"/>
+								<input type="text" name="ghsjyfw" value="${usergys.ghsjyfw}"/>
 								</TD>
-								<TD height=30 width="15%" align=right>注册地址(中文)：</TD>
+								<TD height=30 width="15%" align=right>企业类别(私营/国营)：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.zcdz" value="${usergys.zcdz}"/>
+								<input type="text" name="ghslb" value="${usergys.ghslb}"/>
 								</TD>
 							</TR>
 							<TR>
 								<TD height=30 width="15%" align=right >注册资金(万元)：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.zczj" value="${usergys.zczj}"/>
+								<input type="text" name="ghszczj" value="${usergys.ghszczj}"/>
 								</TD>
-								<TD height=30 width="15%" align=right>固定资产(万元)：</TD>
+								<TD height=30 width="15%" align=right>总资产(万元)：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.gdzc" value="${usergys.gdzc}"/>
+								<input type="text" name="ghszzc" value="${usergys.ghszzc}"/>
 								</TD>
 							</TR>
 							<TR>
 								<TD height=30 width="15%" align=right >联系人：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.lxr" value="${usergys.lxr}"/>
+								<input type="text" name="ghslxr" value="${usergys.ghslxr}"/>
 								</TD>
 								<TD height=30 width="15%" align=right>联系电话：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.dh" value="${usergys.dh}"/>
+								<input type="text" name="ghsphone" value="${usergys.ghsphone}"/>
 								</TD>
 							</TR>
 							
 							<TR>
-								<TD height=30 width="15%" align=right >email：</TD>
+								<TD height=30 width="15%" align=right >企业法人</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.dzyx" value="${usergys.dzyx}"/>
+								<input type="text" name="ghsfr" value="${usergys.ghsfr}"/>
 								</TD>
-								<TD height=30 width="15%" align=right>网址：</TD>
+								<TD height=30 width="15%" align=right>经营许可证</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.wz" value="${usergys.wz}"/>
+								<input type="text" name="ghsxkz" value="${usergys.ghsxkz}"/>
 								</TD>
 							</TR>
 							<TR>
-								<TD height=30 width="15%" align=right >联系地区：</TD>
+								<TD height=30 width="15%" align=right >联系地址：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.lxdz" value="${usergys.lxdz}"/>
+								<input type="text" name="ghsaddr" value="${usergys.ghsaddr}"/>
 								</TD>
-								<TD height=30 width="15%" align=right>邮政编码：</TD>
+								<TD height=30 width="15%" align=right>注册地址：</TD>
 								<TD class=category width="35%">
-								<input type="text" name="usergys.yzbm" value="${usergys.yzbm}"/>
+								<input type="text" name="ghshome" value="${usergys.ghshome}"/>
 								</TD>
 							</TR>
 							<TR>
 								<TD height=30 width="15%" align=right >企业简介：</TD>
 								<TD class=category colspan=3>
-								<textarea rows="10" cols="80" name="usergys.jj">${usergys.jj}</textarea>
+								<textarea rows="10" cols="80" name="ghsjj">${usergys.ghsjj}</textarea>
+								</TD>
+								
+							</TR>
+							<TR>
+								<TD height=30 width="15%" align=right >备注：</TD>
+								<TD class=category colspan=3>
+								<textarea rows="10" cols="80" name="ghsother">${usergys.ghsother}</textarea>
 								</TD>
 								
 							</TR>

@@ -10,7 +10,7 @@ public class Orders implements Serializable {
 
     private Integer yyid;
 
-    private String ordercreatep;
+    private String ordercreateperson;
 
     private String orderctime;
 
@@ -23,6 +23,12 @@ public class Orders implements Serializable {
     private String orderadvice;
 
     private String orderwatime;
+
+    private String orserphone;
+
+    private String ordername;
+
+    private String ordernumber;
 
     private static final long serialVersionUID = 1L;
 
@@ -42,12 +48,12 @@ public class Orders implements Serializable {
         this.yyid = yyid;
     }
 
-    public String getOrdercreatep() {
-        return ordercreatep;
+    public String getOrdercreateperson() {
+        return ordercreateperson;
     }
 
-    public void setOrdercreatep(String ordercreatep) {
-        this.ordercreatep = ordercreatep;
+    public void setOrdercreateperson(String ordercreateperson) {
+        this.ordercreateperson = ordercreateperson;
     }
 
     public String getOrderctime() {
@@ -98,6 +104,30 @@ public class Orders implements Serializable {
         this.orderwatime = orderwatime;
     }
 
+    public String getOrserphone() {
+        return orserphone;
+    }
+
+    public void setOrserphone(String orserphone) {
+        this.orserphone = orserphone;
+    }
+
+    public String getOrdername() {
+        return ordername;
+    }
+
+    public void setOrdername(String ordername) {
+        this.ordername = ordername;
+    }
+
+    public String getOrdernumber() {
+        return ordernumber;
+    }
+
+    public void setOrdernumber(String ordernumber) {
+        this.ordernumber = ordernumber;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -112,13 +142,16 @@ public class Orders implements Serializable {
         Orders other = (Orders) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getYyid() == null ? other.getYyid() == null : this.getYyid().equals(other.getYyid()))
-            && (this.getOrdercreatep() == null ? other.getOrdercreatep() == null : this.getOrdercreatep().equals(other.getOrdercreatep()))
+            && (this.getOrdercreateperson() == null ? other.getOrdercreateperson() == null : this.getOrdercreateperson().equals(other.getOrdercreateperson()))
             && (this.getOrderctime() == null ? other.getOrderctime() == null : this.getOrderctime().equals(other.getOrderctime()))
             && (this.getOrdersub() == null ? other.getOrdersub() == null : this.getOrdersub().equals(other.getOrdersub()))
             && (this.getOrderother() == null ? other.getOrderother() == null : this.getOrderother().equals(other.getOrderother()))
             && (this.getOrderstate() == null ? other.getOrderstate() == null : this.getOrderstate().equals(other.getOrderstate()))
             && (this.getOrderadvice() == null ? other.getOrderadvice() == null : this.getOrderadvice().equals(other.getOrderadvice()))
-            && (this.getOrderwatime() == null ? other.getOrderwatime() == null : this.getOrderwatime().equals(other.getOrderwatime()));
+            && (this.getOrderwatime() == null ? other.getOrderwatime() == null : this.getOrderwatime().equals(other.getOrderwatime()))
+            && (this.getOrserphone() == null ? other.getOrserphone() == null : this.getOrserphone().equals(other.getOrserphone()))
+            && (this.getOrdername() == null ? other.getOrdername() == null : this.getOrdername().equals(other.getOrdername()))
+            && (this.getOrdernumber() == null ? other.getOrdernumber() == null : this.getOrdernumber().equals(other.getOrdernumber()));
     }
 
     @Override
@@ -127,13 +160,16 @@ public class Orders implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getYyid() == null) ? 0 : getYyid().hashCode());
-        result = prime * result + ((getOrdercreatep() == null) ? 0 : getOrdercreatep().hashCode());
+        result = prime * result + ((getOrdercreateperson() == null) ? 0 : getOrdercreateperson().hashCode());
         result = prime * result + ((getOrderctime() == null) ? 0 : getOrderctime().hashCode());
         result = prime * result + ((getOrdersub() == null) ? 0 : getOrdersub().hashCode());
         result = prime * result + ((getOrderother() == null) ? 0 : getOrderother().hashCode());
         result = prime * result + ((getOrderstate() == null) ? 0 : getOrderstate().hashCode());
         result = prime * result + ((getOrderadvice() == null) ? 0 : getOrderadvice().hashCode());
         result = prime * result + ((getOrderwatime() == null) ? 0 : getOrderwatime().hashCode());
+        result = prime * result + ((getOrserphone() == null) ? 0 : getOrserphone().hashCode());
+        result = prime * result + ((getOrdername() == null) ? 0 : getOrdername().hashCode());
+        result = prime * result + ((getOrdernumber() == null) ? 0 : getOrdernumber().hashCode());
         return result;
     }
 
@@ -145,13 +181,16 @@ public class Orders implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", yyid=").append(yyid);
-        sb.append(", ordercreatep=").append(ordercreatep);
+        sb.append(", ordercreateperson=").append(ordercreateperson);
         sb.append(", orderctime=").append(orderctime);
         sb.append(", ordersub=").append(ordersub);
         sb.append(", orderother=").append(orderother);
         sb.append(", orderstate=").append(orderstate);
         sb.append(", orderadvice=").append(orderadvice);
         sb.append(", orderwatime=").append(orderwatime);
+        sb.append(", orserphone=").append(orserphone);
+        sb.append(", ordername=").append(ordername);
+        sb.append(", ordernumber=").append(ordernumber);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

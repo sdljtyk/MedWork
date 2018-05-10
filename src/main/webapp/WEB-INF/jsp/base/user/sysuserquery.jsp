@@ -20,25 +20,23 @@
 		});
 	};
 	function sysuserdel_callback(data) {
-		var result = getCallbackData(data);
-		_alert(result);
+		$.messager.alert("系统提示消息",data.message);
 		sysuserquery();
 	}
 	var sysuseredit = function(id) {
 		//alert(id);
 		var sendUrl = "${baseurl}/user/sysuseredit.action?editid=" + id;
-		createmodalwindow("修改医院信息", 800, 250, sendUrl);
+		createmodalwindow("修改用户信息", 800, 250, sendUrl);
 
 	};
 
 	function sysuserview(id) {
 		var sendUrl = "${baseurl}/user/sysuserview.action?editid=" + id;
-		createmodalwindow("查看医院信息", 800, 250, sendUrl);
+		createmodalwindow("查看用户信息", 800, 250, sendUrl);
 	}
 	var sysuseradd = function() {
-		//alert(id);
 		var sendUrl = "${baseurl}/user/sysuseredit.action";
-		createmodalwindow("添加医院信息", 800, 250, sendUrl);
+		createmodalwindow("添加用户信息", 800, 250, sendUrl);
 	};
 
 	//工具栏
@@ -56,7 +54,7 @@
 		title : '',
 		checkbox : true
 	}, */ {
-		field : 'userid',
+		field : 'usernumber',
 		title : '账号',
 		width : 180
 	}, {
@@ -64,13 +62,13 @@
 		title : '名称',
 		width : 130
 	}, {
-		field : 'groupname',
+		field : 'groupName',
 		title : '用户类型',
 		width : 100
 	}, {
-		field : 'sysmc',
+		field : 'unitName',
 		title : '所属单位',
-		width : 200
+		width : 180
 	}, {
 		field : 'userstate',
 		title : '状态',
@@ -82,6 +80,14 @@
 				return "暂停";
 			}
 		}
+	}, {
+		field : 'usercreate',
+		title : '创建时间',
+		width : 150
+	}, {
+		field : 'useralter',
+		title : '修改	时间',
+		width : 150
 	}, {
 		field : 'opt1',
 		title : '修改',
@@ -101,15 +107,9 @@
 	function initGrid() {
 		$('#sysuserlist').datagrid({
 			title : '系统用户列表',
-			//nowrap : false,
 			striped : true,
-			//collapsible : true,
 			url : '${baseurl}/user/sysuserquery_result.action',
-			//sortName : 'code',
-			//sortOrder : 'desc',
-			//remoteSort : false,
 			idField : 'id',
-			//frozenColumns : frozenColumns,
 			columns : columns,
 			pagination : true,
 			rownumbers : true,
@@ -145,16 +145,14 @@
 				<TBODY>
 					<TR>
 						<TD class="left">用户账号：</td>
-						<td><INPUT type="text" name="sysuser.userid" /></TD>
+						<td><INPUT type="text" name="usernumber" /></TD>
 						<TD class="left">用户名称：</TD>
-						<td><INPUT type="text" name="sysuser.username" /></TD>
+						<td><INPUT type="text" name="username" /></TD>
 						
-						<TD class="left">单位名称：</TD>
-						<td><INPUT type="text" name="sysuserCustom.sysmc" /></TD>
 						<TD class="left">用户类型：</TD>
 						<td>
-							<select name="sysuser.groupid">
-								<option value="">请选择</option>
+							<select name="groupid">
+								<option value="0">请选择</option>
 								<c:forEach items="${usergroupList}" var="group">
 								  <option value="${group.id}">${group.info}</option>
 								</c:forEach>

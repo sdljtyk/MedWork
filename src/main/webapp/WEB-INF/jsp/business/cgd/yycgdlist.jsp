@@ -33,71 +33,44 @@ var columns = [ [
 	title : '医院名称',
 	width : 100
 },{
-	field : 'bm',
+	field : 'ordernumber',
 	title : '采购单编号',
 	width : 80
 },{
-	field : 'mc',
+	field : 'ordername',
 	title : '采购单名称',
 	width : 150
 },{
-	field : 'cjtime',
+	field : 'ordercreateperson',
+	title : '建单人',
+	width : 150
+},{
+	field : 'orderphone',
+	title : '联系方式',
+	width : 150
+},{
+	field : 'orderctime',
 	title : '建单时间',
 	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
+
 },{
-	field : 'tjtime',
+	field : 'orderctime',
+	title : '建单时间',
+	width : 80,
+
+},{
+	field : 'ordersub',
 	title : '提交时间',
 	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
 },{
-	field : 'shtime',
+	field : 'orderwatime',
 	title : '审核时间',
 	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
+
 },{
-	field : 'yycgdztmc',
-	title : '采购单<br>状态', 
-	width : 60
+	field : 'cgdztmc',
+	title : '采购单状态', 
+	width : 80
 },{
 	field : 'opt3',
 	title : '查看',
@@ -112,18 +85,9 @@ var columns = [ [
 function initGrid(){
 	$('#yycgdlist').datagrid({
 		title : '采购单列表',
-		//nowrap : false,
 		striped : true,
-		//collapsible : true,
 		url : '${baseurl}/cgd/yycgdlist_result.action',
-		queryParams:{
-			year:'${year}'
-		},
-		//sortName : 'code',
-		//sortOrder : 'desc',
-		//remoteSort : false,
 		idField : 'id',//采购单id
-		//frozenColumns : frozenColumns,
 		columns : columns,
 		autoRowHeight:true,
 		pagination : true,
@@ -143,17 +107,10 @@ function initGrid(){
 
 	function yycgdquery() {
 		var formdata = $("#yycgdqueryForm").serializeJson();
-		//alert(formdata);
 		$('#yycgdlist').datagrid('unselectAll');
 		$('#yycgdlist').datagrid('load', formdata);
 	}
 	
-
-	
-	$(function(){
-		//加载年
-		businessyearlist('businessyear');
-	});
 </script>
 </HEAD>
 <BODY>
@@ -161,33 +118,18 @@ function initGrid(){
 			<TABLE  class="table_search">
 				<TBODY>
 					<TR>
-						<TD class="left">年份(如2014)：</TD>
-						<td >
-						<select name="year" id="businessyear">
-						</select>
-						</td>
-						<TD class="left">医院名称：</TD>
-						<td ><INPUT type="text" name="useryyCustom.mc" /></td>
 						<TD class="left">采购单编号：</td>
-						<td><INPUT type="text"  name="yycgdCustom.bm" /></TD>
-						
-					</TR>
-					<TR> 
+						<td><INPUT type="text"  name="ordernumber" /></TD>
 					<TD class="left">采购单名称：</TD>
-						<td ><INPUT type="text" name="yycgdCustom.mc" /></td>
+						<td ><INPUT type="text" name="ordername" /></td>
 					  <TD class="left">采购单状态：</TD>
 						<td >
-							审核通过
-						</td>
-						
-						<TD class="left">采购时间：</TD>
-						<td >
-						 <INPUT id="yycgdCustom.kscgdate"
-							name="yycgdCustom.kscgdate" 
-							 onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" style="width:80px"/>--
-					 <INPUT id="yycgdCustom.jscgdate" 
-							name="yycgdCustom.jscgdate"
-							 onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" style="width:80px"/>
+							<select id="yycgdCustom.zt" name="yycgdCustom.zt" style="width:150px">
+								<option value="">全部</option>
+								<c:forEach items="${cgdztList}" var="value">
+									<option value="${value.id}">${value.info}</option>
+								</c:forEach>
+							</select>
 						<a id="btn" href="#" onclick="yycgdquery()" class="easyui-linkbutton" iconCls='icon-search'>查询</a>	
 						</td>
 						

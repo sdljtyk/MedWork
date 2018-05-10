@@ -27,8 +27,7 @@
 		});
 	};
 	function usergysdel_callback(data) {
-		var result = getCallbackData(data);
-		_alert(result);
+		$.messager.alert("系统提示消息",data.message);
 		usergysquery();
 	}
 	var usergysedit = function(id) {
@@ -60,28 +59,28 @@
 
 	var frozenColumns;
 
-	var columns = [ [ /* {
+	var columns = [ [   /*  {
 		field : 'id',
 		title : '',
 		checkbox : true
-	}, */ {
-		field : 'mc',
+	},  */   {
+		field : 'ghsname',
 		title : '企业名称',
 		width : 180
 	}, {
-		field : 'lxr',
+		field : 'ghslxr',
 		title : '联系人',
 		width : 130
 	}, {
-		field : 'dh',
+		field : 'ghsphone',
 		title : '电话',
 		width : 100
 	}, {
-		field : 'lxdz',
+		field : 'ghsaddr',
 		title : '联系地址',
 		width : 100
 	}, {
-		field : 'useryyghdq',
+		field : 'dqmc',
 		title : '供货地区',
 		width : 250
 	}, {
@@ -110,15 +109,9 @@
 	function initGrid() {
 		$('#usergyslist').datagrid({
 			title : '供应商信息列表',
-			//nowrap : false,
 			striped : true,
-			//collapsible : true,
 			url : '${baseurl}/user/usergysquery_result.action',
-			//sortName : 'code',
-			//sortOrder : 'desc',
-			//remoteSort : false,
 			idField : 'id',
-			//frozenColumns : frozenColumns,
 			columns : columns,
 			pagination : true,
 			rownumbers : true,
@@ -177,7 +170,7 @@
 				<TBODY>
 					<TR>
 						<TD class="left">企业名称：</td>
-						<td><INPUT type="text" name="usergysCustom.mc" /></TD>
+						<td><INPUT type="text" name="ghsname" /></TD>
 						
 						<td colspan=4><a id="btn" href="#" onclick="usergysquery()"
 							class="easyui-linkbutton" iconCls='icon-search'>查询</a></td>
