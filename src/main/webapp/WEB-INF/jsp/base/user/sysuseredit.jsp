@@ -55,13 +55,43 @@
 			onError : "请选择用户类型"
 		});
 		
-		/* $('#sysuser_groupid').combobox({  
-            onSelect: function (row) {  
-                if (row != null) {  
-                	$('#unitid').combobox('reload','/user/loadunit.action?groupid='+row.id); 
+		 $('#sysuser_groupid').combobox({  
+			valueField: 'id',
+			textField: 'text',
+			onLoadSuccess : function () {    
+				console.log(${sysuser.unitid});
+                	$.ajax({
+                		url:'/user/loadunit.action',
+                		type:'POST',
+                		data:{groupid:$('#sysuser_groupid').combobox('getValue')},
+                		success : function(res) {
+                			$('#unitid').combobox({
+                				valueField: 'id',
+                				textField: 'text'
+                			});
+                			$('#unitid').combobox('loadData', res);
+                			var id =  ${sysuser.unitid}
+                			$('#unitid').combobox('setValue',id);
+                		}
+                	});               	 
+            },
+            onSelect: function (record) {  
+                if (record != null) {  
+                	$.ajax({
+                		url:'/user/loadunit.action',
+                		type:'POST',
+                		data:{groupid:record.id},
+                		success : function(res) {	
+                			$('#unitid').combobox({
+                				valueField: 'id',
+                				textField: 'text'
+                			});
+                			$('#unitid').combobox('loadData',res);
+                		}
+                	});               	
                 }  
             }  
-        });   */
+        });  
 		
 		//用户密码
 		$("#sysuser_password").formValidator({
@@ -85,7 +115,7 @@
 		$.messager.alert("系统提示消息", data.message);
 		if (data.type == 1) {
 			parent.closemodalwindow();
-			parent.usergysquery();
+			parent.sysuserquery();
 		}
 	}
 </script>
@@ -160,10 +190,9 @@
 								</TR>
 								<TR>
 									<TD height=30 width="15%" align=right>用户单位名称：</TD>
-									<TD class=category width="35%"><input type="text"
-										name="unitName" value="${sysuser.unitName}" />
-										<!-- <select id="unitid" name="unitid" style="width: 80px">
-										</select> -->
+									<TD class=category width="35%">
+									<%-- <input type="text" name="unitName" value="${sysuser.unitName}" /> --%>
+									<input id="unitid" name="unitid" style="width: 168px"/>
 									</TD>
 									<TD height=30 width="15%" align=right>用户状态：</TD>
 									<TD class=category width="35%"><input type="radio"

@@ -73,13 +73,11 @@ public class UserAction {
 	
 	@RequestMapping("/loadunit.action")
 	@ResponseBody
-	public Map<String, String> loadunit(String groupid)
+	public List<Map<String, String>> loadunit(String groupid)
 	{
 		System.out.println(groupid);
-		Map<String,String> map = new HashMap<String, String>();
-
-		map = userService.FinMapByGroupID(groupid);
-		return map;
+		
+		return userService.FinMapByGroupID(groupid);
 			
 	}
 	@RequestMapping("/sysuserquery.action")

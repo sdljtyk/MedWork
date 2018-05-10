@@ -164,10 +164,16 @@ public class UserService {
 		return j;
 	}
 
-	public Map<String, String> FinMapByGroupID(String groupid) {
-		Map<String,String> map = new HashMap<String, String>();
-		if(groupid.equals("26"))
-			map.put("0", "监管部门");
+	public List<Map<String, String>> FinMapByGroupID(String groupid) {
+		List<Map<String, String>> list = new ArrayList<>();
+		
+		if(groupid.equals("26")) {			
+			Map<String,String> map = new HashMap<String, String>();
+			map.put("id", "0");
+			map.put("text", "监管部门");
+			list.add(map);
+		}
+		
 		YyunitExample example = new YyunitExample();
 		GhsunitExample example2 = new GhsunitExample();
 		
@@ -175,17 +181,23 @@ public class UserService {
 		{
 			List<Yyunit> unit = yyunitMapper.selectByExample(example);
 			for (Yyunit yyunit : unit) {
-				map.put(yyunit.getId().toString(), yyunit.getYyname());
+				Map<String,String> map = new HashMap<String, String>();
+				map.put("id", yyunit.getId().toString());
+				map.put("text", yyunit.getYyname());
+				list.add(map);
 			}
 		}
 		if(groupid.equals("28"))
 		{
 			List<Ghsunit> ghsunit = ghsunitMapper.selectByExample(example2);
 			for (Ghsunit ghs : ghsunit) {
-				map.put(ghs.getId().toString(), ghs.getGhsname());
+				Map<String,String> map = new HashMap<String, String>();
+				map.put("id", ghs.getId().toString());
+				map.put("text", ghs.getGhsname());
+				list.add(map);
 			}
 		}
-		return map;
+		return list;
 	}
 
 	public int DelUserByID(String delid) {

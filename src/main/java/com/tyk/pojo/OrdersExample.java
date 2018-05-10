@@ -724,73 +724,73 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneIsNull() {
-            addCriterion("OrserPhone is null");
+        public Criteria andOrderphoneIsNull() {
+            addCriterion("OrderPhone is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneIsNotNull() {
-            addCriterion("OrserPhone is not null");
+        public Criteria andOrderphoneIsNotNull() {
+            addCriterion("OrderPhone is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneEqualTo(String value) {
-            addCriterion("OrserPhone =", value, "orserphone");
+        public Criteria andOrderphoneEqualTo(String value) {
+            addCriterion("OrderPhone =", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneNotEqualTo(String value) {
-            addCriterion("OrserPhone <>", value, "orserphone");
+        public Criteria andOrderphoneNotEqualTo(String value) {
+            addCriterion("OrderPhone <>", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneGreaterThan(String value) {
-            addCriterion("OrserPhone >", value, "orserphone");
+        public Criteria andOrderphoneGreaterThan(String value) {
+            addCriterion("OrderPhone >", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneGreaterThanOrEqualTo(String value) {
-            addCriterion("OrserPhone >=", value, "orserphone");
+        public Criteria andOrderphoneGreaterThanOrEqualTo(String value) {
+            addCriterion("OrderPhone >=", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneLessThan(String value) {
-            addCriterion("OrserPhone <", value, "orserphone");
+        public Criteria andOrderphoneLessThan(String value) {
+            addCriterion("OrderPhone <", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneLessThanOrEqualTo(String value) {
-            addCriterion("OrserPhone <=", value, "orserphone");
+        public Criteria andOrderphoneLessThanOrEqualTo(String value) {
+            addCriterion("OrderPhone <=", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneLike(String value) {
-            addCriterion("OrserPhone like", value, "orserphone");
+        public Criteria andOrderphoneLike(String value) {
+            addCriterion("OrderPhone like", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneNotLike(String value) {
-            addCriterion("OrserPhone not like", value, "orserphone");
+        public Criteria andOrderphoneNotLike(String value) {
+            addCriterion("OrderPhone not like", value, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneIn(List<String> values) {
-            addCriterion("OrserPhone in", values, "orserphone");
+        public Criteria andOrderphoneIn(List<String> values) {
+            addCriterion("OrderPhone in", values, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneNotIn(List<String> values) {
-            addCriterion("OrserPhone not in", values, "orserphone");
+        public Criteria andOrderphoneNotIn(List<String> values) {
+            addCriterion("OrderPhone not in", values, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneBetween(String value1, String value2) {
-            addCriterion("OrserPhone between", value1, value2, "orserphone");
+        public Criteria andOrderphoneBetween(String value1, String value2) {
+            addCriterion("OrderPhone between", value1, value2, "orderphone");
             return (Criteria) this;
         }
 
-        public Criteria andOrserphoneNotBetween(String value1, String value2) {
-            addCriterion("OrserPhone not between", value1, value2, "orserphone");
+        public Criteria andOrderphoneNotBetween(String value1, String value2) {
+            addCriterion("OrderPhone not between", value1, value2, "orderphone");
             return (Criteria) this;
         }
 

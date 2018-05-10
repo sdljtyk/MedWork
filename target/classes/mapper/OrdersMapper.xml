@@ -11,7 +11,7 @@
     <result column="OrderState" jdbcType="INTEGER" property="orderstate" />
     <result column="OrderAdvice" jdbcType="VARCHAR" property="orderadvice" />
     <result column="OrderWatime" jdbcType="VARCHAR" property="orderwatime" />
-    <result column="OrserPhone" jdbcType="VARCHAR" property="orserphone" />
+    <result column="OrderPhone" jdbcType="VARCHAR" property="orderphone" />
     <result column="OrderName" jdbcType="VARCHAR" property="ordername" />
     <result column="OrderNumber" jdbcType="VARCHAR" property="ordernumber" />
   </resultMap>
@@ -75,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, YYID, OrderCreatePerson, OrderCtime, OrderSub, OrderOther, OrderState, OrderAdvice, 
-    OrderWatime, OrserPhone, OrderName, OrderNumber
+    OrderWatime, OrderPhone, OrderName, OrderNumber
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.OrdersExample" resultMap="BaseResultMap">
     select
@@ -119,12 +119,12 @@
     insert into orders (ID, YYID, OrderCreatePerson, 
       OrderCtime, OrderSub, OrderOther, 
       OrderState, OrderAdvice, OrderWatime, 
-      OrserPhone, OrderName, OrderNumber
+      OrderPhone, OrderName, OrderNumber
       )
     values (#{id,jdbcType=INTEGER}, #{yyid,jdbcType=INTEGER}, #{ordercreateperson,jdbcType=VARCHAR}, 
       #{orderctime,jdbcType=VARCHAR}, #{ordersub,jdbcType=VARCHAR}, #{orderother,jdbcType=VARCHAR}, 
       #{orderstate,jdbcType=INTEGER}, #{orderadvice,jdbcType=VARCHAR}, #{orderwatime,jdbcType=VARCHAR}, 
-      #{orserphone,jdbcType=VARCHAR}, #{ordername,jdbcType=VARCHAR}, #{ordernumber,jdbcType=VARCHAR}
+      #{orderphone,jdbcType=VARCHAR}, #{ordername,jdbcType=VARCHAR}, #{ordernumber,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Orders">
@@ -157,8 +157,8 @@
       <if test="orderwatime != null">
         OrderWatime,
       </if>
-      <if test="orserphone != null">
-        OrserPhone,
+      <if test="orderphone != null">
+        OrderPhone,
       </if>
       <if test="ordername != null">
         OrderName,
@@ -195,8 +195,8 @@
       <if test="orderwatime != null">
         #{orderwatime,jdbcType=VARCHAR},
       </if>
-      <if test="orserphone != null">
-        #{orserphone,jdbcType=VARCHAR},
+      <if test="orderphone != null">
+        #{orderphone,jdbcType=VARCHAR},
       </if>
       <if test="ordername != null">
         #{ordername,jdbcType=VARCHAR},
@@ -242,8 +242,8 @@
       <if test="record.orderwatime != null">
         OrderWatime = #{record.orderwatime,jdbcType=VARCHAR},
       </if>
-      <if test="record.orserphone != null">
-        OrserPhone = #{record.orserphone,jdbcType=VARCHAR},
+      <if test="record.orderphone != null">
+        OrderPhone = #{record.orderphone,jdbcType=VARCHAR},
       </if>
       <if test="record.ordername != null">
         OrderName = #{record.ordername,jdbcType=VARCHAR},
@@ -267,7 +267,7 @@
       OrderState = #{record.orderstate,jdbcType=INTEGER},
       OrderAdvice = #{record.orderadvice,jdbcType=VARCHAR},
       OrderWatime = #{record.orderwatime,jdbcType=VARCHAR},
-      OrserPhone = #{record.orserphone,jdbcType=VARCHAR},
+      OrderPhone = #{record.orderphone,jdbcType=VARCHAR},
       OrderName = #{record.ordername,jdbcType=VARCHAR},
       OrderNumber = #{record.ordernumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -301,8 +301,8 @@
       <if test="orderwatime != null">
         OrderWatime = #{orderwatime,jdbcType=VARCHAR},
       </if>
-      <if test="orserphone != null">
-        OrserPhone = #{orserphone,jdbcType=VARCHAR},
+      <if test="orderphone != null">
+        OrderPhone = #{orderphone,jdbcType=VARCHAR},
       </if>
       <if test="ordername != null">
         OrderName = #{ordername,jdbcType=VARCHAR},
@@ -323,7 +323,7 @@
       OrderState = #{orderstate,jdbcType=INTEGER},
       OrderAdvice = #{orderadvice,jdbcType=VARCHAR},
       OrderWatime = #{orderwatime,jdbcType=VARCHAR},
-      OrserPhone = #{orserphone,jdbcType=VARCHAR},
+      OrderPhone = #{orderphone,jdbcType=VARCHAR},
       OrderName = #{ordername,jdbcType=VARCHAR},
       OrderNumber = #{ordernumber,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}

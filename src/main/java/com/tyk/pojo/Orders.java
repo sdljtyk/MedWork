@@ -24,7 +24,7 @@ public class Orders implements Serializable {
 
     private String orderwatime;
 
-    private String orserphone;
+    private String orderphone;
 
     private String ordername;
 
@@ -104,12 +104,12 @@ public class Orders implements Serializable {
         this.orderwatime = orderwatime;
     }
 
-    public String getOrserphone() {
-        return orserphone;
+    public String getOrderphone() {
+        return orderphone;
     }
 
-    public void setOrserphone(String orserphone) {
-        this.orserphone = orserphone;
+    public void setOrderphone(String orderphone) {
+        this.orderphone = orderphone;
     }
 
     public String getOrdername() {
@@ -149,7 +149,7 @@ public class Orders implements Serializable {
             && (this.getOrderstate() == null ? other.getOrderstate() == null : this.getOrderstate().equals(other.getOrderstate()))
             && (this.getOrderadvice() == null ? other.getOrderadvice() == null : this.getOrderadvice().equals(other.getOrderadvice()))
             && (this.getOrderwatime() == null ? other.getOrderwatime() == null : this.getOrderwatime().equals(other.getOrderwatime()))
-            && (this.getOrserphone() == null ? other.getOrserphone() == null : this.getOrserphone().equals(other.getOrserphone()))
+            && (this.getOrderphone() == null ? other.getOrderphone() == null : this.getOrderphone().equals(other.getOrderphone()))
             && (this.getOrdername() == null ? other.getOrdername() == null : this.getOrdername().equals(other.getOrdername()))
             && (this.getOrdernumber() == null ? other.getOrdernumber() == null : this.getOrdernumber().equals(other.getOrdernumber()));
     }
@@ -167,7 +167,7 @@ public class Orders implements Serializable {
         result = prime * result + ((getOrderstate() == null) ? 0 : getOrderstate().hashCode());
         result = prime * result + ((getOrderadvice() == null) ? 0 : getOrderadvice().hashCode());
         result = prime * result + ((getOrderwatime() == null) ? 0 : getOrderwatime().hashCode());
-        result = prime * result + ((getOrserphone() == null) ? 0 : getOrserphone().hashCode());
+        result = prime * result + ((getOrderphone() == null) ? 0 : getOrderphone().hashCode());
         result = prime * result + ((getOrdername() == null) ? 0 : getOrdername().hashCode());
         result = prime * result + ((getOrdernumber() == null) ? 0 : getOrdernumber().hashCode());
         return result;
@@ -188,7 +188,7 @@ public class Orders implements Serializable {
         sb.append(", orderstate=").append(orderstate);
         sb.append(", orderadvice=").append(orderadvice);
         sb.append(", orderwatime=").append(orderwatime);
-        sb.append(", orserphone=").append(orserphone);
+        sb.append(", orderphone=").append(orderphone);
         sb.append(", ordername=").append(ordername);
         sb.append(", ordernumber=").append(ordernumber);
         sb.append(", serialVersionUID=").append(serialVersionUID);

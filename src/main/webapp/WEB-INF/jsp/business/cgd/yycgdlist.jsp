@@ -29,7 +29,7 @@ var frozenColumns;
 var columns = [ [
  
  {
-	field : 'useryymc',
+	field : 'yyname',
 	title : '医院名称',
 	width : 100
 },{
@@ -68,7 +68,7 @@ var columns = [ [
 	width : 80,
 
 },{
-	field : 'cgdztmc',
+	field : 'orderstatemc',
 	title : '采购单状态', 
 	width : 80
 },{
@@ -124,8 +124,8 @@ function initGrid(){
 						<td ><INPUT type="text" name="ordername" /></td>
 					  <TD class="left">采购单状态：</TD>
 						<td >
-							<select id="yycgdCustom.zt" name="yycgdCustom.zt" style="width:150px">
-								<option value="">全部</option>
+							<select id="yycgdCustom.zt" name="orderstate" style="width:150px">
+								<option value="0">全部</option>
 								<c:forEach items="${cgdztList}" var="value">
 									<option value="${value.id}">${value.info}</option>
 								</c:forEach>

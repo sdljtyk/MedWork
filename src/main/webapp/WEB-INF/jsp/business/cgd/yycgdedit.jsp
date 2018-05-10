@@ -288,60 +288,46 @@ function initGrid(){
 						<TBODY>
 							
 							<TR>
-								<TD height=30 width="15%" align=right>采购单编号：</TD>
-								<TD class=category width="35%">
-								${yycgd.bm}
-								</TD>
-								<TD height=30 width="15%" align=right >采购单名称：</TD>
-								<TD class=category width="35%">
-								<div>
-								<input type="text" id="yycgd_mc" name="yycgd.mc" value="${yycgd.mc}"  style="width:260px" />
-								</div>
-								<div id="yycgd_mcTip"></div>
-								</TD>
-							</TR>
-							<TR>
-							   <TD height=30 width="15%" align=right >建单时间：</TD>
-								<TD class=category width="35%">
-									<fmt:formatDate value="${yycgd.cjtime}" pattern="yyyy-MM-dd"/>
-								</TD>
-								<TD height=30 width="15%" align=right >提交时间：</TD>
-								<TD class=category width="35%">
-								<fmt:formatDate value="${yycgd.tjtime}" pattern="yyyy-MM-dd"/>
-								</TD>
-								
-							</TR>
-							<TR>
-								<TD height=30 width="15%" align=right>联系人：</TD>
-								<TD class=category width="35%">
-								<input type="text" name="yycgd.lxr" id="yycgd.lxr" value="${yycgd.lxr}"  style="width:260px" />
-								</TD>
-								<TD height=30 width="15%" align=right >联系电话：</TD>
-								<TD class=category width="35%">
-								<input type="text" name="yycgd.lxdh" id="yycgd.lxdh" value="${yycgd.lxdh}"  style="width:260px" />
-								</TD>
-							</TR>
-							<TR>
-								<TD height=30 width="15%" align=right>采购单状态：</TD>
-								<TD class=category width="35%">
-								${yycgdCustom.yycgdztmc}
-								</TD>
-								<TD height=30 width="15%" align=right>备注：</TD>
-								<TD colspan=3>
-									<textarea rows="2" cols="30" name="yycgd.bz">${yycgd.bz}</textarea>
-								</TD>
-							</TR>
-							
-							<TR>
-								<TD height=30 width="15%" align=right>审核时间：</TD>
-								<TD class=category width="35%">
-								<fmt:formatDate value="${yycgd.shtime}" pattern="yyyy-MM-dd"/>
-								</TD>
-								<TD height=30 width="15%" align=right >审核意见：</TD>
-								<TD class=category width="35%">
-								${yycgd.shyj}
-								</TD>
-							</TR>
+									<TD height=30 width="15%" align=right>采购单编号：</TD>
+									<TD class=category width="35%">${yycgd.ordernumber}</TD>
+									<TD height=30 width="15%" align=right>采购单名称：</TD>
+									<TD class=category width="35%">
+										<div>
+											<input type="text" id="yycgd_mc" name="yycgd.mc"
+												value="${yycgd.ordername}" style="width: 260px" />
+										</div>
+										<div id="yycgd_mcTip"></div>
+									</TD>
+								</TR>
+								<TR>
+									<TD height=30 width="15%" align=right>建单时间：</TD>
+									<TD class=category width="35%">${yycgd.orderctime}</TD>
+									<TD height=30 width="15%" align=right>提交时间：</TD>
+									<TD class=category width="35%">${yycgd.ordersub}</TD>
+
+								</TR>
+								<TR>
+									<TD height=30 width="15%" align=right>联系人：</TD>
+									<TD class=category width="35%"><input type="text"
+										name="ordercreateperson" id="yycgd.lxr"
+										value="${yycgd.ordercreateperson}" style="width: 260px" /></TD>
+									<TD height=30 width="15%" align=right>联系电话：</TD>
+									<TD class=category width="35%"><input type="text"
+										name="orderphone" id="yycgd.lxdh" value="${yycgd.orderphone}"
+										style="width: 260px" /></TD>
+								</TR>
+								<TR>
+									<TD height=30 width="15%" align=right>采购单状态：</TD>
+									<TD class=category width="35%">${yycgd.orderstatemc}</TD>
+									<TD height=30 width="15%" align=right>备注：</TD>
+									<TD colspan=3><textarea rows="2" cols="30"
+											name="orderother">${yycgd.orderother}</textarea></TD>
+								</TR>
+
+								<TR>
+									<TD height=30 width="15%" align=right>审核时间：</TD>
+									<TD class=category width="35%">${yycgd.orderwatime}</TD>
+								</TR>
 							
 							<tr>
 							  <td colspan=4 align=center class=category>
