@@ -113,7 +113,7 @@
 			bgColor=#c4d8ed align=center>
 			<TBODY>
 				<TR>
-					<TD background=images/r_0.gif width="100%">
+					<TD background=${baseurl}/images/r_0.gif width="100%">
 						<TABLE cellSpacing=0 cellPadding=0 width="100%">
 							<TBODY>
 								<TR>
@@ -194,7 +194,7 @@
 			bgColor=#c4d8ed>
 			<TBODY>
 				<TR>
-					<TD background=images/r_0.gif width="100%">
+					<TD background=${baseurl}/images/r_0.gif width="100%">
 						<TABLE cellSpacing=0 cellPadding=0 width="100%">
 							<TBODY>
 								<TR>

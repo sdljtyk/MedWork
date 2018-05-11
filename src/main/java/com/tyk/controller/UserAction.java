@@ -1,6 +1,5 @@
 package com.tyk.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,14 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tyk.pojo.Dicinfo;
-import com.tyk.pojo.Ghsunit;
 import com.tyk.pojo.User;
 import com.tyk.service.BaseService;
 import com.tyk.service.UserService;
 import com.tyk.util.DataGridResultInfo;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.ActiveUser;
-import com.tyk.vo.GHSCustom;
 import com.tyk.vo.UserCustom;
 
 /**

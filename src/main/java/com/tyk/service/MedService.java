@@ -10,11 +10,14 @@ import com.tyk.mapper.DicinfoMapper;
 import com.tyk.mapper.GhsmedMapper;
 import com.tyk.mapper.GhsunitMapper;
 import com.tyk.mapper.MedinfoMapper;
+import com.tyk.mapper.YymedMapper;
 import com.tyk.pojo.Ghsmed;
 import com.tyk.pojo.GhsmedExample;
 import com.tyk.pojo.Medinfo;
 import com.tyk.pojo.MedinfoExample;
 import com.tyk.pojo.MedinfoExample.Criteria;
+import com.tyk.pojo.Yymed;
+import com.tyk.pojo.YymedExample;
 import com.tyk.vo.GysypmlCustom;
 import com.tyk.vo.YpxxCustom;
 
@@ -29,6 +32,8 @@ public class MedService {
 	private GhsmedMapper ghsmedMapper;
 	@Autowired
 	private GhsunitMapper ghsunitMapper;
+	@Autowired
+	private YymedMapper yymedMapper;
 
 	public YpxxCustom FindCusByMed(Medinfo medinfo) {
 		YpxxCustom temp = new YpxxCustom();
@@ -194,6 +199,40 @@ public class MedService {
 		Ghsmed ghsmed = ghsmedMapper.selectByPrimaryKey(Integer.parseInt(string));
 		ghsmed.setGhsmedstate(Integer.parseInt(string2));
 		return ghsmedMapper.updateByPrimaryKeySelective(ghsmed);
+	}
+
+	public List<YpxxCustom> FindYYmedListByCusAndYYid(YpxxCustom ypxxCustom, int yyid) {
+		List<YpxxCustom> list = new ArrayList<YpxxCustom>();
+		YymedExample example = new YymedExample();
+		example.createCriteria().andYyidEqualTo(yyid);
+		List<Yymed> yymeds = yymedMapper.selectByExample(example);
+		List<YpxxCustom> temp = FindListByCustom(ypxxCustom);
+		for (Yymed yymed : yymeds) {
+			for (YpxxCustom ypxxCustom2 : temp) {
+				if(yymed.getMedid() == ypxxCustom2.getId()) {
+					ypxxCustom2.setYymedid(yymed.getId());
+					ypxxCustom2.setMedsum(yymed.getMedsum());
+					list.add(ypxxCustom2);
+				}
+			}
+		}
+		return list;
+	}
+
+	public int FindYYmedCountByCusAndYYid(YpxxCustom ypxxCustom, int yyid) {
+		int count = FindYYmedListByCusAndYYid(ypxxCustom, yyid).size();
+		return count;
+	}
+
+	public int DelYYMedByID(String string) {
+		Yymed yymed = yymedMapper.selectByPrimaryKey(Integer.parseInt(string));
+		System.out.println("yymed:"+yymed);
+		if(yymed.getMedsum() == 0)
+			return yymedMapper.deleteByPrimaryKey(Integer.parseInt(string));
+		else
+			return 0;
+			
+		
 	}
 
 	

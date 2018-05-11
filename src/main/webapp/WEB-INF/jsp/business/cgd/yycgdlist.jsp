@@ -54,11 +54,6 @@ var columns = [ [
 	width : 80,
 
 },{
-	field : 'orderctime',
-	title : '建单时间',
-	width : 80,
-
-},{
 	field : 'ordersub',
 	title : '提交时间',
 	width : 80,

@@ -5,6 +5,7 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="MedID" jdbcType="INTEGER" property="medid" />
     <result column="MedSum" jdbcType="INTEGER" property="medsum" />
+    <result column="YYID" jdbcType="INTEGER" property="yyid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, MedID, MedSum
+    ID, MedID, MedSum, YYID
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.YymedExample" resultMap="BaseResultMap">
     select
@@ -106,10 +107,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.tyk.pojo.Yymed">
-    insert into yymed (ID, MedID, MedSum
-      )
-    values (#{id,jdbcType=INTEGER}, #{medid,jdbcType=INTEGER}, #{medsum,jdbcType=INTEGER}
-      )
+    insert into yymed (ID, MedID, MedSum, 
+      YYID)
+    values (#{id,jdbcType=INTEGER}, #{medid,jdbcType=INTEGER}, #{medsum,jdbcType=INTEGER}, 
+      #{yyid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Yymed">
     insert into yymed
@@ -123,6 +124,9 @@
       <if test="medsum != null">
         MedSum,
       </if>
+      <if test="yyid != null">
+        YYID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -133,6 +137,9 @@
       </if>
       <if test="medsum != null">
         #{medsum,jdbcType=INTEGER},
+      </if>
+      <if test="yyid != null">
+        #{yyid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -154,6 +161,9 @@
       <if test="record.medsum != null">
         MedSum = #{record.medsum,jdbcType=INTEGER},
       </if>
+      <if test="record.yyid != null">
+        YYID = #{record.yyid,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -163,7 +173,8 @@
     update yymed
     set ID = #{record.id,jdbcType=INTEGER},
       MedID = #{record.medid,jdbcType=INTEGER},
-      MedSum = #{record.medsum,jdbcType=INTEGER}
+      MedSum = #{record.medsum,jdbcType=INTEGER},
+      YYID = #{record.yyid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -177,13 +188,17 @@
       <if test="medsum != null">
         MedSum = #{medsum,jdbcType=INTEGER},
       </if>
+      <if test="yyid != null">
+        YYID = #{yyid,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tyk.pojo.Yymed">
     update yymed
     set MedID = #{medid,jdbcType=INTEGER},
-      MedSum = #{medsum,jdbcType=INTEGER}
+      MedSum = #{medsum,jdbcType=INTEGER},
+      YYID = #{yyid,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

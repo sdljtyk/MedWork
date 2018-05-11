@@ -24,9 +24,6 @@ var yyypmladd = function(){
 		}
 		if(rows.length>0){
 			$("#indexs").val(indexs.join(','));
-			/* $("input[name^=ypxxid]").each(function() {
-				ypxxids.push($(this).val());
-				    				}); */
 			jquerySubByFId('yyypmladdqueryForm',yyypmladd_callback, null);
 		}else{
 			alert_warn("请选择要添加的药品");

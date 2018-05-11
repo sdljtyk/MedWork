@@ -16,11 +16,22 @@ public class YpxxCustom extends Medinfo{
 	private String zlccmc;
 	//交易状态名称
 	private String jyztmc;
-	//价格上限
-	private Float zbjgupper;
-	//价格下限
-	private Float zbjglower;
 	
+	private int medsum;
+	private int yymedid;
+	
+	public int getYymedid() {
+		return yymedid;
+	}
+	public void setYymedid(int yymedid) {
+		this.yymedid = yymedid;
+	}
+	public String getLbmc() {
+		return lbmc;
+	}
+	public void setLbmc(String lbmc) {
+		this.lbmc = lbmc;
+	}
 	public String getZlccmc() {
 		return zlccmc;
 	}
@@ -33,23 +44,11 @@ public class YpxxCustom extends Medinfo{
 	public void setJyztmc(String jyztmc) {
 		this.jyztmc = jyztmc;
 	}
-	public Float getZbjgupper() {
-		return zbjgupper;
+	public int getMedsum() {
+		return medsum;
 	}
-	public void setZbjgupper(Float zbjgupper) {
-		this.zbjgupper = zbjgupper;
-	}
-	public Float getZbjglower() {
-		return zbjglower;
-	}
-	public void setZbjglower(Float zbjglower) {
-		this.zbjglower = zbjglower;
-	}
-	public String getLbmc() {
-		return lbmc;
-	}
-	public void setLbmc(String lbmc) {
-		this.lbmc = lbmc;
+	public void setMedsum(int medsum) {
+		this.medsum = medsum;
 	}
 	
 	

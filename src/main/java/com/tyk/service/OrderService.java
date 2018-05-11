@@ -22,7 +22,6 @@ import com.tyk.pojo.OrdersExample;
 import com.tyk.pojo.OrdersExample.Criteria;
 import com.tyk.vo.OrderCustom;
 import com.tyk.vo.OrderInfoCustom;
-import com.tyk.vo.UserCustom;
 
 @Service
 public class OrderService {

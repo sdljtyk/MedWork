@@ -2,6 +2,8 @@ package com.tyk.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import com.tyk.service.BaseService;
 import com.tyk.service.OrderService;
 import com.tyk.util.DataGridResultInfo;
 import com.tyk.util.ResultInfo;
+import com.tyk.vo.ActiveUser;
 import com.tyk.vo.OrderCustom;
 import com.tyk.vo.OrderInfoCustom;
 
@@ -43,8 +46,11 @@ public class OrderAction {
 	
 	@RequestMapping("/yycgdlist_result.action")
 	@ResponseBody
-	public DataGridResultInfo yycgdlist_result(OrderCustom orderCustom,int page,int rows)
+	public DataGridResultInfo yycgdlist_result(OrderCustom orderCustom,int page,int rows,HttpSession session)
 	{
+		ActiveUser activeuser = (ActiveUser) session.getAttribute("activeUser");
+		if(activeuser.getGroupid().equals("27"))
+			orderCustom.setYyid(Integer.parseInt(activeuser.getUnitID()));
 		System.out.println("ordercustom:"+orderCustom);
 		int count = 0;
 		try {

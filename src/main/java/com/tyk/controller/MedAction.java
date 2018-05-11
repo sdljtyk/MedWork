@@ -17,6 +17,12 @@ import com.tyk.util.ResultInfo;
 import com.tyk.vo.GysypmlCustom;
 import com.tyk.vo.YpxxCustom;
 
+/**
+ * 监管部门相关药品控制
+ * @author sdljtyk
+ *
+ */
+
 @Controller
 @RequestMapping("/ypml")
 public class MedAction {
@@ -146,6 +152,7 @@ public class MedAction {
 		return MedmlShow(model, url);
 	}
 
+	//供货商药品供应控制信息加载
 	@RequestMapping("/gysypmlcontrolquery_result.action")
 	@ResponseBody
 	public DataGridResultInfo gysypmlcontrolquery_result(GysypmlCustom gysypmlCustom, int page, int rows)
@@ -164,6 +171,7 @@ public class MedAction {
 		return queryResultInfo;
 	}
 	
+	//供货商药品供应控制
 	@RequestMapping("/gysypmlcontrolsubmit.action")
 	@ResponseBody
 	public ResultInfo gysypmlcontrolsubmit(String indexs,String states)
@@ -200,10 +208,6 @@ public class MedAction {
 	@RequestMapping("/ypxximport.action")
 	public String ypxximport() throws Exception {
 		return "/business/ypml/ypxximport";
-	}
-	@RequestMapping("/yyypmlquery.action")
-	public String yyypmlquery(Model model) {
-		return "/business/ypml/yyypmlquery";
 	}
 	*/
 }

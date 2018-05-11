@@ -12,6 +12,8 @@ public class Yymed implements Serializable {
 
     private Integer medsum;
 
+    private Integer yyid;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -38,6 +40,14 @@ public class Yymed implements Serializable {
         this.medsum = medsum;
     }
 
+    public Integer getYyid() {
+        return yyid;
+    }
+
+    public void setYyid(Integer yyid) {
+        this.yyid = yyid;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -52,7 +62,8 @@ public class Yymed implements Serializable {
         Yymed other = (Yymed) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getMedid() == null ? other.getMedid() == null : this.getMedid().equals(other.getMedid()))
-            && (this.getMedsum() == null ? other.getMedsum() == null : this.getMedsum().equals(other.getMedsum()));
+            && (this.getMedsum() == null ? other.getMedsum() == null : this.getMedsum().equals(other.getMedsum()))
+            && (this.getYyid() == null ? other.getYyid() == null : this.getYyid().equals(other.getYyid()));
     }
 
     @Override
@@ -62,6 +73,7 @@ public class Yymed implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getMedid() == null) ? 0 : getMedid().hashCode());
         result = prime * result + ((getMedsum() == null) ? 0 : getMedsum().hashCode());
+        result = prime * result + ((getYyid() == null) ? 0 : getYyid().hashCode());
         return result;
     }
 
@@ -74,6 +86,7 @@ public class Yymed implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", medid=").append(medid);
         sb.append(", medsum=").append(medsum);
+        sb.append(", yyid=").append(yyid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

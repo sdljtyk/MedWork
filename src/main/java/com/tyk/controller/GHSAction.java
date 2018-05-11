@@ -17,7 +17,6 @@ import com.tyk.util.DataGridResultInfo;
 import com.tyk.util.JacksonUtil;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.GHSCustom;
-import com.tyk.vo.YYCustom;
 
 @Controller
 @RequestMapping("/user")

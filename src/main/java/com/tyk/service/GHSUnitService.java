@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tyk.controller.GHSAction;
 import com.tyk.mapper.GhqyMapper;
 import com.tyk.mapper.GhsunitMapper;
 import com.tyk.mapper.XzqyMapper;
@@ -14,10 +13,8 @@ import com.tyk.pojo.Ghqy;
 import com.tyk.pojo.GhqyExample;
 import com.tyk.pojo.Ghsunit;
 import com.tyk.pojo.GhsunitExample;
-import com.tyk.pojo.MedinfoExample.Criteria;
 import com.tyk.pojo.Xzqy;
 import com.tyk.vo.GHSCustom;
-import com.tyk.vo.YYCustom;
 
 @Service
 public class GHSUnitService {
@@ -118,7 +115,6 @@ public class GHSUnitService {
 
 	public int DelGhsByID(String delid) {
 		int index = ghsunitMapper.deleteByPrimaryKey(Integer.parseInt(delid));
-		int i;
 		GhqyExample example = new GhqyExample();
 		example.createCriteria().andGysunitidEqualTo(Integer.parseInt(delid));
 		List<Ghqy> ghqy= ghqyMapper.selectByExample(example);

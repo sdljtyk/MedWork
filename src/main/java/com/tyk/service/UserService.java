@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.tyk.mapper.DicinfoMapper;
 import com.tyk.mapper.GhsunitMapper;
-import com.tyk.mapper.JdunitMapper;
 import com.tyk.mapper.UserMapper;
 import com.tyk.mapper.YyunitMapper;
 import com.tyk.pojo.Ghsunit;
@@ -24,7 +23,6 @@ import com.tyk.pojo.Yyunit;
 import com.tyk.pojo.YyunitExample;
 import com.tyk.util.MD5;
 import com.tyk.vo.ActiveUser;
-import com.tyk.vo.GHSCustom;
 import com.tyk.vo.UserCustom;
 
 @Service

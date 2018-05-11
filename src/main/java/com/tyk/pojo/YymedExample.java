@@ -303,6 +303,66 @@ public class YymedExample {
             addCriterion("MedSum not between", value1, value2, "medsum");
             return (Criteria) this;
         }
+
+        public Criteria andYyidIsNull() {
+            addCriterion("YYID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidIsNotNull() {
+            addCriterion("YYID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidEqualTo(Integer value) {
+            addCriterion("YYID =", value, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidNotEqualTo(Integer value) {
+            addCriterion("YYID <>", value, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidGreaterThan(Integer value) {
+            addCriterion("YYID >", value, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("YYID >=", value, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidLessThan(Integer value) {
+            addCriterion("YYID <", value, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidLessThanOrEqualTo(Integer value) {
+            addCriterion("YYID <=", value, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidIn(List<Integer> values) {
+            addCriterion("YYID in", values, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidNotIn(List<Integer> values) {
+            addCriterion("YYID not in", values, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidBetween(Integer value1, Integer value2) {
+            addCriterion("YYID between", value1, value2, "yyid");
+            return (Criteria) this;
+        }
+
+        public Criteria andYyidNotBetween(Integer value1, Integer value2) {
+            addCriterion("YYID not between", value1, value2, "yyid");
+            return (Criteria) this;
+        }
     }
 
     /**
