@@ -7,12 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tyk.mapper.DicinfoMapper;
+import com.tyk.mapper.GhsunitMapper;
+import com.tyk.mapper.MedinfoMapper;
+import com.tyk.mapper.OrderinfoMapper;
 import com.tyk.mapper.OrdersMapper;
 import com.tyk.mapper.YyunitMapper;
+import com.tyk.pojo.Dicinfo;
+import com.tyk.pojo.Ghsunit;
+import com.tyk.pojo.Medinfo;
+import com.tyk.pojo.Orderinfo;
+import com.tyk.pojo.OrderinfoExample;
 import com.tyk.pojo.Orders;
 import com.tyk.pojo.OrdersExample;
 import com.tyk.pojo.OrdersExample.Criteria;
 import com.tyk.vo.OrderCustom;
+import com.tyk.vo.OrderInfoCustom;
 import com.tyk.vo.UserCustom;
 
 @Service
@@ -24,6 +33,12 @@ public class OrderService {
 	private YyunitMapper yyunitMapper;
 	@Autowired
 	private DicinfoMapper dicinfoMapper;
+	@Autowired
+	private OrderinfoMapper orderinfoMapper;
+	@Autowired
+	private MedinfoMapper medinfoMapper;
+	@Autowired
+	private GhsunitMapper ghsunitMapper;
 	
 	public OrderCustom FindCusByOrders(Orders orders)
 	{
@@ -88,6 +103,46 @@ public class OrderService {
 		Orders order = ordersMapper.selectByPrimaryKey(Integer.parseInt(yycgdid));
 		OrderCustom custom =FindCusByOrders(order);
 		return custom;
+	}
+
+	public List<OrderInfoCustom> FindOrderListByOrderID(String yycgdid) {
+		List<OrderInfoCustom> list = new ArrayList<OrderInfoCustom>();
+		OrderinfoExample example = new OrderinfoExample();
+		example.createCriteria().andOrderidEqualTo(Integer.parseInt(yycgdid));
+		List<Orderinfo> orderinfo = orderinfoMapper.selectByExample(example);
+		for (Orderinfo orderinfo2 : orderinfo) {
+			OrderInfoCustom temp = FindOrderInfoCusByOrder(orderinfo2);
+			list.add(temp);
+		}
+		return list;
+	}
+
+	private OrderInfoCustom FindOrderInfoCusByOrder(Orderinfo orderinfo2) {
+		OrderInfoCustom custom = new OrderInfoCustom();
+		Medinfo med = medinfoMapper.selectByPrimaryKey(orderinfo2.getMedid());
+		Dicinfo dic = dicinfoMapper.selectByPrimaryKey(orderinfo2.getGhstate());
+		Ghsunit ghs = ghsunitMapper.selectByPrimaryKey(orderinfo2.getGhsid());
+		
+		custom.setGhsid(orderinfo2.getGhsid());
+		custom.setGhsname(ghs.getGhsname());
+		custom.setGhstate(orderinfo2.getGhstate());
+		custom.setGhstatemc(dic.getInfo());
+		custom.setMeddj(orderinfo2.getMeddj());
+		custom.setMedgg(med.getMedgg());
+		custom.setMedid(orderinfo2.getMedid());
+		custom.setMedjx(med.getMedjx());
+		custom.setMedmake(med.getMedmake());
+		custom.setMedname(med.getMedname());
+		custom.setMednum(orderinfo2.getMednum());
+		custom.setMednumber(med.getMednumber());
+		custom.setMedsum(orderinfo2.getMedsum());
+		custom.setMeddw(med.getMeddw());
+		return custom;
+	}
+
+	public int FindOrderCountByOrderId(String yycgdid) {
+		int count = FindOrderListByOrderID(yycgdid).size();
+		return count;
 	}
 
 }

@@ -14,6 +14,7 @@ import com.tyk.service.OrderService;
 import com.tyk.util.DataGridResultInfo;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.OrderCustom;
+import com.tyk.vo.OrderInfoCustom;
 
 
 
@@ -95,5 +96,23 @@ public class OrderAction {
 		OrderCustom custom = orderService.FindCusByID(yycgdid);
 		model.addAttribute("yycgd", custom);
 		return "business/cgd/yycgdinfo";
+	}
+	
+	@RequestMapping("/yycgdlist_cgdmxresult.action")
+	@ResponseBody
+	public DataGridResultInfo yycgdlist_cgdmxresult(String yycgdid,int page,int rows)
+	{
+		int count = 0;
+		try {
+			count = orderService.FindOrderCountByOrderId(yycgdid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(yycgdid);
+		ResultInfo ri = new ResultInfo(1, "查询成功");
+		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
+		queryResultInfo.setRows(list);
+		queryResultInfo.setTotal(count);
+		return queryResultInfo;
 	}
 }

@@ -17,7 +17,7 @@
 
 	var frozenColumns;
 
-	var columns = [ [ {
+	var columns = [ [ /* {
 		field : 'yyname',
 		title : '医院',
 		width : 100,
@@ -29,46 +29,50 @@
 			}
 
 		}
-	}, {
+	}, */ {
 		field : 'mednumber',
 		title : '流水号',
-		width : 50
+		width : 80
 	}, {
 		field : 'medname',
 		title : '药品名称',
-		width : 100
+		width : 160
 	}, {
 		field : 'medjx',
 		title : '剂型',
-		width : 70
+		width : 80
 	}, {
 		field : 'medgg',
 		title : '规格',
 		width : 70
 	}, {
+		field : 'meddw',
+		title : '单位',
+		width : 70
+	},{
 		field : 'meddj',
-		title : '中标价',
-		width : 50
+		title : '中标价(元)',
+		width : 80
 	}, {
 		field : 'mednum',
 		title : '采购量',
-		width : 50
+		width : 70
 	}, {
 		field : 'medsum',
-		title : '采购金额',
-		width : 50
+		title : '采购金额(元)',
+		width : 80
 	}, {
 		field : 'medmake',
 		title : '生产企业',
-		width : 100
+		width : 180
 	}, {
 		field : 'ghstatemc',
 		title : '采购状态',
-		width : 80
+		width : 100
 	}, {
 		field : 'ghsname',
 		title : '供货商',
-		width : 100
+		width : 150
 	} ] ];
 
 	function initGrid() {
@@ -125,14 +129,17 @@
 						<TABLE class="toptable grid" border=1 cellSpacing=1 cellPadding=4
 							align=center>
 							<TBODY>
-
+								<tr>
+									<td height="30" colspan="1" align="center">采购医院</td>
+									<td colspan="3" align="center" class=category>${yycgd.yyname}</td>
+								</tr>
 								<TR>
 									<TD height=30 width="15%" align=right>采购单编号：</TD>
 									<TD class=category width="35%">${yycgd.ordernumber}</TD>
 									<TD height=30 width="15%" align=right>采购单名称：</TD>
 									<TD class=category width="35%">
 										<div>
-											<input type="text" id="yycgd_mc" name="yycgd.mc"
+											<input type="text" id="yycgd_mc" name="ordername"
 												value="${yycgd.ordername}" style="width: 260px" />
 										</div>
 										<div id="yycgd_mcTip"></div>

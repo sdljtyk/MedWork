@@ -16,7 +16,7 @@
 
 function yycgdinfo(bm,id,year){
 	var sendUrl = "${baseurl}/cgd/yycgdinfo.action?yycgdid="+id+'&year='+year;
-	parent.opentabwindow(bm+'采购单查看',sendUrl);
+	parent.opentabwindow('采购单查看',sendUrl);
 }
 
 
