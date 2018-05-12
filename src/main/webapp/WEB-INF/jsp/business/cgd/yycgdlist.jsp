@@ -14,8 +14,8 @@
 <script type="text/javascript">
 
 
-function yycgdinfo(bm,id,year){
-	var sendUrl = "${baseurl}/cgd/yycgdinfo.action?yycgdid="+id+'&year='+year;
+function yycgdinfo(id){
+	var sendUrl = "${baseurl}/cgd/yycgdinfo.action?yycgdid="+id;
 	parent.opentabwindow('采购单查看',sendUrl);
 }
 
@@ -71,9 +71,7 @@ var columns = [ [
 	title : '查看',
 	width : 60,
 	formatter:function(value, row, index){
-		var date = new Date(row.cjtime);
-		var y = date.getFullYear();
-		return '<a href=javascript:yycgdinfo(\''+row.bm+'\',\''+row.id+'\','+y+')>查看</a>';
+		return '<a href=javascript:yycgdinfo(\''+row.id+'\')>查看</a>';
 	}
 }]];
 

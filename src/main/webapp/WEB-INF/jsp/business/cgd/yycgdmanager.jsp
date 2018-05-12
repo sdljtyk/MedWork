@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/WEB-INF/jsp/base/tag.jsp"%>
-<html> 
+<html>
 <head>
 <title>医院采购单维护</title>
 <meta http-equiv="pragma" content="no-cache">
@@ -13,11 +13,11 @@
 
 <script type="text/javascript">
 
-var yycgddelete = function(cgdid){
+var yycgddelete = function(id){
 	_confirm('您确定要删除该采购单吗?',null,
 	  function(){
-		if(cgdid){
-			$("#cgddeleteid").val(cgdid);
+		if(id){
+			$("#cgddeleteid").val(id);
 			jquerySubByFId('yycgddeleteForm', yycgddelete_callback, null);
 		}else{
 			
@@ -37,16 +37,15 @@ function yycgddelete_callback(data) {
 
 function yycgdinfo(id){
 	var sendUrl = "${baseurl}/cgd/yycgdinfo.action?yycgdid="+id;
-	parent.opentabwindow(bm+'采购单查看',sendUrl);
+	parent.opentabwindow('采购单查看',sendUrl);
 }
 
-function yycgdedit(id,bm){
+function yycgdedit(id){
 	var sendUrl = "${baseurl}/cgd/yycgdedit.action?yycgdid="+id;
-	//window.location=sendUrl;
-	parent.opentabwindow(bm+'采购单修改',sendUrl);
+	parent.opentabwindow('采购单修改',sendUrl);
 }
 function yycgdadd(id){
-	var sendUrl = "${baseurl}/cgd/yycgdedit.action";
+	var sendUrl = "${baseurl}/cgd/yycgdadd.action";
 	parent.opentabwindow('采购单创建',sendUrl);
 }
 //工具栏
@@ -61,82 +60,49 @@ var toolbar = [{
 var frozenColumns;
 
 var columns = [ [
- {
-	field : 'useryymc',
-	title : '医院名称',
-	width : 100
-},{
-	field : 'bm',
-	title : '采购单编号',
-	width : 80
-},{
-	field : 'mc',
-	title : '采购单名称',
-	width : 150
-},{
-	field : 'cjtime',
-	title : '建单时间',
-	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
-},{
-	field : 'xgtime',
-	title : '修改时间',
-	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
-},{
-	field : 'tjtime',
-	title : '提交时间',
-	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
-},{
-	field : 'yycgdztmc',
-	title : '采购单<br>状态', 
-	width : 60
-},{
+	{
+		field : 'id',
+		hidden : true
+	},{
+		field : 'ordernumber',
+		title : '采购单编号',
+		width : 80
+	},{
+		field : 'ordername',
+		title : '采购单名称',
+		width : 150
+	},{
+		field : 'ordercreateperson',
+		title : '建单人',
+		width : 150
+	},{
+		field : 'orderphone',
+		title : '联系方式',
+		width : 150
+	},{
+		field : 'orderctime',
+		title : '建单时间',
+		width : 80,
+
+	},{
+		field : 'ordersub',
+		title : '提交时间',
+		width : 80,
+	},{
+		field : 'orderwatime',
+		title : '审核时间',
+		width : 80,
+
+	},{
+		field : 'orderstatemc',
+		title : '采购单状态', 
+		width : 80
+	},{
 	field : 'opt4',
 	title : '修改',
 	width : 60,
 	formatter:function(value, row, index){
-		return '<a href=javascript:yycgdedit(\''+row.id+'\',\''+row.bm+'\')>修改</a>';
+		return '<a href=javascript:yycgdedit(\''+row.id+'\')>修改</a>';
 	}
 },{
 	field : 'opt5',
@@ -157,11 +123,7 @@ function initGrid(){
 		queryParams:{
 			year:'${year}'
 		},
-		//sortName : 'code',
-		//sortOrder : 'desc',
-		//remoteSort : false,
 		idField : 'id',//采购单id
-		//frozenColumns : frozenColumns,
 		columns : columns,
 		autoRowHeight:true,
 		pagination : true,
@@ -172,13 +134,6 @@ function initGrid(){
 		onClickRow : function(index, field, value) {
 					$('#yycgdlist').datagrid('unselectRow', index);
 				},
-		onLoadSuccess: function(data){
-			if (data.resultInfo.type==TYPE_RESULT_FAIL){
-				var result = getCallbackData(data);
-				_alert(result);
-			} 
-		}
-
 		});
 
 	}
@@ -193,58 +148,34 @@ function initGrid(){
 		$('#yycgdlist').datagrid('unselectAll');
 		$('#yycgdlist').datagrid('load', formdata);
 	}
-	$(function(){
-		//加载年
-		businessyearlist('businessyear');
-	});
 </script>
 </HEAD>
 <BODY>
-    <form id="yycgdqueryForm" name="yycgdqueryForm" method="post">
-			<input type="hidden" name="indexs" id="indexs" />
-			<TABLE  class="table_search">
-				<TBODY>
-					<TR>
-						<TD class="left">年度：</td>
-						<td><select id="businessyear" name="year" ></select></TD>
-						<TD class="left">采购单编号：</td>
-						<td><INPUT type="text"  name="yycgdCustom.bm" /></TD>
-						<TD class="left">采购单名称：</TD>
-						<td ><INPUT type="text" name="yycgdCustom.mc" /></td>
-						
-						
-					</TR>
-					<TR> 
-					   <TD class="left">采购单状态：</TD>
-						<td >
-							<select id="yycgdCustom.zt" name="yycgdCustom.zt" style="width:150px">
-								<option value="">全部</option>
-								<c:forEach items="${cgdztList}" var="value">
-									<option value="${value.id}">${value.info}</option>
-								</c:forEach>
-							</select>
-						</td>
-						<TD class="left">医院名称：</TD>
-						<td ><INPUT type="text" name="yycgdCustom.useryymc" /></td>
-						<TD class="left">采购时间：</TD>
-						<td >
-						 <INPUT id="yycgdCustom.kscgdate"
-							name="yycgdCustom.kscgdate" 
-							 onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" style="width:80px"/>--
-					 <INPUT id="yycgdCustom.jscgdate" 
-							name="yycgdCustom.jscgdate"
-							 onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" style="width:80px"/>
-							
-						</td>
-						<TD colspan=2>
-							<a id="btn" href="#" onclick="yycgdquery()" class="easyui-linkbutton" iconCls='icon-search'>查询</a>
-						</TD>
-						
-					</tr>
-					
-				</TBODY>
-			</TABLE>
-	   
+	<form id="yycgdqueryForm" name="yycgdqueryForm" method="post">
+		<input type="hidden" name="indexs" id="indexs" />
+		<TABLE class="table_search">
+			<TBODY>
+				<TR>
+					<TD class="left">采购单编号：</td>
+					<td><INPUT type="text" name="ordernumber" /></TD>
+					<TD class="left">采购单名称：</TD>
+					<td><INPUT type="text" name="ordername" /></td>
+					<TD class="left">采购单状态：</TD>
+					<td><select id="yycgdCustom.zt" name="orderstate"
+						style="width: 150px">
+							<option value="0">全部</option>
+							<c:forEach items="${cgdztList}" var="value">
+								<option value="${value.id}">${value.info}</option>
+							</c:forEach>
+					</select></td>
+					<TD colspan=2><a id="btn" href="#" onclick="yycgdquery()"
+						class="easyui-linkbutton" iconCls='icon-search'>查询</a></TD>
+
+				</tr>
+
+			</TBODY>
+		</TABLE>
+
 		<TABLE border=0 cellSpacing=0 cellPadding=0 width="99%" align=center>
 			<TBODY>
 				<TR>
@@ -254,11 +185,12 @@ function initGrid(){
 				</TR>
 			</TBODY>
 		</TABLE>
-		 </form>
+	</form>
 
-<form id="yycgddeleteForm" name="yycgddeleteForm" action="${baseurl}/cgd/yycgddelete.action">
-<input type="hidden" id="cgddeleteid" name="cgddeleteid" />
-</form>
+	<form id="yycgddeleteForm" name="yycgddeleteForm"
+		action="${baseurl}/cgd/yycgddelete.action">
+		<input type="hidden" id="cgddeleteid" name="cgddeleteid" />
+	</form>
 
 </BODY>
 </HTML>
