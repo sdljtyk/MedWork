@@ -51,9 +51,15 @@ public class UserService {
 			activeUser.setUnitID(user.getUnitid().toString());
 			activeUser.setGroupid(user.getGroupid().toString());
 			activeUser.setUsername(user.getUsername());
-			activeUser.setUnitName(null);
-			activeUser.setGroupname(null);
+			activeUser.setGroupname(dicinfoMapper.selectByPrimaryKey(user.getGroupid()).getInfo());
 			activeUser.setMenu(null);
+			
+			if(user.getGroupid()==26)
+				activeUser.setUnitName("监管部门");
+			if(user.getGroupid()==27)
+				activeUser.setUnitName(yyunitMapper.selectByPrimaryKey(user.getUnitid()).getYyname());
+			if(user.getGroupid()==28)
+				activeUser.setUnitName(ghsunitMapper.selectByPrimaryKey(user.getUnitid()).getGhsname());
 			return activeUser;
 
 		}

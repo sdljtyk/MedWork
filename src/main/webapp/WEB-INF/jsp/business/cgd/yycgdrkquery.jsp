@@ -36,8 +36,7 @@ var yycgdrksubmit = function(){
 };
 
 function yycgdrk_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 
 }
 

@@ -57,8 +57,9 @@ public class ActiveUser  implements java.io.Serializable {
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
 	}
-	
-	
-
-
+	@Override
+	public String toString() {
+		return "ActiveUser [userid=" + userid + ", username=" + username + ", groupid=" + groupid + ", groupname="
+				+ groupname + ", menu=" + menu + ", unitID=" + unitID + ", unitName=" + unitName + "]";
+	}
 }

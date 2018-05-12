@@ -30,8 +30,7 @@ var yycgddelete = function(cgdid){
 };
 
 function yycgddelete_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	yycgdquery();
 }
 

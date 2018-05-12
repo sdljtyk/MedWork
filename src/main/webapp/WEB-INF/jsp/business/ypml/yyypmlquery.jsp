@@ -25,11 +25,8 @@
 			} else {
 				alert_warn("请选择要删除的药品");
 			}
-
 		})
-
 	};
-
 	function yyypmldel_callback(data) {
 		$.messager.alert("系统提示消息",data.message);
 		yyypmlquery();

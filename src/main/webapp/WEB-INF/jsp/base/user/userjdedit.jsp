@@ -60,9 +60,7 @@
 
 	}
 	function userjdsave_callback(data){
-		var result = getCallbackData(data);
-		var type = result.type;
-		_alert(result);
+		$.messager.alert("系统提示消息",data.message);
 		/* if (TYPE_RESULT_SUCCESS == type) {
 			parent.userjdquery();
 			parent.closemodalwindow();

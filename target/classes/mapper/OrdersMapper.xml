@@ -115,7 +115,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tyk.pojo.Orders">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.tyk.pojo.Orders">
     insert into orders (ID, YYID, OrderCreatePerson, 
       OrderCtime, OrderSub, OrderOther, 
       OrderState, OrderAdvice, OrderWatime, 
@@ -127,7 +127,7 @@
       #{orderphone,jdbcType=VARCHAR}, #{ordername,jdbcType=VARCHAR}, #{ordernumber,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.tyk.pojo.Orders">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.tyk.pojo.Orders">
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

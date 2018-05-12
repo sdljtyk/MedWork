@@ -25,10 +25,9 @@ function yycgdsubmit(){
 }
 function yycgdsave_callback(data) {
 	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	//如果成功刷新页面，重新跳转至修改页面
 	if(result.type==TYPE_RESULT_SUCCESS){
-		//alert(result.sysdata.yycgd.id);
 		var yycgdid=result.sysdata.yycgd.id;
 		window.location='${baseurl}/cgd/yycgdedit.action?yycgdid='+yycgdid;
 	}
@@ -77,13 +76,11 @@ function yycgdmxsave(){
 	});
 }
 function yycgdmxdelete_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	yycgdmxquery();
 }
 function yycgdmxsave_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 }
 //采购药品添加
 function yycgdmxaddshow(){

@@ -35,8 +35,7 @@ var yycgdmxaddsubmit = function(){
 };
 
 function yycgdmxaddsubmit_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	yyypmlquery();//提交完成刷新本页面
 	parent.yycgdmxquery();
 }

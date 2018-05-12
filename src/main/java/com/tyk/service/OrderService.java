@@ -1,10 +1,15 @@
 package com.tyk.service;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.tyk.mapper.DicinfoMapper;
 import com.tyk.mapper.GhsunitMapper;
@@ -144,4 +149,25 @@ public class OrderService {
 		return count;
 	}
 
+	public int UpdateOrders(Orders orders) {
+		return ordersMapper.updateByPrimaryKeySelective(orders);
+	}
+
+	public Orders InsertOrders(Orders orders) {
+		ordersMapper.insertSelective(orders);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DecimalFormat df2=new DecimalFormat("00000000");
+		try {
+			Date parse = df.parse(orders.getOrderctime());
+			df = new SimpleDateFormat("yyyyMMdd");
+			String str = df.format(parse);
+			String ordernumber = str + df2.format(orders.getId());
+			orders.setOrdernumber(ordernumber);
+			ordersMapper.updateByPrimaryKeySelective(orders);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+	
 }

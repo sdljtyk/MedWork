@@ -17,19 +17,7 @@
 
 	var frozenColumns;
 
-	var columns = [ [ /* {
-		field : 'yyname',
-		title : '医院',
-		width : 100,
-		formatter : function(value, row, index) {
-			if (value) {
-				return value;
-			} else {
-				return '总计';
-			}
-
-		}
-	}, */ {
+	var columns = [ [ {
 		field : 'mednumber',
 		title : '流水号',
 		width : 80

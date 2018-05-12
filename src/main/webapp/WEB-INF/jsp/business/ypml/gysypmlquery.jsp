@@ -35,17 +35,11 @@ var gysypmldel = function(){
 };
 
 function gysypmldel_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	gysypmlquery();
 }
 
 
-/* function ypxxedit_callback(redata){
-	$('#ypxxquery_div').css("display","none");
-	$("#ypxxedit_div").css("display","block");
-	$("#ypxxedit_div").html(redata);
-} */
 function ypxxinfo(id){
 	var sendUrl = "${baseurl}/ypml/ypxxview.action?id="+id;
 	createmodalwindow("药品信息查看", 900, 500, sendUrl);
