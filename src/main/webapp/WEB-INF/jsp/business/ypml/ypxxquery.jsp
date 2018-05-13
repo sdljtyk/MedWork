@@ -15,9 +15,6 @@
 var ypxximport = function (){
 	var sendUrl = "${baseurl}/ypml/ypxximport.action";
 	createmodalwindow("药品信息导入", 800, 300, sendUrl);
-	/* var ajaxOption = new AjaxOption();
-			ajaxOption._initPostRequest(true,sendUrl,"json","html");
-			_ajaxPostRequest(ajaxOption, '', ypxximport_callback); */
 };
 
 

@@ -1,9 +1,9 @@
 package com.tyk.vo;
 
-import com.tyk.pojo.Orders;
 
 public class OrderInfoCustom{
-	private int medid;
+	private Integer id;
+	private Integer medid;
 	private String mednumber;
 	private String medname;
 	private String medjx;
@@ -11,27 +11,33 @@ public class OrderInfoCustom{
 	private String medgg;
 	private String meddw;
 	
-	private int mednum;
-	private float meddj;
-	private float medsum;
+	private Integer mednum;
+	private String meddj;
+	private String medsum;
 	
-	private int ghstate;
+	private Integer ghstate;
 	private String ghstatemc;
 	
-	private int ghsid;
+	private Integer ghsid;
 	private String ghsname;
 	
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getMeddw() {
 		return meddw;
 	}
 	public void setMeddw(String meddw) {
 		this.meddw = meddw;
 	}
-	public int getMedid() {
+	public Integer getMedid() {
 		return medid;
 	}
-	public void setMedid(int medid) {
+	public void setMedid(Integer medid) {
 		this.medid = medid;
 	}
 	public String getMednumber() {
@@ -64,22 +70,22 @@ public class OrderInfoCustom{
 	public void setMedgg(String medgg) {
 		this.medgg = medgg;
 	}
-	public int getMednum() {
+	public Integer getMednum() {
 		return mednum;
 	}
-	public void setMednum(int mednum) {
+	public void setMednum(Integer mednum) {
 		this.mednum = mednum;
 	}
-	public float getMeddj() {
+	public String getMeddj() {
 		return meddj;
 	}
-	public void setMeddj(float meddj) {
+	public void setMeddj(String meddj) {
 		this.meddj = meddj;
 	}
-	public float getMedsum() {
+	public String getMedsum() {
 		return medsum;
 	}
-	public void setMedsum(float medsum) {
+	public void setMedsum(String medsum) {
 		this.medsum = medsum;
 	}
 	public String getGhstatemc() {
@@ -88,16 +94,16 @@ public class OrderInfoCustom{
 	public void setGhstatemc(String ghstatemc) {
 		this.ghstatemc = ghstatemc;
 	}
-	public int getGhstate() {
+	public Integer getGhstate() {
 		return ghstate;
 	}
-	public void setGhstate(int ghstate) {
+	public void setGhstate(Integer ghstate) {
 		this.ghstate = ghstate;
 	}
-	public int getGhsid() {
+	public Integer getGhsid() {
 		return ghsid;
 	}
-	public void setGhsid(int ghsid) {
+	public void setGhsid(Integer ghsid) {
 		this.ghsid = ghsid;
 	}
 	public String getGhsname() {

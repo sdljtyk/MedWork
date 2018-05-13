@@ -1,5 +1,6 @@
 package com.tyk.controller;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tyk.pojo.Dicinfo;
+import com.tyk.pojo.Orderinfo;
 import com.tyk.pojo.Orders;
 import com.tyk.service.BaseService;
 import com.tyk.service.OrderService;
 import com.tyk.util.DataGridResultInfo;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.ActiveUser;
+import com.tyk.vo.GysypmlCustom;
 import com.tyk.vo.OrderCustom;
 import com.tyk.vo.OrderInfoCustom;
 
@@ -30,6 +33,18 @@ public class OrderAction {
 	private OrderService orderService;
 	@Autowired
 	private BaseService baseService;
+
+	public String MedmlShow(Model model, String url) {
+		List<Dicinfo> yplbList = baseService.FindDicByType("001");
+		List<Dicinfo> ypghztList = baseService.FindDicByType("002");
+		List<Dicinfo> ypjyztList = baseService.FindDicByType("003");
+		List<Dicinfo> ypzlccList = baseService.FindDicByType("004");
+		model.addAttribute("yplbList", yplbList);
+		model.addAttribute("ypghztList", ypghztList);
+		model.addAttribute("ypzlccList", ypzlccList);
+		model.addAttribute("ypjyztList", ypjyztList);
+		return url;
+	}
 
 	// 采购单列表页面跳转
 	@RequestMapping("/yycgdlist.action")
@@ -180,8 +195,9 @@ public class OrderAction {
 	}
 
 	@RequestMapping("/yycgdedit.action")
-	public String yycgdedit(Integer yycgdid) {
-		System.out.println("OrderAction.yycgdfedit yycgdid:" + yycgdid);
+	public String yycgdedit(String yycgdid, Model model) {
+		OrderCustom custom = orderService.FindCusByID(yycgdid);
+		model.addAttribute("yycgd", custom);
 		return "/business/cgd/yycgdedit";
 	}
 
@@ -205,6 +221,121 @@ public class OrderAction {
 		return queryResultInfo;
 	}
 
+	@RequestMapping("/yycgdmxadd.action")
+	public String yycgdmxadd(String yycgdid, Model model) throws Exception {
+		model.addAttribute("yycgdid", yycgdid);
+		String url = "/business/cgd/yycgdmxadd";
+		return MedmlShow(model, url);
+	}
+
+	@RequestMapping("/yycgdmxadd_result.action")
+	@ResponseBody
+	public DataGridResultInfo yycgdmxadd_result(HttpSession session, GysypmlCustom gysypmlCustom, String yycgdid,
+			int page, int rows) {
+		ActiveUser user = (ActiveUser) session.getAttribute("activeUser");
+		int yyid = Integer.parseInt(user.getUnitID());
+		int count = 0;
+		try {
+			count = orderService.FindGhMedCountByGysCustom(gysypmlCustom, yycgdid, yyid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<GysypmlCustom> list = orderService.FindGhMedListByGysCustom(gysypmlCustom, yycgdid, yyid);
+		ResultInfo ri = new ResultInfo(1, "查询成功");
+		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
+		queryResultInfo.setRows(list);
+		queryResultInfo.setTotal(count);
+		return queryResultInfo;
+	}
+
+	@RequestMapping("/yycgdmxaddsubmit.action")
+	@ResponseBody
+	public ResultInfo yycgdmxaddsubmit(OrderCustom orderCustom) {
+		ResultInfo ri = new ResultInfo();
+		List<Orderinfo> orderInfos = orderCustom.getYycgdmxs();
+		int ins_success = 0;
+		int ins_fail = 0;
+		for (Orderinfo orderinfo : orderInfos) {
+			try {
+				ins_success += orderService.InsertOrderInfo(orderinfo);
+			} catch (Exception e) {
+				ins_fail++;
+			}
+		}
+		ri.setMessage("成功添加" + ins_success + "条信息!失败添加" + ins_fail + "条信息！");
+		return ri;
+	}
+
+	@RequestMapping("/yycgdmxdelete.action")
+	@ResponseBody
+	public ResultInfo yycgdmxdelete(String indexs) {
+		ResultInfo ri = new ResultInfo();
+		if (indexs == null || indexs.equals("")) {
+			ri.setType(0);
+			ri.setMessage("删除失败，请重新选择需要删除的信息！");
+			return ri;
+		}
+		String[] ids = indexs.split(",");
+		int del_success = 0;
+		int del_fail = 0;
+		for (int i = 0; i < ids.length; i++) {
+			try {
+				del_success += orderService.DelOrderInfoByID(ids[i]);
+			} catch (Exception e) {
+				del_fail++;
+				e.printStackTrace();
+			}
+		}
+		ri.setType(1);
+		ri.setMessage("成功删除" + del_success + "条信息。\n删除失败" + del_fail + "条信息");
+		return ri;
+	}
+
+	@RequestMapping("/yycgdmxsave.action")
+	@ResponseBody
+	public ResultInfo yycgdmxsave(OrderCustom orderCustom, String indexs) {
+		ResultInfo ri = new ResultInfo();
+		List<Orderinfo> orderInfos = orderCustom.getYycgdmxs();
+		System.out.println("OrderAction.yycgdmxsave  orderInfos:" + orderInfos.toString());
+		int ins_success = 0;
+		int ins_fail = 0;
+		int i, j;
+		String[] ids = indexs.split(",");
+		for (j = 0; j < ids.length; j++) {
+			for (i = 0; i < orderInfos.size(); i++) {
+				try {
+					Orderinfo orderinfo = orderInfos.get(i);
+					if (orderinfo.getId() == Integer.parseInt(ids[j]))
+						ins_success += orderService.UpdateOrderInfo(orderinfo);
+				} catch (Exception e) {
+					ins_fail++;
+				}
+			}
+		}
+		ri.setMessage("成功保存" + ins_success + "条信息!失败保存" + ins_fail + "条信息！");
+		return ri;
+	}
+
+	@RequestMapping("/yycgdsubmit.action")
+	@ResponseBody
+	public ResultInfo yycgdsubmit(Orders orders) throws Exception {
+		ResultInfo ri =new ResultInfo();
+		Date date = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		orders.setOrdersub(df.format(date));
+		orders.setOrderstate(30);
+		int i = orderService.UpdateOrders(orders);
+		if(i == 1) {
+			ri.setType(1);
+			ri.setMessage("提交成功！");
+		}else
+		{
+			ri.setType(0);
+			ri.setMessage("提交失败！");
+		}
+		return ri;
+	}
+	
 	@RequestMapping("/yycgddelete.action")
 	@ResponseBody
 	public ResultInfo yycgddelete(String cgddeleteid) throws Exception {
@@ -226,5 +357,4 @@ public class OrderAction {
 		ri.setMessage("成功删除" + del_success + "条信息。\n删除失败" + del_fail + "条信息");
 		return ri;
 	}
-
 }
