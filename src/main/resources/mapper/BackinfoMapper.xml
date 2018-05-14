@@ -6,12 +6,13 @@
     <result column="BackID" jdbcType="INTEGER" property="backid" />
     <result column="OrderID" jdbcType="INTEGER" property="orderid" />
     <result column="MedID" jdbcType="INTEGER" property="medid" />
+    <result column="MedDj" jdbcType="REAL" property="meddj" />
+    <result column="GhsId" jdbcType="INTEGER" property="ghsid" />
     <result column="BackNum" jdbcType="INTEGER" property="backnum" />
     <result column="BackSum" jdbcType="REAL" property="backsum" />
     <result column="BackState" jdbcType="INTEGER" property="backstate" />
     <result column="BackReason" jdbcType="VARCHAR" property="backreason" />
   </resultMap>
-  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, BackID, OrderID, MedID, BackNum, BackSum, BackState, BackReason
+    ID, BackID, OrderID, MedID, MedDj, GhsId, BackNum, BackSum, BackState, BackReason
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.BackinfoExample" resultMap="BaseResultMap">
     select
@@ -113,11 +114,13 @@
   </delete>
   <insert id="insert" parameterType="com.tyk.pojo.Backinfo">
     insert into backinfo (ID, BackID, OrderID, 
-      MedID, BackNum, BackSum, 
-      BackState, BackReason)
+      MedID, MedDj, GhsId, BackNum, 
+      BackSum, BackState, BackReason
+      )
     values (#{id,jdbcType=INTEGER}, #{backid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, 
-      #{medid,jdbcType=INTEGER}, #{backnum,jdbcType=INTEGER}, #{backsum,jdbcType=REAL}, 
-      #{backstate,jdbcType=INTEGER}, #{backreason,jdbcType=VARCHAR})
+      #{medid,jdbcType=INTEGER}, #{meddj,jdbcType=REAL}, #{ghsid,jdbcType=INTEGER}, #{backnum,jdbcType=INTEGER}, 
+      #{backsum,jdbcType=REAL}, #{backstate,jdbcType=INTEGER}, #{backreason,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.tyk.pojo.Backinfo">
     insert into backinfo
@@ -133,6 +136,12 @@
       </if>
       <if test="medid != null">
         MedID,
+      </if>
+      <if test="meddj != null">
+        MedDj,
+      </if>
+      <if test="ghsid != null">
+        GhsId,
       </if>
       <if test="backnum != null">
         BackNum,
@@ -159,6 +168,12 @@
       </if>
       <if test="medid != null">
         #{medid,jdbcType=INTEGER},
+      </if>
+      <if test="meddj != null">
+        #{meddj,jdbcType=REAL},
+      </if>
+      <if test="ghsid != null">
+        #{ghsid,jdbcType=INTEGER},
       </if>
       <if test="backnum != null">
         #{backnum,jdbcType=INTEGER},
@@ -195,6 +210,12 @@
       <if test="record.medid != null">
         MedID = #{record.medid,jdbcType=INTEGER},
       </if>
+      <if test="record.meddj != null">
+        MedDj = #{record.meddj,jdbcType=REAL},
+      </if>
+      <if test="record.ghsid != null">
+        GhsId = #{record.ghsid,jdbcType=INTEGER},
+      </if>
       <if test="record.backnum != null">
         BackNum = #{record.backnum,jdbcType=INTEGER},
       </if>
@@ -218,6 +239,8 @@
       BackID = #{record.backid,jdbcType=INTEGER},
       OrderID = #{record.orderid,jdbcType=INTEGER},
       MedID = #{record.medid,jdbcType=INTEGER},
+      MedDj = #{record.meddj,jdbcType=REAL},
+      GhsId = #{record.ghsid,jdbcType=INTEGER},
       BackNum = #{record.backnum,jdbcType=INTEGER},
       BackSum = #{record.backsum,jdbcType=REAL},
       BackState = #{record.backstate,jdbcType=INTEGER},
@@ -237,6 +260,12 @@
       </if>
       <if test="medid != null">
         MedID = #{medid,jdbcType=INTEGER},
+      </if>
+      <if test="meddj != null">
+        MedDj = #{meddj,jdbcType=REAL},
+      </if>
+      <if test="ghsid != null">
+        GhsId = #{ghsid,jdbcType=INTEGER},
       </if>
       <if test="backnum != null">
         BackNum = #{backnum,jdbcType=INTEGER},
@@ -258,6 +287,8 @@
     set BackID = #{backid,jdbcType=INTEGER},
       OrderID = #{orderid,jdbcType=INTEGER},
       MedID = #{medid,jdbcType=INTEGER},
+      MedDj = #{meddj,jdbcType=REAL},
+      GhsId = #{ghsid,jdbcType=INTEGER},
       BackNum = #{backnum,jdbcType=INTEGER},
       BackSum = #{backsum,jdbcType=REAL},
       BackState = #{backstate,jdbcType=INTEGER},

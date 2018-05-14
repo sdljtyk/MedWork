@@ -5,12 +5,14 @@
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="YYID" jdbcType="INTEGER" property="yyid" />
     <result column="YYLxr" jdbcType="VARCHAR" property="yylxr" />
-    <result column="BackJdr" jdbcType="VARCHAR" property="backjdr" />
     <result column="BackCreat" jdbcType="VARCHAR" property="backcreat" />
     <result column="BackAlter" jdbcType="VARCHAR" property="backalter" />
     <result column="BackSub" jdbcType="VARCHAR" property="backsub" />
     <result column="BackOther" jdbcType="VARCHAR" property="backother" />
     <result column="BackState" jdbcType="INTEGER" property="backstate" />
+    <result column="BackName" jdbcType="VARCHAR" property="backname" />
+    <result column="Backphone" jdbcType="VARCHAR" property="backphone" />
+    <result column="BackNumber" jdbcType="VARCHAR" property="backnumber" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, YYID, YYLxr, BackJdr, BackCreat, BackAlter, BackSub, BackOther, BackState
+    ID, YYID, YYLxr, BackCreat, BackAlter, BackSub, BackOther, BackState, BackName, Backphone, 
+    BackNumber
   </sql>
   <select id="selectByExample" parameterType="com.tyk.pojo.BacksExample" resultMap="BaseResultMap">
     select
@@ -111,17 +114,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.tyk.pojo.Backs">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.tyk.pojo.Backs">
     insert into backs (ID, YYID, YYLxr, 
-      BackJdr, BackCreat, BackAlter, 
-      BackSub, BackOther, BackState
-      )
+      BackCreat, BackAlter, BackSub, 
+      BackOther, BackState, BackName, 
+      Backphone, BackNumber)
     values (#{id,jdbcType=INTEGER}, #{yyid,jdbcType=INTEGER}, #{yylxr,jdbcType=VARCHAR}, 
-      #{backjdr,jdbcType=VARCHAR}, #{backcreat,jdbcType=VARCHAR}, #{backalter,jdbcType=VARCHAR}, 
-      #{backsub,jdbcType=VARCHAR}, #{backother,jdbcType=VARCHAR}, #{backstate,jdbcType=INTEGER}
-      )
+      #{backcreat,jdbcType=VARCHAR}, #{backalter,jdbcType=VARCHAR}, #{backsub,jdbcType=VARCHAR}, 
+      #{backother,jdbcType=VARCHAR}, #{backstate,jdbcType=INTEGER}, #{backname,jdbcType=VARCHAR}, 
+      #{backphone,jdbcType=VARCHAR}, #{backnumber,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.tyk.pojo.Backs">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.tyk.pojo.Backs">
     insert into backs
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,9 +135,6 @@
       </if>
       <if test="yylxr != null">
         YYLxr,
-      </if>
-      <if test="backjdr != null">
-        BackJdr,
       </if>
       <if test="backcreat != null">
         BackCreat,
@@ -151,6 +151,15 @@
       <if test="backstate != null">
         BackState,
       </if>
+      <if test="backname != null">
+        BackName,
+      </if>
+      <if test="backphone != null">
+        Backphone,
+      </if>
+      <if test="backnumber != null">
+        BackNumber,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -161,9 +170,6 @@
       </if>
       <if test="yylxr != null">
         #{yylxr,jdbcType=VARCHAR},
-      </if>
-      <if test="backjdr != null">
-        #{backjdr,jdbcType=VARCHAR},
       </if>
       <if test="backcreat != null">
         #{backcreat,jdbcType=VARCHAR},
@@ -179,6 +185,15 @@
       </if>
       <if test="backstate != null">
         #{backstate,jdbcType=INTEGER},
+      </if>
+      <if test="backname != null">
+        #{backname,jdbcType=VARCHAR},
+      </if>
+      <if test="backphone != null">
+        #{backphone,jdbcType=VARCHAR},
+      </if>
+      <if test="backnumber != null">
+        #{backnumber,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -200,9 +215,6 @@
       <if test="record.yylxr != null">
         YYLxr = #{record.yylxr,jdbcType=VARCHAR},
       </if>
-      <if test="record.backjdr != null">
-        BackJdr = #{record.backjdr,jdbcType=VARCHAR},
-      </if>
       <if test="record.backcreat != null">
         BackCreat = #{record.backcreat,jdbcType=VARCHAR},
       </if>
@@ -218,6 +230,15 @@
       <if test="record.backstate != null">
         BackState = #{record.backstate,jdbcType=INTEGER},
       </if>
+      <if test="record.backname != null">
+        BackName = #{record.backname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backphone != null">
+        Backphone = #{record.backphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backnumber != null">
+        BackNumber = #{record.backnumber,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -228,12 +249,14 @@
     set ID = #{record.id,jdbcType=INTEGER},
       YYID = #{record.yyid,jdbcType=INTEGER},
       YYLxr = #{record.yylxr,jdbcType=VARCHAR},
-      BackJdr = #{record.backjdr,jdbcType=VARCHAR},
       BackCreat = #{record.backcreat,jdbcType=VARCHAR},
       BackAlter = #{record.backalter,jdbcType=VARCHAR},
       BackSub = #{record.backsub,jdbcType=VARCHAR},
       BackOther = #{record.backother,jdbcType=VARCHAR},
-      BackState = #{record.backstate,jdbcType=INTEGER}
+      BackState = #{record.backstate,jdbcType=INTEGER},
+      BackName = #{record.backname,jdbcType=VARCHAR},
+      Backphone = #{record.backphone,jdbcType=VARCHAR},
+      BackNumber = #{record.backnumber,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -246,9 +269,6 @@
       </if>
       <if test="yylxr != null">
         YYLxr = #{yylxr,jdbcType=VARCHAR},
-      </if>
-      <if test="backjdr != null">
-        BackJdr = #{backjdr,jdbcType=VARCHAR},
       </if>
       <if test="backcreat != null">
         BackCreat = #{backcreat,jdbcType=VARCHAR},
@@ -265,6 +285,15 @@
       <if test="backstate != null">
         BackState = #{backstate,jdbcType=INTEGER},
       </if>
+      <if test="backname != null">
+        BackName = #{backname,jdbcType=VARCHAR},
+      </if>
+      <if test="backphone != null">
+        Backphone = #{backphone,jdbcType=VARCHAR},
+      </if>
+      <if test="backnumber != null">
+        BackNumber = #{backnumber,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -272,12 +301,14 @@
     update backs
     set YYID = #{yyid,jdbcType=INTEGER},
       YYLxr = #{yylxr,jdbcType=VARCHAR},
-      BackJdr = #{backjdr,jdbcType=VARCHAR},
       BackCreat = #{backcreat,jdbcType=VARCHAR},
       BackAlter = #{backalter,jdbcType=VARCHAR},
       BackSub = #{backsub,jdbcType=VARCHAR},
       BackOther = #{backother,jdbcType=VARCHAR},
-      BackState = #{backstate,jdbcType=INTEGER}
+      BackState = #{backstate,jdbcType=INTEGER},
+      BackName = #{backname,jdbcType=VARCHAR},
+      Backphone = #{backphone,jdbcType=VARCHAR},
+      BackNumber = #{backnumber,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

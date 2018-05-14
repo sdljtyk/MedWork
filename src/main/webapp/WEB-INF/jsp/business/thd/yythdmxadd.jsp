@@ -25,7 +25,6 @@ var yythdmxaddsubmit = function(){
 		}
 		if(rows.length>0){
 			$("#indexs").val(indexs.join(','));
-			//alert($("#indexs").val());
 			jquerySubByFId('yycgdmxForm', yythdmxaddsubmit_callback, null);
 		}else{
 			alert_warn("请选择要退货的药品");
@@ -36,9 +35,9 @@ var yythdmxaddsubmit = function(){
 };
 
 function yythdmxaddsubmit_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息", data.message);
 	yycgdmxquery();//提交完成刷新本页面
+	parent.yythdmxquery();
 }
 
 
@@ -53,118 +52,99 @@ var toolbar = [{
 
 var frozenColumns;
 
-var columns = [ [{
+var columns = [ [ {
+	field : 'id',
 	checkbox:true
 },{
-	field : 'ypxxid',
+	field : 'medid',
 	hidden : true,
 	formatter: function(value,row,index){
-		return '<input type="hidden" name="yythdmxs['+index+'].ypxxid" value="'+value+'" />';
+		return '<input type="hidden" name="yythdmxs['+index+'].medid" value="'+row.medid+'" />';
 	}
 },{
-	field : 'yycgdid',
+	field : 'backid',
 	hidden : true,
 	formatter: function(value,row,index){
-		return '<input type="hidden" name="yythdmxs['+index+'].yycgdid" value="'+value+'" />';
+		return '<input type="hidden" name="yythdmxs['+index+'].backid" value="${yythdid}" />';
 	}
 },{
-	field : 'yycgdbm',
-	title : '采购单号',
-	width : 70
+	field : 'orderid',
+	hidden : true,
+	formatter: function(value,row,index){
+		return '<input type="hidden" name="yythdmxs['+index+'].orderid" value="'+row.orderid+'" />';
+	}
 },{
-	field : 'usergysmc',
-	title : '供货商',
-	width : 100
+	field : 'medid',
+	hidden : true,
+	formatter: function(value,row,index){
+		return '<input type="hidden" name="yythdmxs['+index+'].medid" value="'+row.medid+'" />';
+	}
 },{
-	field : 'ypxxbm',
+	field : 'dj',
+	hidden : true,
+	formatter: function(value,row,index){
+		return '<input type="hidden" name="yythdmxs['+index+'].meddj" value="'+row.meddj+'" />';
+	}
+},{
+	field : 'ghsid',
+	hidden : true,
+	formatter: function(value,row,index){
+		return '<input type="hidden" name="yythdmxs['+index+'].ghsid" value="'+row.ghsid+'" />';
+	}
+},{
+	field : 'mednumber',
 	title : '流水号',
-	width : 50
-},{
-	field : 'ypxxmc',
-	title : '通用名',
 	width : 80
-},{
-	field : 'jx',
+}, {
+	field : 'medname',
+	title : '药品名称',
+	width : 160
+}, {
+	field : 'medjx',
 	title : '剂型',
-	width : 70
-},{
-	field : 'gg',
+	width : 80
+}, {
+	field : 'medgg',
 	title : '规格',
 	width : 70
+}, {
+	field : 'meddw',
+	title : '单位',
+	width : 70
 },{
-	field : 'zhxs',
-	title : '转换系数',
-	width : 50
-},{
-	field : 'jyjg',
-	title : '交易价',
-	width : 50
-},{
-	field : 'cgl',
+	field : 'meddj',
+	title : '中标价(元)',
+	width : 80
+}, {
+	field : 'mednum',
 	title : '采购量',
-	width : 50
-},{
-	field : 'cgje',
-	title : '采购金额',
-	width : 50
-},{
-	field : 'rkl',
-	title : '入库量',
-	width : 50
-},{
-	field : 'rkje',
-	title : '入库金额',
-	width : 60
-},{
-	field : 'thl',
-	title : '退货量',
-	width : 50,
-	formatter:function(value,row,index){
-		   return '<input type="text" name="yythdmxs['+index+'].thl" />';
-
-	}
-},{
-	field : 'thyy',
-	title : '退货原因',
-	width : 70,
-	formatter:function(value,row,index){
-		 return '<input type="text" name="yythdmxs['+index+'].thyy" />';
-	}
-}
-,{
-	field : 'rkdh',
-	title : '发票号或入库单号',
-	width : 90
-},{
-	field : 'ypph',
-	title : '药品批号',
 	width : 70
-},{
-	field : 'ypyxq',
-	title : '药品有效期(年)',
-	width : 70
-},{
-	field : 'cgztmc',
-	title : '采购状态', 
-	width : 60
+}, {
+	field : 'medsum',
+	title : '采购金额(元)',
+	width : 80
+}, {
+	field : 'medmake',
+	title : '生产企业',
+	width : 180
+}, {
+	field : 'ghstatemc',
+	title : '采购状态',
+	width : 100
+}, {
+	field : 'ghsname',
+	title : '供货商',
+	width : 150
 }]];
 
 function initGrid(){
 	$('#yycgdmxlist').datagrid({
 		title : '采购单列表',
-		//nowrap : false,
 		striped : true,
-		//collapsible : true,
-		url : '${baseurl}/thd/yythdmxadd_result.action',
+		url : '${baseurl}/thd/yythdmxadd_result.action?backid=${yythdid}',
 		queryParams:{
-			year:'${year}',
 			yythdid:'${yythdid}'
 		},
-		//sortName : 'code',
-		//sortOrder : 'desc',
-		//remoteSort : false,
-		//idField : 'id',
-		//frozenColumns : frozenColumns,
 		autoRowHeight:true,
 		columns : columns,
 		pagination : true,
@@ -184,11 +164,8 @@ function initGrid(){
 	});
 
 	function yycgdmxquery() {
-		
-		var formdata = $("#yycgdmxForm").serializeJson();
-		//alert(formdata);
 		$('#yycgdmxlist').datagrid('unselectAll');
-		$('#yycgdmxlist').datagrid('load', formdata);
+		$('#yycgdmxlist').datagrid('reload');
 	}
 </script>
 </HEAD>
@@ -196,57 +173,26 @@ function initGrid(){
 
  <form id="yycgdmxForm" name="yycgdmxForm" action="${baseurl}/thd/yythdmxaddsubmit.action" method="post">
 	<input type="hidden" name="indexs" id="indexs" />
-	<input type="hidden" name="yythdid" value="${yythdid}" />
-	<input type="hidden" name="year" value="${year}" />
+	<input type="hidden" name="backid" value="${yythdid}"/>
 			<TABLE  class="table_search">
 				<TBODY>
 				<TR>
-					<TD class="left">年份(如2014)：</TD>
-					<td>${year}</td>
-					
-					<TD class="left">采购单编号：</td>
-					<td><INPUT type="text" name="yycgdCustom.bm" /></TD>
-					<TD class="left">采购单名称：</TD>
-					<td><INPUT type="text" name="yycgdCustom.mc" /></td>
-					<TD class="left">采购时间：</TD>
-					<td><INPUT id="yycgdCustom.kscgdate"
-						name="yycgdCustom.kscgdate"
-						onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})"
-						style="width: 80px" />-- <INPUT id="yycgdCustom.jscgdate"
-						name="yycgdCustom.jscgdate"
-						onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})"
-						style="width: 80px" /></td>
-				</TR>
-				
-				<TR>
-					<TD class="left">流水号：</TD>
-					<td><INPUT type="text" name="ypxxCustom.bm" /></td>
-					<TD class="left">通用名：</td>
-					<td><INPUT type="text" name="ypxxCustom.mc" /></TD>
-					 <TD class="left">入库时间：</TD>
-					<td><INPUT id="yycgdCustom.startrktime"
-						name="yycgdCustom.startrktime"
-						onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})"
-						style="width: 80px" />-- <INPUT id="yycgdCustom.endrktime"
-						name="yycgdCustom.endrktime"
-						onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})"
-						style="width: 80px" /></td>
-					<TD class="left">药品批号：</td>
-					<td><INPUT type="text" name="yycgdCustom.ypph" /></TD>
-				</tr>
-				<tr>
-
-					<TD class="left">药品有效期(年)：</td>
-					<td><INPUT type="text" name="yycgdCustom.ypyxq" /></TD>
-					<TD class="left">发票号或入库单号：</td>
-					<td><INPUT type="text" name="yycgdCustom.rkdh" /></TD>
+					<TD class="left">采购单名称：</td>
+					<td>
+						<select id="ordername" name="ordername"
+						style="width: 200px">
+							<option value="0">全部</option>
+							<c:forEach items="${cgdNameList}" var="value">
+								<option value="${value.id}">${value.ordername}</option>
+							</c:forEach>
+					</select>
+					</TD>
 					<TD class="left">采购状态：</TD>
 					<td>已入库</td>
 					<td ></TD>
 					<td colspan=2><a id="btn" href="#" onclick="yycgdmxquery()"
 						class="easyui-linkbutton" iconCls='icon-search'>查询</a></td>
 				</tr>
-			
 			</TBODY>
 			</TABLE>
 	   

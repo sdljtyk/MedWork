@@ -1,6 +1,5 @@
 package com.tyk.controller;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -188,7 +187,6 @@ public class OrderAction {
 
 	@RequestMapping("/yycgdmanager")
 	public String yycgdmanager(Model model) throws Exception {
-
 		List<Dicinfo> cgdztList = baseService.FindDicByType("007");
 		model.addAttribute("cgdztList", cgdztList);
 		return "/business/cgd/yycgdmanager";

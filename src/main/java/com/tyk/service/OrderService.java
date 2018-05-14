@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tyk.controller.YYMedAction;
 import com.tyk.mapper.DicinfoMapper;
 import com.tyk.mapper.GhqyMapper;
 import com.tyk.mapper.GhsmedMapper;
@@ -180,6 +179,7 @@ public class OrderService {
 		Dicinfo dic = dicinfoMapper.selectByPrimaryKey(orderinfo2.getGhstate());
 		Ghsunit ghs = ghsunitMapper.selectByPrimaryKey(orderinfo2.getGhsid());
 		
+		custom.setOrderid(orderinfo2.getOrderid());
 		custom.setId(orderinfo2.getId());
 		custom.setGhsid(orderinfo2.getGhsid());
 		custom.setGhsname(ghs.getGhsname());

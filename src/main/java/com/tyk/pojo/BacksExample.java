@@ -314,76 +314,6 @@ public class BacksExample {
             return (Criteria) this;
         }
 
-        public Criteria andBackjdrIsNull() {
-            addCriterion("BackJdr is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrIsNotNull() {
-            addCriterion("BackJdr is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrEqualTo(String value) {
-            addCriterion("BackJdr =", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrNotEqualTo(String value) {
-            addCriterion("BackJdr <>", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrGreaterThan(String value) {
-            addCriterion("BackJdr >", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrGreaterThanOrEqualTo(String value) {
-            addCriterion("BackJdr >=", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrLessThan(String value) {
-            addCriterion("BackJdr <", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrLessThanOrEqualTo(String value) {
-            addCriterion("BackJdr <=", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrLike(String value) {
-            addCriterion("BackJdr like", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrNotLike(String value) {
-            addCriterion("BackJdr not like", value, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrIn(List<String> values) {
-            addCriterion("BackJdr in", values, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrNotIn(List<String> values) {
-            addCriterion("BackJdr not in", values, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrBetween(String value1, String value2) {
-            addCriterion("BackJdr between", value1, value2, "backjdr");
-            return (Criteria) this;
-        }
-
-        public Criteria andBackjdrNotBetween(String value1, String value2) {
-            addCriterion("BackJdr not between", value1, value2, "backjdr");
-            return (Criteria) this;
-        }
-
         public Criteria andBackcreatIsNull() {
             addCriterion("BackCreat is null");
             return (Criteria) this;
@@ -721,6 +651,216 @@ public class BacksExample {
 
         public Criteria andBackstateNotBetween(Integer value1, Integer value2) {
             addCriterion("BackState not between", value1, value2, "backstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameIsNull() {
+            addCriterion("BackName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameIsNotNull() {
+            addCriterion("BackName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameEqualTo(String value) {
+            addCriterion("BackName =", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameNotEqualTo(String value) {
+            addCriterion("BackName <>", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameGreaterThan(String value) {
+            addCriterion("BackName >", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameGreaterThanOrEqualTo(String value) {
+            addCriterion("BackName >=", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameLessThan(String value) {
+            addCriterion("BackName <", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameLessThanOrEqualTo(String value) {
+            addCriterion("BackName <=", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameLike(String value) {
+            addCriterion("BackName like", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameNotLike(String value) {
+            addCriterion("BackName not like", value, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameIn(List<String> values) {
+            addCriterion("BackName in", values, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameNotIn(List<String> values) {
+            addCriterion("BackName not in", values, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameBetween(String value1, String value2) {
+            addCriterion("BackName between", value1, value2, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknameNotBetween(String value1, String value2) {
+            addCriterion("BackName not between", value1, value2, "backname");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneIsNull() {
+            addCriterion("Backphone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneIsNotNull() {
+            addCriterion("Backphone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneEqualTo(String value) {
+            addCriterion("Backphone =", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneNotEqualTo(String value) {
+            addCriterion("Backphone <>", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneGreaterThan(String value) {
+            addCriterion("Backphone >", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneGreaterThanOrEqualTo(String value) {
+            addCriterion("Backphone >=", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneLessThan(String value) {
+            addCriterion("Backphone <", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneLessThanOrEqualTo(String value) {
+            addCriterion("Backphone <=", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneLike(String value) {
+            addCriterion("Backphone like", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneNotLike(String value) {
+            addCriterion("Backphone not like", value, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneIn(List<String> values) {
+            addCriterion("Backphone in", values, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneNotIn(List<String> values) {
+            addCriterion("Backphone not in", values, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneBetween(String value1, String value2) {
+            addCriterion("Backphone between", value1, value2, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackphoneNotBetween(String value1, String value2) {
+            addCriterion("Backphone not between", value1, value2, "backphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberIsNull() {
+            addCriterion("BackNumber is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberIsNotNull() {
+            addCriterion("BackNumber is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberEqualTo(String value) {
+            addCriterion("BackNumber =", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberNotEqualTo(String value) {
+            addCriterion("BackNumber <>", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberGreaterThan(String value) {
+            addCriterion("BackNumber >", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberGreaterThanOrEqualTo(String value) {
+            addCriterion("BackNumber >=", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberLessThan(String value) {
+            addCriterion("BackNumber <", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberLessThanOrEqualTo(String value) {
+            addCriterion("BackNumber <=", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberLike(String value) {
+            addCriterion("BackNumber like", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberNotLike(String value) {
+            addCriterion("BackNumber not like", value, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberIn(List<String> values) {
+            addCriterion("BackNumber in", values, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberNotIn(List<String> values) {
+            addCriterion("BackNumber not in", values, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberBetween(String value1, String value2) {
+            addCriterion("BackNumber between", value1, value2, "backnumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacknumberNotBetween(String value1, String value2) {
+            addCriterion("BackNumber not between", value1, value2, "backnumber");
             return (Criteria) this;
         }
     }

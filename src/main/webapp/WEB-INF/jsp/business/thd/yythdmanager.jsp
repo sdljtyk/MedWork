@@ -13,11 +13,11 @@
 
 <script type="text/javascript">
 
-var yythddelete = function(thdid){
+var yythddelete = function(id){
 	_confirm('您确定要删除该退货单吗?',null,
 	  function(){
-		if(thdid){
-			$("#thddeleteid").val(thdid);
+		if(id){
+			$("#thddeleteid").val(id);
 			jquerySubByFId('yythddeleteForm', yythddelete_callback, null);
 		}else{
 			
@@ -30,24 +30,22 @@ var yythddelete = function(thdid){
 };
 
 function yythddelete_callback(data) {
-	var result = getCallbackData(data);
-	_alert(result);
+	$.messager.alert("系统提示消息",data.message);
 	yythdquery();
 }
 
 
 function yythdinfo(id){
 	var sendUrl = "${baseurl}/thd/yythdinfo.action?yythdid="+id;
-	parent.opentabwindow(bm+'退货单查看',sendUrl);
+	parent.opentabwindow('退货单查看',sendUrl);
 }
 
-function yythdedit(id,bm){
-	var sendUrl = "${baseurl}/thd/yythdedit.action?yythdid="+id+'&year=${year}';
-	//window.location=sendUrl;
-	parent.opentabwindow(bm+'退货单修改',sendUrl);
+function yythdedit(id){
+	var sendUrl = "${baseurl}/thd/yythdedit.action?yythdid="+id;
+	parent.opentabwindow('退货单修改',sendUrl);
 }
 function yythdadd(id){
-	var sendUrl = "${baseurl}/thd/yythdedit.action";
+	var sendUrl = "${baseurl}/thd/yythdadd.action";
 	parent.opentabwindow('退货单创建',sendUrl);
 }
 //工具栏
@@ -63,50 +61,52 @@ var frozenColumns;
 
 var columns = [ [
  {
-	field : 'useryymc',
-	title : '医院名称',
+	field : 'id',
+	title : '',
+	hidden : true,
+},{
+	field : 'backnumber',
+	title : '退货单编号',
+	width : 140
+},{
+	field : 'backname',
+	title : '退货单名称',
+	width : 180
+},{
+	field : 'yylxr',
+	title : '联系人',
+	width : 70
+},{
+	field : 'backphone',
+	title : '联系方式',
 	width : 100
 },{
-	field : 'bm',
-	title : '退货单编号',
-	width : 80
-},{
-	field : 'mc',
-	title : '退货单名称',
-	width : 150
-},{
-	field : 'cjtime',
+	field : 'backcreat',
 	title : '建单时间',
-	width : 80,
-	formatter: function(value,row,index){
-		if(value){
-			try{
-			var date = new Date(value);
-			var y = date.getFullYear();
-			var m = date.getMonth()+1;
-			var d = date.getDate();
-			return y+"-"+m+"-"+d;
-			}catch(e){
-				alert(e);
-			}
-		}
-		
-	}
+	width : 130
 },{
-	field : 'thdztmc',
-	title : '退货单<br>状态', 
-	width : 60
+	field : 'backalter',
+	title : '修改时间',
+	width : 130
+},{
+	field : 'backsub',
+	title : '提交时间',
+	width : 130
+},{
+	field : 'backstatename',
+	title : '退货单状态', 
+	width : 100
 },{
 	field : 'opt4',
 	title : '修改',
-	width : 60,
+	width : 70,
 	formatter:function(value, row, index){
-		return '<a href=javascript:yythdedit(\''+row.id+'\',\''+row.bm+'\')>修改</a>';
+		return '<a href=javascript:yythdedit(\''+row.id+'\')>修改</a>';
 	}
 },{
 	field : 'opt5',
 	title : '删除',
-	width : 60,
+	width : 70,
 	formatter:function(value, row, index){
 		return '<a href=javascript:yythddelete(\''+row.id+'\')>删除</a>';
 	}
@@ -115,18 +115,9 @@ var columns = [ [
 function initGrid(){
 	$('#yythdlist').datagrid({
 		title : '退货单列表',
-		//nowrap : false,
 		striped : true,
-		//collapsible : true,
 		url : '${baseurl}/thd/yythdmanager_result.action',
-		queryParams:{
-			year:'${year}'
-		},
-		//sortName : 'code',
-		//sortOrder : 'desc',
-		//remoteSort : false,
 		idField : 'id',//退货单id
-		//frozenColumns : frozenColumns,
 		columns : columns,
 		autoRowHeight:true,
 		pagination : true,
@@ -138,23 +129,16 @@ function initGrid(){
 					$('#yythdlist').datagrid('unselectRow', index);
 				}
 		});
-
 	}
 	$(function() {
 		initGrid();
 		
 	});
-
 	function yythdquery() {
 		var formdata = $("#yythdqueryForm").serializeJson();
-		//alert(formdata);
 		$('#yythdlist').datagrid('unselectAll');
 		$('#yythdlist').datagrid('load', formdata);
 	}
-	$(function(){ 
-			//加载年
-			businessyearlist('businessyear');
-		});
 </script>
 </HEAD>
 <BODY>
@@ -163,32 +147,10 @@ function initGrid(){
 			<TABLE  class="table_search">
 				<TBODY>
 					<TR>
-						<TD class="left">年份(如2014)：</TD>
-						<td >
-						<select name="year" id="businessyear">
-						</select>
-						</td>
-						<TD class="left">医院名称：</TD>
-						<td ><INPUT type="text" name="useryyCustom.mc" /></td>
 						<TD class="left">退货单编号：</td>
-						<td><INPUT type="text"  name="yycgdCustom.yythdbm" /></TD>
-						
-					</TR>
-					<TR> 
+						<td><INPUT type="text"  name="backnumber" /></TD>
 					<TD class="left">退货单名称：</TD>
-						<td ><INPUT type="text" name="yycgdCustom.yythdmc" /></td>
-					 
-						
-						<TD class="left">退货时间：</TD>
-						<td >
-						 <INPUT id="yycgdCustom.ksthdate"
-							name="yycgdCustom.ksthdate" 
-							 onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" style="width:80px"/>--
-					 <INPUT id="yycgdCustom.jsthdate" 
-							name="yycgdCustom.jsthdate"
-							 onfocus="WdatePicker({isShowWeek:false,skin:'whyGreen',dateFmt:'yyyy-MM-dd'})" style="width:80px"/>
-							
-						</td>
+						<td ><INPUT type="text" name="backname" /></td>
 						 <TD class="left">退货单状态：</TD>
 						<td >
 							未提交
@@ -213,7 +175,6 @@ function initGrid(){
 
 <form id="yythddeleteForm" name="yythddeleteForm" action="${baseurl}/thd/yythddelete.action">
 <input type="hidden" id="thddeleteid" name="thddeleteid" />
-<input type="hidden" id="year" name="year" value="${year}" />
 </form>
 
 </BODY>

@@ -234,10 +234,9 @@
 	});
 
 	function yycgdmxquery() {
-		var formdata = $("#yycgdmxForm").serializeJson();
-		//alert(formdata);
+		$('#yycgdmxlist').datagrid('reload');
 		$('#yycgdmxlist').datagrid('unselectAll');
-		$('#yycgdmxlist').datagrid('load', formdata);
+		
 	}
 </script>
 </HEAD>

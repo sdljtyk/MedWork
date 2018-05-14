@@ -364,6 +364,126 @@ public class BackinfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andMeddjIsNull() {
+            addCriterion("MedDj is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjIsNotNull() {
+            addCriterion("MedDj is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjEqualTo(Float value) {
+            addCriterion("MedDj =", value, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjNotEqualTo(Float value) {
+            addCriterion("MedDj <>", value, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjGreaterThan(Float value) {
+            addCriterion("MedDj >", value, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjGreaterThanOrEqualTo(Float value) {
+            addCriterion("MedDj >=", value, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjLessThan(Float value) {
+            addCriterion("MedDj <", value, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjLessThanOrEqualTo(Float value) {
+            addCriterion("MedDj <=", value, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjIn(List<Float> values) {
+            addCriterion("MedDj in", values, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjNotIn(List<Float> values) {
+            addCriterion("MedDj not in", values, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjBetween(Float value1, Float value2) {
+            addCriterion("MedDj between", value1, value2, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andMeddjNotBetween(Float value1, Float value2) {
+            addCriterion("MedDj not between", value1, value2, "meddj");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidIsNull() {
+            addCriterion("GhsId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidIsNotNull() {
+            addCriterion("GhsId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidEqualTo(Integer value) {
+            addCriterion("GhsId =", value, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidNotEqualTo(Integer value) {
+            addCriterion("GhsId <>", value, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidGreaterThan(Integer value) {
+            addCriterion("GhsId >", value, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("GhsId >=", value, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidLessThan(Integer value) {
+            addCriterion("GhsId <", value, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidLessThanOrEqualTo(Integer value) {
+            addCriterion("GhsId <=", value, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidIn(List<Integer> values) {
+            addCriterion("GhsId in", values, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidNotIn(List<Integer> values) {
+            addCriterion("GhsId not in", values, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidBetween(Integer value1, Integer value2) {
+            addCriterion("GhsId between", value1, value2, "ghsid");
+            return (Criteria) this;
+        }
+
+        public Criteria andGhsidNotBetween(Integer value1, Integer value2) {
+            addCriterion("GhsId not between", value1, value2, "ghsid");
+            return (Criteria) this;
+        }
+
         public Criteria andBacknumIsNull() {
             addCriterion("BackNum is null");
             return (Criteria) this;

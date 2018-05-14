@@ -14,6 +14,10 @@ public class Backinfo implements Serializable {
 
     private Integer medid;
 
+    private Float meddj;
+
+    private Integer ghsid;
+
     private Integer backnum;
 
     private Float backsum;
@@ -54,6 +58,22 @@ public class Backinfo implements Serializable {
 
     public void setMedid(Integer medid) {
         this.medid = medid;
+    }
+
+    public Float getMeddj() {
+        return meddj;
+    }
+
+    public void setMeddj(Float meddj) {
+        this.meddj = meddj;
+    }
+
+    public Integer getGhsid() {
+        return ghsid;
+    }
+
+    public void setGhsid(Integer ghsid) {
+        this.ghsid = ghsid;
     }
 
     public Integer getBacknum() {
@@ -104,6 +124,8 @@ public class Backinfo implements Serializable {
             && (this.getBackid() == null ? other.getBackid() == null : this.getBackid().equals(other.getBackid()))
             && (this.getOrderid() == null ? other.getOrderid() == null : this.getOrderid().equals(other.getOrderid()))
             && (this.getMedid() == null ? other.getMedid() == null : this.getMedid().equals(other.getMedid()))
+            && (this.getMeddj() == null ? other.getMeddj() == null : this.getMeddj().equals(other.getMeddj()))
+            && (this.getGhsid() == null ? other.getGhsid() == null : this.getGhsid().equals(other.getGhsid()))
             && (this.getBacknum() == null ? other.getBacknum() == null : this.getBacknum().equals(other.getBacknum()))
             && (this.getBacksum() == null ? other.getBacksum() == null : this.getBacksum().equals(other.getBacksum()))
             && (this.getBackstate() == null ? other.getBackstate() == null : this.getBackstate().equals(other.getBackstate()))
@@ -118,6 +140,8 @@ public class Backinfo implements Serializable {
         result = prime * result + ((getBackid() == null) ? 0 : getBackid().hashCode());
         result = prime * result + ((getOrderid() == null) ? 0 : getOrderid().hashCode());
         result = prime * result + ((getMedid() == null) ? 0 : getMedid().hashCode());
+        result = prime * result + ((getMeddj() == null) ? 0 : getMeddj().hashCode());
+        result = prime * result + ((getGhsid() == null) ? 0 : getGhsid().hashCode());
         result = prime * result + ((getBacknum() == null) ? 0 : getBacknum().hashCode());
         result = prime * result + ((getBacksum() == null) ? 0 : getBacksum().hashCode());
         result = prime * result + ((getBackstate() == null) ? 0 : getBackstate().hashCode());
@@ -135,6 +159,8 @@ public class Backinfo implements Serializable {
         sb.append(", backid=").append(backid);
         sb.append(", orderid=").append(orderid);
         sb.append(", medid=").append(medid);
+        sb.append(", meddj=").append(meddj);
+        sb.append(", ghsid=").append(ghsid);
         sb.append(", backnum=").append(backnum);
         sb.append(", backsum=").append(backsum);
         sb.append(", backstate=").append(backstate);

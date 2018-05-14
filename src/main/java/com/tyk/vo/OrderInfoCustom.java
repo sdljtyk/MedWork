@@ -11,6 +11,7 @@ public class OrderInfoCustom{
 	private String medgg;
 	private String meddw;
 	
+	private Integer orderid;
 	private Integer mednum;
 	private String meddj;
 	private String medsum;
@@ -22,6 +23,13 @@ public class OrderInfoCustom{
 	private String ghsname;
 	
 	
+	
+	public Integer getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(Integer orderid) {
+		this.orderid = orderid;
+	}
 	public Integer getId() {
 		return id;
 	}
