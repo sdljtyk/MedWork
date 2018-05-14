@@ -203,8 +203,8 @@ public class MedAction {
 		ri.setMessage("成功修改" + upt_success + "条信息。\n修改失败" + upt_fail + "条信息");
 		return ri;
 	}
-	
-	/*// 导入药品信息信息
+
+	/*导入药品信息
 	@RequestMapping("/ypxximport.action")
 	public String ypxximport() throws Exception {
 		return "/business/ypml/ypxximport";

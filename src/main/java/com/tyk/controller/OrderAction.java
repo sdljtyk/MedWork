@@ -130,7 +130,7 @@ public class OrderAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(yycgdid);
+		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(yycgdid, null);
 		ResultInfo ri = new ResultInfo(1, "查询成功");
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
 		queryResultInfo.setRows(list);
@@ -250,13 +250,16 @@ public class OrderAction {
 
 	@RequestMapping("/yycgdmxaddsubmit.action")
 	@ResponseBody
-	public ResultInfo yycgdmxaddsubmit(OrderCustom orderCustom) {
+	public ResultInfo yycgdmxaddsubmit(OrderCustom orderCustom, String indexs) {
 		ResultInfo ri = new ResultInfo();
 		List<Orderinfo> orderInfos = orderCustom.getYycgdmxs();
+		System.out.println(indexs);
+		String[] ids = indexs.split(",");
 		int ins_success = 0;
 		int ins_fail = 0;
-		for (Orderinfo orderinfo : orderInfos) {
+		for (int i = 0; i < ids.length; i++) {
 			try {
+				Orderinfo orderinfo = orderInfos.get(Integer.parseInt(ids[i]));
 				ins_success += orderService.InsertOrderInfo(orderinfo);
 			} catch (Exception e) {
 				ins_fail++;
@@ -319,23 +322,22 @@ public class OrderAction {
 	@RequestMapping("/yycgdsubmit.action")
 	@ResponseBody
 	public ResultInfo yycgdsubmit(Orders orders) throws Exception {
-		ResultInfo ri =new ResultInfo();
+		ResultInfo ri = new ResultInfo();
 		Date date = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		orders.setOrdersub(df.format(date));
 		orders.setOrderstate(30);
 		int i = orderService.UpdateOrders(orders);
-		if(i == 1) {
+		if (i == 1) {
 			ri.setType(1);
 			ri.setMessage("提交成功！");
-		}else
-		{
+		} else {
 			ri.setType(0);
 			ri.setMessage("提交失败！");
 		}
 		return ri;
 	}
-	
+
 	@RequestMapping("/yycgddelete.action")
 	@ResponseBody
 	public ResultInfo yycgddelete(String cgddeleteid) throws Exception {
@@ -357,4 +359,59 @@ public class OrderAction {
 		ri.setMessage("成功删除" + del_success + "条信息。\n删除失败" + del_fail + "条信息");
 		return ri;
 	}
+
+	@RequestMapping("/yycgdrkquery.action")
+	public String yycgdrkquery(Model model, HttpSession session) throws Exception {
+		OrderCustom orderCustom = new OrderCustom();
+		ActiveUser activeuser = (ActiveUser) session.getAttribute("activeUser");
+		if (activeuser.getGroupid().equals("27"))
+			orderCustom.setYyid(Integer.parseInt(activeuser.getUnitID()));
+		List<OrderCustom> list = orderService.FindListByOrderCustom(orderCustom);
+		model.addAttribute("cgdNameList", list);
+		return "/business/cgd/yycgdrkquery";
+	}
+
+	@RequestMapping("/yycgdrkquery_result.action")
+	@ResponseBody
+	public DataGridResultInfo yycgdrkquery_result(String ordername, int page, int rows) {
+		int count = 0;
+		try {
+			count = orderService.FindOrderCountByOrderId(ordername);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(ordername, "34");
+		ResultInfo ri = new ResultInfo(1, "查询成功");
+		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
+		queryResultInfo.setRows(list);
+		queryResultInfo.setTotal(count);
+		return queryResultInfo;
+	}
+
+	@RequestMapping("/yycgdrk_submit.action")
+	@ResponseBody
+	public ResultInfo yycgdrk_submit(String indexs,HttpSession session) {
+		ActiveUser activeuser = (ActiveUser) session.getAttribute("activeUser");
+		ResultInfo ri = new ResultInfo();
+		if (indexs == null || indexs.equals("")) {
+			ri.setType(0);
+			ri.setMessage("入库失败，请重新选择需要入库的信息！");
+			return ri;
+		}
+		int rk_success = 0;
+		int rk_fail = 0;
+		String[] ids = indexs.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			try {
+				rk_success += orderService.RkOrderInfoByID(ids[i],activeuser.getUnitID());
+			} catch (Exception e) {
+				rk_fail++;
+				e.printStackTrace();
+			}
+		}
+		ri.setType(1);
+		ri.setMessage("成功入库" + rk_success + "条信息。\n入库失败" + rk_fail + "条信息");
+		return ri;
+	}
+
 }

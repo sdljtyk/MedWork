@@ -1,5 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Random"%>
 <%@ page import="java.io.OutputStream"%>
 <%@ page import="java.awt.Color"%>
@@ -8,28 +8,27 @@
 <%@ page import="java.awt.image.BufferedImage"%>
 <%@ page import="javax.imageio.ImageIO"%>
 <%
+	String[] codes = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9"};
 	int width = 60;
 	int height = 32;
-	//create the image
 	BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	Graphics g = image.getGraphics();
-	// set the background color
 	g.setColor(new Color(0xDCDCDC));
 	g.fillRect(0, 0, width, height);
-	// draw the border
 	g.setColor(Color.black);
 	g.drawRect(0, 0, width - 1, height - 1);
-	// create a random instance to generate the codes
 	Random rdm = new Random();
-	String hash1 = Integer.toHexString(rdm.nextInt());
-	// make some confusion
+	String capstr = "";
+	for(int j=0;j<4;j++)
+	{
+		capstr = capstr + codes[rdm.nextInt(35)];
+	}
 	for (int i = 0; i < 50; i++) {
 		int x = rdm.nextInt(width);
 		int y = rdm.nextInt(height);
 		g.drawOval(x, y, 0, 0);
 	}
-	// generate a random code
-	String capstr = hash1.substring(0, 4);
+	
 	session.setAttribute("validateCode", capstr);
 	g.setColor(new Color(0, 100, 0));
 	g.setFont(new Font("Candara", Font.BOLD, 24));

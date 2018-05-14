@@ -40,7 +40,7 @@ public class Login {
 		ActiveUser activeUser;
 		ResultInfo ri;
 		String validateCode = (String) session.getAttribute("validateCode");
-		if(randomcode!=null && !validateCode.equals(randomcode)) { 
+		if(randomcode!=null && !validateCode.equals(randomcode.toLowerCase())) { 
 			ri = new ResultInfo(0,"验证码错误！");
 			return ri;
 		}

@@ -21,7 +21,6 @@
 				var index = $('#yyypmllist').datagrid('getRowIndex', rows[i]);
 				indexs.push(index);
 			}
-			console.log( $("#yyypmllist").serialize())
 			if (rows.length > 0) {
 				$("#indexs").val(indexs.join(','));
 				jquerySubByFId('yyypmlForm', yycgdmxaddsubmit_callback, null);
@@ -142,10 +141,9 @@
 	});
 
 	function yyypmlquery() {
-
-		var formdata = $("#yyypmlForm").serializeJson();
+		
+		$('#yyypmllist').datagrid('reload');
 		$('#yyypmllist').datagrid('unselectAll');
-		$('#yyypmllist').datagrid('load', formdata);
 	}
 </script>
 </HEAD>

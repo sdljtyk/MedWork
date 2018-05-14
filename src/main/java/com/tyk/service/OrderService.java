@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tyk.controller.YYMedAction;
 import com.tyk.mapper.DicinfoMapper;
 import com.tyk.mapper.GhqyMapper;
 import com.tyk.mapper.GhsmedMapper;
@@ -16,6 +17,7 @@ import com.tyk.mapper.GhsunitMapper;
 import com.tyk.mapper.MedinfoMapper;
 import com.tyk.mapper.OrderinfoMapper;
 import com.tyk.mapper.OrdersMapper;
+import com.tyk.mapper.YymedMapper;
 import com.tyk.mapper.YyunitMapper;
 import com.tyk.pojo.Dicinfo;
 import com.tyk.pojo.Ghqy;
@@ -23,7 +25,6 @@ import com.tyk.pojo.GhqyExample;
 import com.tyk.pojo.Ghsmed;
 import com.tyk.pojo.GhsmedExample;
 import com.tyk.pojo.Ghsunit;
-import com.tyk.pojo.GhsunitExample;
 import com.tyk.pojo.Medinfo;
 import com.tyk.pojo.MedinfoExample;
 import com.tyk.pojo.Orderinfo;
@@ -31,6 +32,8 @@ import com.tyk.pojo.OrderinfoExample;
 import com.tyk.pojo.Orders;
 import com.tyk.pojo.OrdersExample;
 import com.tyk.pojo.OrdersExample.Criteria;
+import com.tyk.pojo.Yymed;
+import com.tyk.pojo.YymedExample;
 import com.tyk.pojo.Yyunit;
 import com.tyk.vo.GysypmlCustom;
 import com.tyk.vo.OrderCustom;
@@ -38,7 +41,8 @@ import com.tyk.vo.OrderInfoCustom;
 
 @Service
 public class OrderService {
-
+	@Autowired
+	private YymedMapper yymedMapper;
 	@Autowired
 	private GhqyMapper ghqyMapper;
 	@Autowired
@@ -153,10 +157,15 @@ public class OrderService {
 		return custom;
 	}
 
-	public List<OrderInfoCustom> FindOrderListByOrderID(String yycgdid) {
+	public List<OrderInfoCustom> FindOrderListByOrderID(String yycgdid,String ghstate) {
 		List<OrderInfoCustom> list = new ArrayList<OrderInfoCustom>();
 		OrderinfoExample example = new OrderinfoExample();
-		example.createCriteria().andOrderidEqualTo(Integer.parseInt(yycgdid));
+		com.tyk.pojo.OrderinfoExample.Criteria criteria = example.createCriteria();
+		if(yycgdid != null && !yycgdid.equals("0")) {
+			criteria.andOrderidEqualTo(Integer.parseInt(yycgdid));
+		}
+		if(ghstate !=null)
+			criteria.andGhstateEqualTo(Integer.parseInt(ghstate));
 		List<Orderinfo> orderinfo = orderinfoMapper.selectByExample(example);
 		for (Orderinfo orderinfo2 : orderinfo) {
 			OrderInfoCustom temp = FindOrderInfoCusByOrder(orderinfo2);
@@ -190,7 +199,7 @@ public class OrderService {
 	}
 
 	public int FindOrderCountByOrderId(String yycgdid) {
-		int count = FindOrderListByOrderID(yycgdid).size();
+		int count = FindOrderListByOrderID(yycgdid,null).size();
 		return count;
 	}
 
@@ -304,6 +313,30 @@ public class OrderService {
 	public int UpdateOrderInfo(Orderinfo orderinfo) {
 		orderinfo.setMedsum(orderinfo.getMeddj()*orderinfo.getMednum());
 		return orderinfoMapper.updateByPrimaryKeySelective(orderinfo);
+	}
+
+	public int RkOrderInfoByID(String string, String string2) throws Exception{
+		Orderinfo orderinfo = orderinfoMapper.selectByPrimaryKey(Integer.parseInt(string));
+		orderinfo.setGhstate(35);
+		
+		int medid = orderinfo.getMedid();
+		int mednum = orderinfo.getMednum();
+		YymedExample example = new YymedExample();
+		example.createCriteria().andMedidEqualTo(medid).andYyidEqualTo(Integer.parseInt(string2));
+		List<Yymed> yymeds = yymedMapper.selectByExample(example);
+		if(yymeds.size()>0)
+		{
+			Yymed yymed = yymeds.get(0);
+			yymed.setMedsum(yymed.getMedsum()+mednum);
+			yymedMapper.updateByPrimaryKeySelective(yymed);
+		}else {
+			Yymed temp = new Yymed();
+			temp.setMedid(medid);
+			temp.setMedsum(mednum);
+			temp.setYyid(Integer.parseInt(string2));
+			yymedMapper.insertSelective(temp);
+		}
+		return	orderinfoMapper.updateByPrimaryKeySelective(orderinfo);
 	}
 	
 }
