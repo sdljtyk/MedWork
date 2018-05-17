@@ -209,6 +209,7 @@ public class BackAction {
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
 		queryResultInfo.setRows(list);
 		queryResultInfo.setTotal(count);
+		System.out.println("这就要返回了！");
 		return queryResultInfo;
 	}
 	

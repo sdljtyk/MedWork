@@ -40,6 +40,19 @@ function yythdmxaddsubmit_callback(data) {
 	parent.yythdmxquery();
 }
 
+function selectByOrdername(){
+	var backid = ${yythdid}
+	var data = {
+		ordername:$('#ordername').val(),
+		backid:backid,
+		page:1,
+		rows:15
+	};
+	
+	$.post('yythdmxadd_result.action', data, function(data){
+		$('#yycgdmxlist').datagrid('loadData', data);
+	});
+}
 
 
 //工具栏
@@ -164,6 +177,7 @@ function initGrid(){
 	});
 
 	function yycgdmxquery() {
+		console.log($('#yycgdmxForm').serialize());
 		$('#yycgdmxlist').datagrid('unselectAll');
 		$('#yycgdmxlist').datagrid('reload');
 	}
@@ -190,7 +204,7 @@ function initGrid(){
 					<TD class="left">采购状态：</TD>
 					<td>已入库</td>
 					<td ></TD>
-					<td colspan=2><a id="btn" href="#" onclick="yycgdmxquery()"
+					<td colspan=2><a id="btn" href="#" onclick="selectByOrdername()"
 						class="easyui-linkbutton" iconCls='icon-search'>查询</a></td>
 				</tr>
 			</TBODY>

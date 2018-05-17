@@ -14,7 +14,8 @@
 <script type="text/javascript">
 
 var ypxxexport = function(){
-	jquerySubByFId('ypxxqueryForm', ypxxexport_callback, null, "json");
+	window.location.href = 'http://localhost:8080/ypml/ypxxexport.action';
+	//jquerySubByFId('ypxxqueryForm', ypxxexport_callback, null, "json");
 };
 
 function ypxxexport_callback(data) {
