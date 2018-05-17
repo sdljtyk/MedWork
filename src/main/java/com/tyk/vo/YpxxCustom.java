@@ -19,7 +19,7 @@ public class YpxxCustom extends Medinfo{
 	
 	private int medsum;
 	private int yymedid;
-	
+
 	public int getYymedid() {
 		return yymedid;
 	}

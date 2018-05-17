@@ -17,16 +17,12 @@ var gysypmladd = function(){
 	_confirm('您确定要將选择药品添加至药品目录吗?',null,
 	  function(){
 		var indexs = [];
-		var ypxxids =[];
 		var rows = dataGrid_obj.datagrid('getSelections');
 		for(var i=0;i<rows.length;i++){
-			indexs.push(dataGrid_obj.datagrid('getRowIndex',rows[i]));
+			indexs.push(rows[i].id);
 		}
 		if(rows.length>0){
 			$("#indexs").val(indexs.join(','));
-			/* $("input[name^=ypxxid]").each(function() {
-				ypxxids.push($(this).val());
-				    				}); */
 			jquerySubByFId('gysypmladdqueryForm',gysypmladd_callback, null);
 		}else{
 			alert_warn("请选择要添加的药品");
@@ -59,49 +55,41 @@ var columns = [ [{
 	title : '选择',
 	checkbox : true
 },{
-	field : 'ypxxid',
-	hidden:true,
-	formatter:function(value, row, index){
-		return '<input type="hidden" name="gysypmlControls['+index+'].ypxxid" id="'+row.ypxxid+'" value="'+value+'" />';
-	}
+	field : 'id',
+	hidden:true
 },{
-	field : 'bm',
+	field : 'mednumber',
 	title : '流水号',
 	width : 80
 },{
-	field : 'mc',
-	title : '通用名',
+	field : 'medname',
+	title : '商品名称',
 	width : 130
 },{
-	field : 'jx',
+	field : 'medjx',
 	title : '剂型',
 	width : 80
 },{
-	field : 'gg',
+	field : 'medgg',
 	title : '规格',
 	width : 100
 },{
-	field : 'zhxs',
-	title : '转换系数',
-	width : 50
-},{
-	field : 'scqymc',
+	field : 'medmake',
 	title : '生产企业',
 	width : 180
 },{
-	field : 'spmc',
-	title : '商品名称',
+	field : 'zlccmc',
+	title : '质量层次',
 	width : 150
 },{
-	field : 'zbjg',
-	title : '中标价',
+	field : 'lbmc',
+	title : '药品类别',
 	width : 50
 },{
 	field : 'jyztmc',
 	title : '交易状态',
 	width : 60
-}
-]];
+}]];
 
 var dataGrid_obj;
 
@@ -110,15 +98,9 @@ function initGrid(){
 	
 	dataGrid_obj.datagrid({
 		title : '供应药品列表',
-		//nowrap : false,
 		striped : true,
-		//collapsible : true,
 		url : '${baseurl}/ypml/gysypmladdquery_result.action',
-		//sortName : 'code',
-		//sortOrder : 'desc',
-		//remoteSort : false,
-		idField : 'ypxxid',
-		//frozenColumns : frozenColumns,
+		idField : 'id',
 		columns : columns,
 		pagination : true,
 		rownumbers : true,
@@ -152,56 +134,43 @@ function initGrid(){
 			<TABLE  class="table_search">
 				<TBODY>
 					<TR>
-						
-						<TD class="left">通用名：</td>
-						<td><INPUT type="text"  name="ypxxCustom.mc" /></TD>
+						<TD class="left">商品名称：</td>
+						<td><INPUT type="text" name="medname" /></TD>
 						<TD class="left">剂型：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.jx" /></td>
+						<td><INPUT type="text" name="medjx" /></td>
 						<TD class="left">规格：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.gg" /></td>
-						<TD class="left">转换系数：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.zhxs" /></td>
+						<td><INPUT type="text" name="medgg" /></td>
 					</TR>
 					<TR>
+						<TD class="left">药品单位：</TD>
+						<td><INPUT type="text" name="meddw" /></td>
 						<TD class="left">流水号：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.bm" /></td>
+						<td><INPUT type="text" name="mednumber" /></td>
 						<TD class="left">生产企业：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.scqymc" /></td>
-						<TD class="left">商品名称：</TD>
-						<td ><INPUT type="text" name="ypxxCustom.spmc" /></td>
-						 <td class="left">价格范围：</td>
-				  		<td>
-				      		<INPUT id="ypxxCustom.zbjglower" name="ypxxCustom.zbjglower" style="width:70px"/>
-							至
-							<INPUT id="ypxxCustom.zbjgupper" name="ypxxCustom.zbjgupper" style="width:70px"/>
-							
-				 		 </td>
+						<td><INPUT type="text" name="medmake" /></td>
 					</tr>
 					<tr>
-					  
+
 						<TD class="left">药品类别：</TD>
-						<td >
-							<select id="ypxxCustom.lb" name="ypxxCustom.lb" style="width:150px">
+						<td><select id="ypxxCustom.medclass" name="medclass"
+							style="width: 150px">
 								<option value="">全部</option>
 								<c:forEach items="${yplbList}" var="value">
 									<option value="${value.id}">${value.info}</option>
 								</c:forEach>
-							</select>
-						</td>
+						</select></td>
 						<TD class="left">交易状态：</TD>
-						<td >
-							<select id="ypxxCustom.jyzt" name="ypxxCustom.jyzt" style="width:150px">
+						<td><select id="ypxxCustom.medstate" name="medstate"
+							style="width: 150px">
 								<option value="">全部</option>
 								<c:forEach items="${ypjyztList}" var="value">
 									<option value="${value.id}">${value.info}</option>
 								</c:forEach>
-							</select>
-							
-						</td>
-						
-				 		 <td class="left" height="25">质量层次：</td>
-				  		<td>
-				  		<select id="ypxxCustom.zlcc" name="ypxxCustom.zlcc" style="width:150px">
+						</select></td>
+
+						<td class="left" height="25">质量层次：</td>
+						<td><select id="ypxxCustom.medzl" name="medzl"
+							style="width: 150px">
 								<option value="">全部</option>
 								<c:forEach items="${ypzlccList}" var="value">
 									<option value="${value.id}">${value.info}</option>

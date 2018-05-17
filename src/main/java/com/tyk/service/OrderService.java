@@ -156,15 +156,27 @@ public class OrderService {
 		return custom;
 	}
 
-	public List<OrderInfoCustom> FindOrderListByOrderID(String yycgdid,String ghstate) {
+	public List<OrderInfoCustom> FindOrderListByOrderID(String yycgdid, String ghstate, String ghsid) {
+		OrdersExample ordersExample = new OrdersExample();
+		ordersExample.createCriteria().andOrderstateEqualTo(31);
+		List<Orders> orders = ordersMapper.selectByExample(ordersExample);
+		List<Integer> ids = new ArrayList<Integer>();
+		for (Orders orders2 : orders) {
+			ids.add(orders2.getId());
+		}
+		
 		List<OrderInfoCustom> list = new ArrayList<OrderInfoCustom>();
 		OrderinfoExample example = new OrderinfoExample();
 		com.tyk.pojo.OrderinfoExample.Criteria criteria = example.createCriteria();
 		if(yycgdid != null && !yycgdid.equals("0")) {
 			criteria.andOrderidEqualTo(Integer.parseInt(yycgdid));
 		}
-		if(ghstate !=null)
+		if(ghstate != null)
 			criteria.andGhstateEqualTo(Integer.parseInt(ghstate));
+		if(ghsid != null) {
+			criteria.andGhsidEqualTo(Integer.parseInt(ghsid));
+			criteria.andOrderidIn(ids);
+		}	
 		List<Orderinfo> orderinfo = orderinfoMapper.selectByExample(example);
 		for (Orderinfo orderinfo2 : orderinfo) {
 			OrderInfoCustom temp = FindOrderInfoCusByOrder(orderinfo2);
@@ -178,6 +190,8 @@ public class OrderService {
 		Medinfo med = medinfoMapper.selectByPrimaryKey(orderinfo2.getMedid());
 		Dicinfo dic = dicinfoMapper.selectByPrimaryKey(orderinfo2.getGhstate());
 		Ghsunit ghs = ghsunitMapper.selectByPrimaryKey(orderinfo2.getGhsid());
+		Orders order = ordersMapper.selectByPrimaryKey(orderinfo2.getOrderid());
+		Yyunit yyunit = yyunitMapper.selectByPrimaryKey(order.getYyid());
 		
 		custom.setOrderid(orderinfo2.getOrderid());
 		custom.setId(orderinfo2.getId());
@@ -195,11 +209,15 @@ public class OrderService {
 		custom.setMednumber(med.getMednumber());
 		custom.setMedsum(orderinfo2.getMedsum().toString());
 		custom.setMeddw(med.getMeddw());
+		custom.setOrdername(order.getOrdername());
+		custom.setOrdernumber(order.getOrdernumber());
+		custom.setYyname(yyunit.getYyname());
+		custom.setOrdercreate(order.getOrderctime());
 		return custom;
 	}
 
-	public int FindOrderCountByOrderId(String yycgdid) {
-		int count = FindOrderListByOrderID(yycgdid,null).size();
+	public int FindOrderCountByOrderId(String yycgdid,String ghstate, String ghsid) {
+		int count = FindOrderListByOrderID(yycgdid,ghstate,ghsid).size();
 		return count;
 	}
 
@@ -337,6 +355,12 @@ public class OrderService {
 			yymedMapper.insertSelective(temp);
 		}
 		return	orderinfoMapper.updateByPrimaryKeySelective(orderinfo);
+	}
+
+	public int FhOrderInfoByID(String string) {
+		Orderinfo info = orderinfoMapper.selectByPrimaryKey(Integer.parseInt(string));
+		info.setGhstate(34);
+		return orderinfoMapper.updateByPrimaryKeySelective(info);
 	}
 	
 }

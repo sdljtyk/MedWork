@@ -1,5 +1,8 @@
 package com.tyk.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tyk.pojo.Ghsmed;
 
 /**
@@ -18,6 +21,8 @@ public class GysypmlCustom extends Ghsmed{
 	private String zlccmc;
 	private int medclass;
 	private int medstate;
+	
+	private List<Ghsmed> ghsmeds = new ArrayList<Ghsmed>();
 	//供应商名称
 	private String GHSName;
 	//供货状态名称
@@ -96,6 +101,15 @@ public class GysypmlCustom extends Ghsmed{
 	}
 	public void setZlccmc(String zlccmc) {
 		this.zlccmc = zlccmc;
+	}
+	
+	
+	
+	public List<Ghsmed> getGhsmeds() {
+		return ghsmeds;
+	}
+	public void setGhsmeds(List<Ghsmed> ghsmeds) {
+		this.ghsmeds = ghsmeds;
 	}
 	@Override
 	public String toString() {

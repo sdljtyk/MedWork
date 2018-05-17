@@ -65,7 +65,6 @@
 	//保存采购药品信息
 	function yycgdmxsave() {
 		_confirm("您确定要保存选择的采购药品信息吗？", null, function() {
-
 			var indexs = [];//选择记录的序号
 			var rows = $('#yycgdmxlist').datagrid('getSelections');
 			for (var i = 0; i < rows.length; i++) {
@@ -77,7 +76,6 @@
 			} else {
 				alert_warn("请选择要保存的采购药品");
 			}
-
 		});
 	}
 	function yycgdmxdelete_callback(data) {
@@ -103,12 +101,12 @@
 	}, {
 		id : 'yycgdmxdelete',
 		text : '采购药品删除',
-		iconCls : 'icon-add',
+		iconCls : 'icon-remove',
 		handler : yycgdmxdelete
 	}, {
 		id : 'yycgdmxsave',
 		text : '保存采购药品信息',
-		iconCls : 'icon-add',
+		iconCls : 'icon-save',
 		handler : yycgdmxsave
 	} ];
 
@@ -117,7 +115,6 @@
 	var columns = [ [
 			{
 				checkbox : true,
-				
 			},
 			{
 				field : 'id',

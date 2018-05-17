@@ -215,17 +215,6 @@ function submit_alert_show(iconType,messageCode,message,messagelist,width,height
 	//结束
 	html +='</div>';
 	
-		
-	/*
-	var html='<div style="width: 93%; height: auto;padding:10px" title="" >'
-				+'<div class="messager-icon messager-success"></div>'
-				+'<div>系统代码：907，操作成功0条，失败2条</div><div style="clear:both;"></div>'
-			//+'<div style="width: 100%;">ffsdsfdsfds</div>'
-			//+'<div style="width: 100%;">ffsdsfdsfds</div>'
-			//+'<div style="width: 100%;">ffsdsfdsfds</div>'
-			//+'<div style="width: 100%;">ffsdsfdsfds</div>'
-			+'<div style="width: 100%;"><div class="dialog-button" style="text-align:center;"><a href="javascript:closemessagewindow()" class="l-btn"><span class="l-btn-left"><span class="l-btn-text">确定</span></span></a></div></div>';
-		+'</div>';*/
 
 	messagewindow_singleobj = new messagewindow("系统提示",width,height,html);
 	messagewindow_singleobj.createWindow();

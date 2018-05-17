@@ -27,6 +27,10 @@ public class BackInfoCustom {
 	private String backsum;
 	private String backreason;
 	
+	private String backnumber;
+	private String yyname;
+	private String backcreat;
+	
 	
 	public String getOrdernumber() {
 		return ordernumber;
@@ -154,4 +158,24 @@ public class BackInfoCustom {
 	public void setBacksum(String backsum) {
 		this.backsum = backsum;
 	}
+	public String getBacknumber() {
+		return backnumber;
+	}
+	public void setBacknumber(String backnumber) {
+		this.backnumber = backnumber;
+	}
+	public String getYyname() {
+		return yyname;
+	}
+	public void setYyname(String yyname) {
+		this.yyname = yyname;
+	}
+	public String getBackcreat() {
+		return backcreat;
+	}
+	public void setBackcreat(String backcreat) {
+		this.backcreat = backcreat;
+	}
+	
+	
 }

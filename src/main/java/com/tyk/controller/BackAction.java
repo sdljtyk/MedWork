@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.tyk.pojo.Backinfo;
 import com.tyk.pojo.Backs;
 import com.tyk.pojo.Dicinfo;
-import com.tyk.pojo.Orderinfo;
 import com.tyk.service.BackService;
 import com.tyk.service.BaseService;
 import com.tyk.service.OrderService;
@@ -168,11 +167,11 @@ public class BackAction {
 	public DataGridResultInfo yythdedit_thdmxresult(String yythdid, int page, int rows) {
 		int count = 0;
 		try {
-			count = backService.FindBackInfoCountByBackId(yythdid);
+			count = backService.FindBackInfoCountByBackId(yythdid, null ,null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<BackInfoCustom> list = backService.FindBackInfoListByBackID(yythdid, null);
+		List<BackInfoCustom> list = backService.FindBackInfoListByBackID(yythdid, null ,null);
 		ResultInfo ri = new ResultInfo(1, "查询成功");
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
 		queryResultInfo.setRows(list);
@@ -200,11 +199,11 @@ public class BackAction {
 		int count = 0;
 		ActiveUser activeUser = (ActiveUser) session.getAttribute("activeUser");
 		try {
-			count = orderService.FindOrderCountByOrderId(ordername);
+			count = orderService.FindOrderCountByOrderId(ordername, "35" , null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<OrderInfoCustom> temp = orderService.FindOrderListByOrderID(ordername, "35");
+		List<OrderInfoCustom> temp = orderService.FindOrderListByOrderID(ordername, "35" , null);
 		List<OrderInfoCustom> list = backService.FindOrderListBOrderInfo(temp,backid,activeUser.getUnitID());
 		ResultInfo ri = new ResultInfo(1, "查询成功");
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
@@ -312,6 +311,58 @@ public class BackAction {
 		return "/business/thd/yythdinfo";
 	}
 	
+	@RequestMapping("/yythddispose.action")
+	public String yycgddispose(Model model)
+	{  
+		BackCustom backCustom = new BackCustom();
+		backCustom.setBackstate(38);
+		List<BackCustom> list = backService.FindListByBackCustom(backCustom);
+		model.addAttribute("thdNameList", list);
+		return "business/thd/yythddispose";
+	}
 	
+	@RequestMapping("/yythddispose_result.action")
+	@ResponseBody
+	public DataGridResultInfo yythddispose_result(HttpSession session,String backname, int page, int rows) {
+		ActiveUser activeUser = (ActiveUser)session.getAttribute("activeUser");
+		
+		int count = 0;
+		try {
+			count = backService.FindBackInfoCountByBackId(backname, "39",activeUser.getUnitID());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<BackInfoCustom> list = backService.FindBackInfoListByBackID(backname, "39",activeUser.getUnitID());
+		ResultInfo ri = new ResultInfo(1, "查询成功");
+		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
+		queryResultInfo.setRows(list);
+		queryResultInfo.setTotal(count);
+		return queryResultInfo;
+	}
+	
+	@RequestMapping("/yythddispose_submit.action")
+	@ResponseBody
+	public ResultInfo yythddispose_submit(String indexs) {
+		ResultInfo ri = new ResultInfo();
+		if (indexs == null || indexs.equals("")) {
+			ri.setType(0);
+			ri.setMessage("退货失败，请重新选择需要退货的信息！");
+			return ri;
+		}
+		int th_success = 0;
+		int th_fail = 0;
+		String[] ids = indexs.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			try {
+				th_success += backService.ThBackInfoByID(ids[i]);
+			} catch (Exception e) {
+				th_fail++;
+				e.printStackTrace();
+			}
+		}
+		ri.setType(1);
+		ri.setMessage("成功退货" + th_success + "条信息。\n退货失败" + th_fail + "条信息");
+		return ri;
+	}
 	
 }

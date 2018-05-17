@@ -22,6 +22,10 @@ public class OrderInfoCustom{
 	private Integer ghsid;
 	private String ghsname;
 	
+	private String yyname;
+	private String ordernumber;
+	private String ordername;
+	private String ordercreate;
 	
 	
 	public Integer getOrderid() {
@@ -119,6 +123,30 @@ public class OrderInfoCustom{
 	}
 	public void setGhsname(String ghsname) {
 		this.ghsname = ghsname;
+	}
+	public String getYyname() {
+		return yyname;
+	}
+	public void setYyname(String yyname) {
+		this.yyname = yyname;
+	}
+	public String getOrdernumber() {
+		return ordernumber;
+	}
+	public void setOrdernumber(String ordernumber) {
+		this.ordernumber = ordernumber;
+	}
+	public String getOrdername() {
+		return ordername;
+	}
+	public void setOrdername(String ordername) {
+		this.ordername = ordername;
+	}
+	public String getOrdercreate() {
+		return ordercreate;
+	}
+	public void setOrdercreate(String ordercreate) {
+		this.ordercreate = ordercreate;
 	}
 	
 	

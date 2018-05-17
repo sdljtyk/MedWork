@@ -159,11 +159,11 @@ public class MedAction {
 	{
 		int count = 0;
 		try {
-			count = medService.FindCountByGysCustom(gysypmlCustom);
+			count = medService.FindCountByGysCustom(gysypmlCustom,null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<GysypmlCustom> list = medService.FindListByGysCustom(gysypmlCustom);
+		List<GysypmlCustom> list = medService.FindListByGysCustom(gysypmlCustom,null);
 		ResultInfo ri = new ResultInfo(1, "查询成功");
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
 		queryResultInfo.setRows(list);

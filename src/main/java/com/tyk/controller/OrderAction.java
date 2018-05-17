@@ -125,11 +125,11 @@ public class OrderAction {
 	public DataGridResultInfo yycgdlist_cgdmxresult(String yycgdid, int page, int rows) {
 		int count = 0;
 		try {
-			count = orderService.FindOrderCountByOrderId(yycgdid);
+			count = orderService.FindOrderCountByOrderId(yycgdid,null, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(yycgdid, null);
+		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(yycgdid,null, null);
 		ResultInfo ri = new ResultInfo(1, "查询成功");
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
 		queryResultInfo.setRows(list);
@@ -374,11 +374,11 @@ public class OrderAction {
 	public DataGridResultInfo yycgdrkquery_result(String ordername, int page, int rows) {
 		int count = 0;
 		try {
-			count = orderService.FindOrderCountByOrderId(ordername);
+			count = orderService.FindOrderCountByOrderId(ordername, "34", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(ordername, "34");
+		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(ordername, "34", null);
 		ResultInfo ri = new ResultInfo(1, "查询成功");
 		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
 		queryResultInfo.setRows(list);
@@ -411,5 +411,60 @@ public class OrderAction {
 		ri.setMessage("成功入库" + rk_success + "条信息。\n入库失败" + rk_fail + "条信息");
 		return ri;
 	}
-
+	
+	@RequestMapping("/yycgddispose.action")
+	public String yycgddispose(Model model)
+	{  
+		OrderCustom orderCustom = new OrderCustom();
+		orderCustom.setOrderstatemc("31");
+		List<OrderCustom> list = orderService.FindListByOrderCustom(orderCustom);
+		model.addAttribute("cgdNameList", list);
+		return "business/cgd/yycgddispose";
+	}
+	
+	@RequestMapping("/yycgddispose_result.action")
+	@ResponseBody
+	public DataGridResultInfo yycgddispose_result(HttpSession session,String ordername, int page, int rows) {
+		ActiveUser activeUser = (ActiveUser)session.getAttribute("activeUser");
+		
+		int count = 0;
+		try {
+			count = orderService.FindOrderCountByOrderId(ordername,"33",activeUser.getUnitID());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<OrderInfoCustom> list = orderService.FindOrderListByOrderID(ordername,"33",activeUser.getUnitID());
+		ResultInfo ri = new ResultInfo(1, "查询成功");
+		DataGridResultInfo queryResultInfo = new DataGridResultInfo(ri);
+		queryResultInfo.setRows(list);
+		queryResultInfo.setTotal(count);
+		return queryResultInfo;
+	}
+	
+	@RequestMapping("/yycgddispose_submit.action")
+	@ResponseBody
+	public ResultInfo yycgddispose_submit(String indexs) {
+		ResultInfo ri = new ResultInfo();
+		if (indexs == null || indexs.equals("")) {
+			ri.setType(0);
+			ri.setMessage("发货失败，请重新选择需要发货的信息！");
+			return ri;
+		}
+		int fh_success = 0;
+		int fh_fail = 0;
+		String[] ids = indexs.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			try {
+				fh_success += orderService.FhOrderInfoByID(ids[i]);
+			} catch (Exception e) {
+				fh_fail++;
+				e.printStackTrace();
+			}
+		}
+		ri.setType(1);
+		ri.setMessage("成功发货" + fh_success + "条信息。\n发货失败" + fh_fail + "条信息");
+		return ri;
+	}
+	
+	
 }

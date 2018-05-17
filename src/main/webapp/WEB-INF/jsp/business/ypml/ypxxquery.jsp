@@ -12,11 +12,6 @@
 <%@ include file="/WEB-INF/jsp/base/common_js.jsp"%>
 
 <script type="text/javascript">
-var ypxximport = function (){
-	var sendUrl = "${baseurl}/ypml/ypxximport.action";
-	createmodalwindow("药品信息导入", 800, 300, sendUrl);
-};
-
 
 var ypxxexport = function(){
 	jquerySubByFId('ypxxqueryForm', ypxxexport_callback, null, "json");
@@ -69,12 +64,8 @@ var sendUrl = "${baseurl}/ypml/ypxxview.action?id="+id;
 	createmodalwindow("药品信息查看", 900, 500, sendUrl);
 }
 var ypxxadd = function (){
-	//alert(id);
 	var sendUrl = "${baseurl}/ypml/ypxxedit.action";
 	createmodalwindow("药品信息添加", 900, 500, sendUrl);
-	/* var ajaxOption = new AjaxOption();
-			ajaxOption._initPostRequest(true,sendUrl,"json","html");
-			_ajaxPostRequest(ajaxOption, '', ypxxedit_callback);  */
 };
 
 
@@ -85,11 +76,6 @@ var toolbar = [ {
 	text : '添加',
 	iconCls : 'icon-add',
 	handler : ypxxadd
-	},{
-	id : 'import',
-	text : '导入',
-	iconCls : 'icon-undo',
-	handler : ypxximport
 	},{
 	id : 'export',
 	text : '导出',

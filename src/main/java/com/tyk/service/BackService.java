@@ -30,6 +30,7 @@ import com.tyk.pojo.OrderinfoExample;
 import com.tyk.pojo.Orders;
 import com.tyk.pojo.Yymed;
 import com.tyk.pojo.YymedExample;
+import com.tyk.pojo.Yyunit;
 import com.tyk.pojo.BacksExample.Criteria;
 import com.tyk.vo.BackCustom;
 import com.tyk.vo.BackInfoCustom;
@@ -80,14 +81,17 @@ public class BackService {
 
 	private BackInfoCustom FindBackInfoCusByBackInfo(Backinfo backinfo2) {
 		BackInfoCustom custom = new BackInfoCustom();
+		Backs backs = backsMapper.selectByPrimaryKey(backinfo2.getBackid());
 		Medinfo med = medinfoMapper.selectByPrimaryKey(backinfo2.getMedid());
 		Dicinfo dic = dicinfoMapper.selectByPrimaryKey(backinfo2.getBackstate());
 		Ghsunit ghs = ghsunitMapper.selectByPrimaryKey(backinfo2.getGhsid());
 		Orders order = ordersMapper.selectByPrimaryKey(backinfo2.getOrderid());
+		Yyunit yyunit = yyunitMapper.selectByPrimaryKey(backs.getYyid());
 		OrderinfoExample example = new OrderinfoExample();
 		example.createCriteria().andOrderidEqualTo(backinfo2.getOrderid()).andMedidEqualTo(backinfo2.getMedid());
 		List<Orderinfo> temp = orderInfoMapper.selectByExample(example);
-
+		
+		
 		Orderinfo orderinfo = temp.get(0);
 		custom.setId(backinfo2.getId());
 		custom.setGhsid(backinfo2.getGhsid());
@@ -110,6 +114,9 @@ public class BackService {
 		custom.setBackreason(backinfo2.getBackreason());
 		custom.setBacksum(backinfo2.getBacksum().toString());
 		custom.setOrdernumber(order.getOrdernumber());
+		custom.setBacknumber(backs.getBacknumber());
+		custom.setBackcreat(backs.getBackcreat());
+		custom.setYyname(yyunit.getYyname());
 
 		return custom;
 	}
@@ -179,8 +186,17 @@ public class BackService {
 		return backsMapper.deleteByPrimaryKey(Integer.parseInt(thddeleteid));
 	}
 
-	public List<BackInfoCustom> FindBackInfoListByBackID(String yythdid, String backstate) {
-
+	public List<BackInfoCustom> FindBackInfoListByBackID(String yythdid, String backstate, String unitid) {
+		BacksExample backsExample = new BacksExample();
+		backsExample.createCriteria().andBackstateEqualTo(38);
+		List<Backs> backs = backsMapper.selectByExample(backsExample);
+		List<Integer> ids = new ArrayList<Integer>();
+		for (Backs backs2 : backs) {
+			ids.add(backs2.getId());
+		}
+		
+		
+		
 		List<BackInfoCustom> list = new ArrayList<BackInfoCustom>();
 		BackinfoExample example = new BackinfoExample();
 		com.tyk.pojo.BackinfoExample.Criteria criteria = example.createCriteria();
@@ -189,6 +205,11 @@ public class BackService {
 		}
 		if (backstate != null)
 			criteria.andBackstateEqualTo(Integer.parseInt(backstate));
+		
+		if(unitid != null) {
+			criteria.andGhsidEqualTo(Integer.parseInt(unitid));
+			criteria.andBackidIn(ids);
+		}
 		List<Backinfo> Backinfo = backinfoMapper.selectByExample(example);
 		for (Backinfo backinfo2 : Backinfo) {
 			BackInfoCustom temp = FindBackInfoCusByBackInfo(backinfo2);
@@ -197,8 +218,8 @@ public class BackService {
 		return list;
 	}
 
-	public int FindBackInfoCountByBackId(String yythdid) {
-		int count = FindBackInfoListByBackID(yythdid, null).size();
+	public int FindBackInfoCountByBackId(String yythdid, String thstate, String unitid) {
+		int count = FindBackInfoListByBackID(yythdid, thstate,unitid).size();
 		return count;
 	}
 
@@ -247,6 +268,12 @@ public class BackService {
 		backinfo.setBackreason(null);
 		backinfo.setBackstate(39);
 		return backinfoMapper.insertSelective(backinfo);
+	}
+
+	public int ThBackInfoByID(String string) {
+		Backinfo info = backinfoMapper.selectByPrimaryKey(Integer.parseInt(string));
+		info.setBackstate(40);
+		return backinfoMapper.updateByPrimaryKeySelective(info);
 	}
 
 }
