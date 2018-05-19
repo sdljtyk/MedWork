@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class=menu id=MenuContainer>
+<div class="menu" id="MenuContainer">
 
 <c:forEach items="${menulist}" var="menuindex">
  <h4>${menuindex.menuname}</h4>

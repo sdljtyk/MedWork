@@ -14,6 +14,7 @@ public class ActiveUser  implements java.io.Serializable {
 	private List<MenuVo> menu;//操作菜单
 	private String unitID;//用户所属单位id
 	private String unitName;//单位名称
+	private Integer usersate;//用户状态
 	public String getUserid() {
 		return userid;
 	}
@@ -56,6 +57,14 @@ public class ActiveUser  implements java.io.Serializable {
 	}
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
+	}
+	
+	
+	public Integer getUsersate() {
+		return usersate;
+	}
+	public void setUsersate(Integer usersate) {
+		this.usersate = usersate;
 	}
 	@Override
 	public String toString() {

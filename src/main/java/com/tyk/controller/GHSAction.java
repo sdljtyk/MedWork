@@ -80,9 +80,11 @@ public class GHSAction {
 		if(unit.getId()!=null)
 		{
 			int i = ghsUnitService.UpdateGhs(unit,dqid);
+			ri.setType(1);
 			ri.setMessage("成功修改"+i+"条数据！");
 		}else{
 			int j = ghsUnitService.InsertGhs(unit,dqid);
+			ri.setType(1);
 			ri.setMessage("成功添加"+j+"条数据！");
 		}
 		return ri;

@@ -35,37 +35,37 @@ var columns = [ [
 },{
 	field : 'ordernumber',
 	title : '采购单编号',
-	width : 80
+	width : 120
 },{
 	field : 'ordername',
 	title : '采购单名称',
-	width : 150
+	width : 170
 },{
 	field : 'ordercreateperson',
-	title : '建单人',
-	width : 150
+	title : '联系人',
+	width : 120
 },{
 	field : 'orderphone',
 	title : '联系方式',
-	width : 150
+	width : 120
 },{
 	field : 'orderctime',
 	title : '建单时间',
-	width : 80,
+	width : 120
 
 },{
 	field : 'ordersub',
 	title : '提交时间',
-	width : 80,
+	width : 120
 },{
 	field : 'orderwatime',
 	title : '审核时间',
-	width : 80,
+	width : 120
 
 },{
 	field : 'orderstatemc',
 	title : '采购单状态', 
-	width : 80
+	width : 70
 },{
 	field : 'opt3',
 	title : '查看',

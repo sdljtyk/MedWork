@@ -61,32 +61,26 @@
 			},
 			{
 				field : 'medid',
-				hidden : true,
-				formatter : function(value, row, index) {
-					return '<input type="hidden" name="gysypmlControls['+index+'].medid" value="'+row.medid+'" />';
-				}
+				hidden : true
 			},
 			{
 				field : 'ghsunitid',
-				hidden : true,
-				formatter : function(value, row, index) {
-					return '<input type="hidden" name="gysypmlControls['+index+'].ghsunitid" value="'+row.ghsunitid+'" />';
-				}
+				hidden : true
 			},
 			{
 				field : 'ghsname',
 				title : '供货企业',
-				width : 80
+				width : 100
 			},
 			{
 				field : 'controlmc',
 				title : '供货状态',
-				width : 80
+				width : 100
 			},
 			{
 				field : 'reghsmedstate',
 				title : '修改供货状态',
-				width : 80,
+				width : 100,
 				formatter : function(value, row, index) {
 					return '<select  id="reghsmedstate'+row.id+'" style="width:80px">'
 							+ '<option value="0">默认</option>'
@@ -98,7 +92,7 @@
 			{
 				field : 'mednumber',
 				title : '流水号',
-				width : 60
+				width : 80
 			},
 			{
 				field : 'medjx',
@@ -113,22 +107,22 @@
 			{
 				field : 'medmake',
 				title : '生产企业',
-				width : 150
+				width : 200
 			},
 			{
 				field : 'medname',
 				title : '商品名称',
-				width : 100
+				width : 120
 			},
 			{
 				field : 'meddj',
 				title : '中标价',
-				width : 50
+				width : 60
 			},
 			{
 				field : 'jyztmc',
 				title : '交易状态',
-				width : 60
+				width : 80
 			},
 			{
 				field : 'opt3',
@@ -143,9 +137,7 @@
 	function initGrid() {
 		$('#gysypmllist').datagrid({
 			title : '供应药品列表',
-			//nowrap : false,
 			striped : true,
-			//collapsible : true,
 			url : '${baseurl}/ypml/gysypmlcontrolquery_result.action',
 			columns : columns,
 			pagination : true,
@@ -231,7 +223,7 @@
 				<TBODY>
 					<TR>
 						<TD>
-							<table id="gysypmllist"></table>
+							<table id="gysypmllist" align="center"></table>
 						</TD>
 					</TR>
 				</TBODY>

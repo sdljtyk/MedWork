@@ -27,10 +27,7 @@
 				alert('菜单加载异常!');
 			}
 		});
-
-		//tabClose();
-		//tabCloseEven();
-
+		
 		$('#tabs').tabs('add', {
 			title : '欢迎使用',
 			content : createFrame('${baseurl}/welcome.action')
@@ -56,6 +53,12 @@
 
 	});
 
+	function sysuseredit() {
+		var sendUrl = "${baseurl}/user/sysuseredit.action?editid=${activeUser.userid}";
+		createmodalwindow("修改用户信息", 800, 400, sendUrl);
+
+	};
+	
 	//退出系统方法
 	function logout() {
 		_confirm('您确定要退出本系统吗?',null,
@@ -74,7 +77,7 @@
 		style='background: url("../images/layout-browser-hd-bg.gif") repeat-x center 50% rgb(127, 153, 190); height: 30px; color: rgb(255, 255, 255); line-height: 20px; overflow: hidden; font-family: Verdana, 微软雅黑, 黑体;'
 		border="false" split="true" region="north">
 		<SPAN style="padding-right: 20px; float: right;" class="head">
-			欢迎当前用户：${activeUser.username}&nbsp;&nbsp;
+			欢迎当前用户：<a title='修改个人信息' ref='modifinfo' href="#" onclick="sysuseredit()" icon='icon-null' id="modifinfo" >${activeUser.username}</a>&nbsp;&nbsp;
 			<A title='修改密码' ref='modifypwd' href="#" rel='${baseurl}/user/updatepwd.action' icon='icon-null' id="modifypwd" >修改密码</A>
 			&nbsp;&nbsp;
 			<A id="loginOut" href=javascript:logout()>退出系统</A>

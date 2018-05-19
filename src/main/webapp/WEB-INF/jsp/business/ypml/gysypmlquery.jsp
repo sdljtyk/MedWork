@@ -102,7 +102,7 @@
 			{
 				field : 'ghsname',
 				title : '供货企业',
-				width : 80
+				width : 110
 			},
 			{
 				field : 'controlmc',
@@ -112,37 +112,37 @@
 			{
 				field : 'mednumber',
 				title : '流水号',
-				width : 60
+				width :80
 			},
 			{
 				field : 'medjx',
 				title : '剂型',
-				width : 80
+				width : 100
 			},
 			{
 				field : 'medgg',
 				title : '规格',
-				width : 100
+				width : 80
 			},
 			{
 				field : 'medmake',
 				title : '生产企业',
-				width : 150
+				width : 200
 			},
 			{
 				field : 'medname',
 				title : '商品名称',
-				width : 100
+				width : 140
 			},
 			{
 				field : 'meddj',
 				title : '中标价',
-				width : 50
+				width : 70
 			},
 			{
 				field : 'newdj',
 				title : '新单价',
-				width : 50,
+				width :70,
 				formatter : function(value, row, index) {
 					return '<input type="text" name="ghsmeds[' + index
 							+ '].meddj" value="' + (value ? value : "0")
@@ -152,12 +152,12 @@
 			{
 				field : 'jyztmc',
 				title : '交易状态',
-				width : 60
+				width : 80
 			},
 			{
 				field : 'opt3',
 				title : '详细',
-				width : 60,
+				width : 80,
 				formatter : function(value, row, index) {
 					return '<a href=javascript:ypxxinfo(\'' + row.medid
 							+ '\')>查看</a>';

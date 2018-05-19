@@ -358,6 +358,7 @@ public class OrderService {
 	}
 
 	public int FhOrderInfoByID(String string) {
+		System.out.println(string);
 		Orderinfo info = orderinfoMapper.selectByPrimaryKey(Integer.parseInt(string));
 		info.setGhstate(34);
 		return orderinfoMapper.updateByPrimaryKeySelective(info);

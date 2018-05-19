@@ -273,6 +273,16 @@ public class BackService {
 	public int ThBackInfoByID(String string) {
 		Backinfo info = backinfoMapper.selectByPrimaryKey(Integer.parseInt(string));
 		info.setBackstate(40);
+		Orders  order = ordersMapper.selectByPrimaryKey(info.getOrderid());
+		YymedExample example = new YymedExample();
+		example.createCriteria().andYyidEqualTo(order.getYyid())
+			.andMedidEqualTo(info.getMedid());
+		List<Yymed> temp = yymedMapper.selectByExample(example);
+		
+		Yymed yymed = temp.get(0);
+		yymed.setMedsum(yymed.getMedsum()-info.getBacknum());
+		
+		yymedMapper.updateByPrimaryKeySelective(yymed);
 		return backinfoMapper.updateByPrimaryKeySelective(info);
 	}
 

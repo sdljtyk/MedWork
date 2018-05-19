@@ -19,9 +19,8 @@
 					var indexs = [];//提交记录的序号
 					var rows = $('#yycgdmxlist').datagrid('getSelections');
 					for (var i = 0; i < rows.length; i++) {
-						var index = $('#yycgdmxlist').datagrid('getRowIndex',
-								rows[i]);
-						indexs.push(index);
+						
+						indexs.push(rows[i].id);
 					}
 					if (rows.length > 0) {
 						$("#indexs").val(indexs.join(','));

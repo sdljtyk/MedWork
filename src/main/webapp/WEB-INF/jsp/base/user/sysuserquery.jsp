@@ -24,19 +24,18 @@
 		sysuserquery();
 	}
 	var sysuseredit = function(id) {
-		//alert(id);
 		var sendUrl = "${baseurl}/user/sysuseredit.action?editid=" + id;
-		createmodalwindow("修改用户信息", 800, 250, sendUrl);
+		createmodalwindow("修改用户信息", 800, 400, sendUrl);
 
 	};
 
 	function sysuserview(id) {
 		var sendUrl = "${baseurl}/user/sysuserview.action?editid=" + id;
-		createmodalwindow("查看用户信息", 800, 250, sendUrl);
+		createmodalwindow("查看用户信息", 800, 500, sendUrl);
 	}
 	var sysuseradd = function() {
 		var sendUrl = "${baseurl}/user/sysuseredit.action";
-		createmodalwindow("添加用户信息", 800, 250, sendUrl);
+		createmodalwindow("添加用户信息", 800, 500, sendUrl);
 	};
 
 	//工具栏
@@ -49,11 +48,7 @@
 
 	var frozenColumns;
 
-	var columns = [ [ /* {
-		field : 'id',
-		title : '',
-		checkbox : true
-	}, */ {
+	var columns = [ [ {
 		field : 'usernumber',
 		title : '账号',
 		width : 180
@@ -130,7 +125,6 @@
 	function sysuserquery() {
 
 		var formdata = $("#sysuserqueryForm").serializeJson();
-		//alert(formdata);
 		$('#sysuserlist').datagrid('unselectAll');
 		$('#sysuserlist').datagrid('load', formdata);
 	}

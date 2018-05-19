@@ -48,7 +48,11 @@ public class Login {
 		if(activeUser==null) {
 			ri = new ResultInfo(0,"用户名或者密码错误！");
 			return ri;
-		}else {
+		}else if(activeUser.getUsersate() == 0) {
+			ri = new ResultInfo(0,"该用户已被暂停使用，请查证后登录！");
+			return ri;
+		}
+		else{
 			ri = new ResultInfo(1,"登录成功！");
 			session.setAttribute("activeUser", activeUser);
 			System.out.println("ID:"+activeUser.getUserid()+"Name:"+activeUser.getUsername());

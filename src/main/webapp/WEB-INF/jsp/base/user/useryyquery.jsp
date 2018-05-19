@@ -31,7 +31,6 @@
 		useryyquery();
 	}
 	var useryyedit = function(id) {
-		//alert(id);
 		var sendUrl = "${baseurl}/user/useryyedit.action?editid=" + id;
 		createmodalwindow("修改医院信息", 800, 300, sendUrl);
 	};
@@ -40,7 +39,6 @@
 		createmodalwindow("查看医院信息", 800, 300, sendUrl);
 	}
 	var useryyadd = function() {
-		//alert(id);
 		var sendUrl = "${baseurl}/user/useryyedit.action";
 		createmodalwindow("添加医院信息", 800, 300, sendUrl);
 	};

@@ -119,19 +119,19 @@ var columns = [ [{
 },{
 	field : 'medgg',
 	title : '规格',
-	width : 100
+	width : 120
 },{
 	field : 'medmake',
 	title : '生产企业',
-	width : 180
+	width : 210
 },{
 	field : 'zlccmc',
 	title : '质量层次',
-	width : 150
+	width : 130
 },{
 	field : 'lbmc',
 	title : '药品类别',
-	width : 50
+	width : 100
 },{
 	field : 'jyztmc',
 	title : '交易状态',

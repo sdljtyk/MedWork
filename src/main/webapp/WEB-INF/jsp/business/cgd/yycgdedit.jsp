@@ -147,7 +147,7 @@
 			{
 				field : 'mednumber',
 				title : '流水号',
-				width : 80
+				width : 100
 			},
 			{
 				field : 'medname',
@@ -185,7 +185,7 @@
 			{
 				field : 'mednum',
 				title : '采购量',
-				width : 50,
+				width : 70,
 				formatter : function(value, row, index) {
 					return '<input type="text" name="yycgdmxs[' + index
 							+ '].mednum" value="' + (value ? value : "0")
@@ -194,11 +194,11 @@
 			}, {
 				field : 'medsum',
 				title : '采购金额',
-				width : 50
+				width : 70
 			}, {
 				field : 'medmake',
 				title : '生产企业',
-				width : 100
+				width : 200
 			}, {
 				field : 'ghstatemc',
 				title : '采购状态',

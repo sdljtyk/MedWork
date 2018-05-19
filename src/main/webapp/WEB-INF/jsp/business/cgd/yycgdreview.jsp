@@ -80,37 +80,37 @@
 			{
 				field : 'yyname',
 				title : '医院名称',
-				width : 100
+				width : 130
 			},
 			{
 				field : 'ordernumber',
 				title : '采购单编号',
-				width : 80
+				width : 140
 			},
 			{
 				field : 'ordername',
 				title : '采购单名称',
-				width : 150 
+				width : 170 
 			},
 			{
 				field : 'orderctime',
 				title : '建单时间',
-				width : 80,
+				width : 120
 			},
 			{
 				field : 'ordersub',
 				title : '提交时间',
-				width : 80,
+				width : 120
 			},
 			{
 				field : 'orderstatemc',
 				title : '采购单状态',
-				width : 80
+				width : 100
 			},
 			{
 				field : 'opt3',
 				title : '查看',
-				width : 60,
+				width : 80,
 				formatter : function(value, row, index) {
 					return '<a href=javascript:yycgdinfo(\'' + row.id
 							+ '\')>查看</a>';

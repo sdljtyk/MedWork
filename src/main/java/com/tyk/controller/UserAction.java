@@ -16,6 +16,7 @@ import com.tyk.pojo.User;
 import com.tyk.service.BaseService;
 import com.tyk.service.UserService;
 import com.tyk.util.DataGridResultInfo;
+import com.tyk.util.MD5;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.ActiveUser;
 import com.tyk.vo.UserCustom;
@@ -127,6 +128,8 @@ public class UserAction {
 			ri.setType(1);
 			ri.setMessage("成功修改"+i+"条数据！");
 		}else{
+			String pwd = "123456";
+			user.setUserpass(pwd);
 			int j = userService.InsertUser(user);
 			ri.setMessage("成功添加"+j+"条数据！");
 			ri.setType(1);

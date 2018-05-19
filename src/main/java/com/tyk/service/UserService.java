@@ -45,7 +45,7 @@ public class UserService {
 		List<User> users = userMapper.selectByExample(userExample);
 		if (users.isEmpty())
 			return null;
-		else {
+		else{
 			User user = users.get(0);
 			activeUser.setUserid(user.getId().toString());
 			activeUser.setUnitID(user.getUnitid().toString());
@@ -53,7 +53,7 @@ public class UserService {
 			activeUser.setUsername(user.getUsername());
 			activeUser.setGroupname(dicinfoMapper.selectByPrimaryKey(user.getGroupid()).getInfo());
 			activeUser.setMenu(null);
-			
+			activeUser.setUsersate(user.getUserstate());;
 			if(user.getGroupid()==26)
 				activeUser.setUnitName("监管部门");
 			if(user.getGroupid()==27)
@@ -161,8 +161,6 @@ public class UserService {
 	public int UpdateUser(User user) {
 		Date day=new Date();    
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		MD5 md5 = new MD5();
-		user.setUserpass(md5.getMD5ofStr(user.getUserpass()));
 		user.setUseralter(df.format(day));
 		int j = userMapper.updateByPrimaryKeySelective(user);
 		return j;

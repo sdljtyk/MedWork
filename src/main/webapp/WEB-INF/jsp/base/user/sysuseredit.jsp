@@ -51,7 +51,7 @@
 			onShow : "",
 			onCorrect : "&nbsp;"
 		}).inputValidator({
-			min : 1,
+			min : 0,
 			onError : "请选择用户类型"
 		});
 		
@@ -59,7 +59,6 @@
 			valueField: 'id',
 			textField: 'text',
 			onLoadSuccess : function () {    
-				console.log(${sysuser.unitid});
                 	$.ajax({
                 		url:'/user/loadunit.action',
                 		type:'POST',
@@ -92,16 +91,6 @@
                 }  
             }  
         });  
-		
-		//用户密码
-		$("#sysuser_password").formValidator({
-			onShow : "",
-			onCorrect : "&nbsp;"
-		}).inputValidator({
-			min : 1,
-			max : 10,
-			onError : "请填写用户密码(最长10个字符)"
-		});
 
 	});
 	function sysusersave() {
@@ -112,7 +101,7 @@
 
 	}
 	function sysusersave_callback(data) {
-		$.messager.alert("系统提示消息", data.message);
+		$.messager.alert("系统提示消息", data.message,"info");
 		if (data.type == 1) {
 			parent.closemodalwindow();
 			parent.sysuserquery();
@@ -168,11 +157,7 @@
 								<TR>
 									<TD height=30 width="15%" align=right>用户密码：</TD>
 									<TD class=category width="35%">
-										<div>
-											<input type="password" id="sysuser_password" name="userpass"
-												value="${sysuser.userpass}" />
-										</div>
-										<div id="sysuser_passwordTip"></div>
+										${sysuser.userpass}
 									</TD>
 									<TD height=30 width="15%" align=right>用户类型：</TD>
 									<TD class=category width="35%">

@@ -26,6 +26,13 @@ import com.tyk.vo.BackInfoCustom;
 import com.tyk.vo.OrderCustom;
 import com.tyk.vo.OrderInfoCustom;
 
+
+/**
+ * 
+ * @author sdljtyk
+ * 退货单相关操作
+ *
+ */
 @Controller
 @RequestMapping("/thd")
 public class BackAction {
@@ -36,7 +43,7 @@ public class BackAction {
 	private BackService backService;
 	@Autowired
 	private OrderService orderService;
-	
+	/*退货单查询列表界面跳转*/
 	@RequestMapping("/yythdlist.action")
 	public String yythdlist(Model model)
 	{
@@ -45,6 +52,7 @@ public class BackAction {
 		return "business/thd/yythdlist";
 	}
 	
+	/*添加退货单界面跳转*/
 	@RequestMapping("/yythdadd.action")
 	public String yythdadd(HttpSession session, Model model)
 	{
@@ -65,6 +73,7 @@ public class BackAction {
 		return "business/thd/yythdadd";
 	}
 
+	/*执行退货单保存*/
 	@RequestMapping("/yythdsave.action")
 	@ResponseBody
 	public ResultInfo yythdsave(Backs backs) throws Exception {
@@ -89,11 +98,13 @@ public class BackAction {
 		return ri;
 	}
 
+	/*退货单维护界面跳转*/
 	@RequestMapping("/yythdmanager.action")
 	public String yythdmanager(Model model) throws Exception {
 		return "/business/thd/yythdmanager";
 	}
 	
+	/*根据条件查询退货单维护列表结果*/
 	@RequestMapping("/yythdmanager_result.action")
 	@ResponseBody
 	public DataGridResultInfo yythdmanager_result(BackCustom backCustom, int page, int rows, HttpSession session) {
@@ -115,6 +126,7 @@ public class BackAction {
 		return queryResultInfo;
 	}
 	
+	/*退货单修改界面跳转*/
 	@RequestMapping("/yythdedit.action")
 	public String yythdedit(String yythdid, Model model) {
 		BackCustom custom = backService.FindCusByBackID(yythdid);
@@ -122,6 +134,7 @@ public class BackAction {
 		return "/business/thd/yythdedit";
 	}
 	
+	/*退货单删除操作*/
 	@RequestMapping("/yythddelete.action")
 	@ResponseBody
 	public ResultInfo yythddelete(String thddeleteid) throws Exception {
@@ -143,6 +156,8 @@ public class BackAction {
 		ri.setMessage("成功删除" + del_success + "条信息。\n删除失败" + del_fail + "条信息");
 		return ri;
 	}
+	
+	/*医院退货单列表查询*/
 	@RequestMapping("/yythdlist_result.action")
 	@ResponseBody
 	public DataGridResultInfo yythdlist_result(BackCustom backCustom, int page, int rows, HttpSession session) {
@@ -162,6 +177,8 @@ public class BackAction {
 		queryResultInfo.setTotal(count);
 		return queryResultInfo;
 	}
+	
+	/*医院退货单明细列表查询*/
 	@RequestMapping("/yythdedit_thdmxresult.action")
 	@ResponseBody
 	public DataGridResultInfo yythdedit_thdmxresult(String yythdid, int page, int rows) {
@@ -179,6 +196,7 @@ public class BackAction {
 		return queryResultInfo;
 	}
 	
+	/*退货单明细添加界面跳转*/
 	@RequestMapping("/yythdmxadd.action")
 	public String yythdmxadd(Model model,HttpSession session,String yythdid)
 	{
@@ -192,6 +210,7 @@ public class BackAction {
 		return "/business/thd/yythdmxadd";
 	}
 	
+	/*退货单可添加信息*/
 	@RequestMapping("/yythdmxadd_result.action")
 	@ResponseBody
 	public DataGridResultInfo yycgdrkquery_result(HttpSession session,String ordername, int page, int rows,String backid) {
@@ -213,6 +232,7 @@ public class BackAction {
 		return queryResultInfo;
 	}
 	
+	/*退货单药品添加提交*/
 	@RequestMapping("/yythdmxaddsubmit.action")
 	@ResponseBody
 	public ResultInfo yythdmxaddsubmit(BackCustom backCustom, String indexs) {
@@ -235,6 +255,7 @@ public class BackAction {
 		return ri;
 	}
 	
+	/*退货单药品信息保存*/
 	@RequestMapping("/yythdmxsave.action")
 	@ResponseBody
 	public ResultInfo yythdmxsave(BackCustom backCustom, String indexs) {
@@ -261,6 +282,7 @@ public class BackAction {
 		return ri;
 	}
 	
+	/*退货单明细删除*/
 	@RequestMapping("/yythdmxdelete.action")
 	@ResponseBody
 	public ResultInfo yythdmxdelete(String indexs) {
@@ -286,6 +308,7 @@ public class BackAction {
 		return ri;
 	}
 	
+	/*退货单提交*/
 	@RequestMapping("/yythdsubmit.action")
 	@ResponseBody
 	public ResultInfo yythdsubmit(Backs backs) throws Exception {
@@ -305,6 +328,7 @@ public class BackAction {
 		return ri;
 	}
 	
+	/*查看退货单信息界面跳转*/
 	@RequestMapping("/yythdinfo.action")
 	public String yythdinfo(String yythdid, Model model) {
 		BackCustom custom = backService.FindCusByBackID(yythdid);
@@ -312,6 +336,7 @@ public class BackAction {
 		return "/business/thd/yythdinfo";
 	}
 	
+	/*退货单受理界面跳转*/
 	@RequestMapping("/yythddispose.action")
 	public String yycgddispose(Model model)
 	{  
@@ -322,6 +347,7 @@ public class BackAction {
 		return "business/thd/yythddispose";
 	}
 	
+	/*退货单受理药品列表查询*/
 	@RequestMapping("/yythddispose_result.action")
 	@ResponseBody
 	public DataGridResultInfo yythddispose_result(HttpSession session,String backname, int page, int rows) {
@@ -341,6 +367,7 @@ public class BackAction {
 		return queryResultInfo;
 	}
 	
+	/*退货单受理结果提交*/
 	@RequestMapping("/yythddispose_submit.action")
 	@ResponseBody
 	public ResultInfo yythddispose_submit(String indexs) {

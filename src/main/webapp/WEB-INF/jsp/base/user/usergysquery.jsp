@@ -97,14 +97,14 @@
 		formatter : function(value, row, index) {
 			return '<a href=javascript:usergysdel(\'' + row.id + '\')>删除</a>';
 		}
-	}, {
+	}/* , {
 		field : 'opt3',
 		title : '详细',
 		width : 60,
 		formatter : function(value, row, index) {
 			return '<a href=javascript:usergysview(\'' + row.id + '\')>查看</a>';
 		}
-	} ] ];
+	} */ ] ];
 
 	function initGrid() {
 		$('#usergyslist').datagrid({

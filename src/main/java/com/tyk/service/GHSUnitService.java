@@ -103,14 +103,14 @@ public class GHSUnitService {
 	}
 
 	public int InsertGhs(Ghsunit unit, String[] dqid) {
-		int i = ghsunitMapper.insertSelective(unit);
-		for(i=0;i<dqid.length;i++) {
+		int j = ghsunitMapper.insertSelective(unit);
+		for(int i=0;i<dqid.length;i++) {
 			Ghqy temp = new Ghqy();
 			temp.setGysunitid(unit.getId());
 			temp.setXzqyid(Integer.parseInt(dqid[i]));
 			ghqyMapper.insertSelective(temp);
 		}
-		return 0;
+		return j;
 	}
 
 	public int DelGhsByID(String delid) {

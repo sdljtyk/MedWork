@@ -74,11 +74,11 @@
 			}, {
 				field : 'mednumber',
 				title : '流水号',
-				width : 50
+				width : 80
 			}, {
 				field : 'medname',
-				title : '通用名',
-				width : 100
+				title : '商品名称',
+				width : 120
 			}, {
 				field : 'medjx',
 				title : '剂型',
@@ -90,7 +90,7 @@
 			}, {
 				field : 'meddj',
 				title : '中标价',
-				width : 50,
+				width : 70,
 			},{
 			field : 'dj',
 			title : '',
@@ -101,7 +101,7 @@
 		}, {
 				field : 'medmake',
 				title : '生产企业',
-				width : 100
+				width : 180
 			}, {
 				field : 'jyztmc',
 				title : '交易状态',
@@ -109,7 +109,7 @@
 			}, {
 				field : 'ghsname',
 				title : '供货商',
-				width : 100
+				width : 200
 			} ] ];
 
 	function initGrid() {

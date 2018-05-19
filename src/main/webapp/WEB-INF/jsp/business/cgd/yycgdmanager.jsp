@@ -66,32 +66,32 @@ var columns = [ [
 	},{
 		field : 'ordernumber',
 		title : '采购单编号',
-		width : 80
+		width : 130
 	},{
 		field : 'ordername',
 		title : '采购单名称',
-		width : 150
+		width : 180
 	},{
 		field : 'ordercreateperson',
-		title : '建单人',
-		width : 150
+		title : '联系人',
+		width : 110
 	},{
 		field : 'orderphone',
 		title : '联系方式',
-		width : 150
+		width : 110
 	},{
 		field : 'orderctime',
 		title : '建单时间',
-		width : 80,
+		width : 130
 
 	},{
 		field : 'ordersub',
 		title : '提交时间',
-		width : 80,
+		width : 130
 	},{
 		field : 'orderwatime',
 		title : '审核时间',
-		width : 80,
+		width : 130
 
 	},{
 		field : 'orderstatemc',
@@ -119,10 +119,7 @@ function initGrid(){
 		//nowrap : false,
 		striped : true,
 		//collapsible : true,
-		url : '${baseurl}/cgd/yycgdmanager_result.action',
-		queryParams:{
-			year:'${year}'
-		},
+		url : '${baseurl}/cgd/yycgdmanager_result.action?orderstate=29',
 		idField : 'id',//采购单id
 		columns : columns,
 		autoRowHeight:true,
@@ -161,13 +158,7 @@ function initGrid(){
 					<TD class="left">采购单名称：</TD>
 					<td><INPUT type="text" name="ordername" /></td>
 					<TD class="left">采购单状态：</TD>
-					<td><select id="yycgdCustom.zt" name="orderstate"
-						style="width: 150px">
-							<option value="0">全部</option>
-							<c:forEach items="${cgdztList}" var="value">
-								<option value="${value.id}">${value.info}</option>
-							</c:forEach>
-					</select></td>
+					<td width="160px">未提交</td>
 					<TD colspan=2><a id="btn" href="#" onclick="yycgdquery()"
 						class="easyui-linkbutton" iconCls='icon-search'>查询</a></TD>
 

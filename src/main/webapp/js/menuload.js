@@ -4,7 +4,6 @@ var opentabwindow = function(tabTitle,url){
 };
 //菜单单击事件
 var menuclick = function(){
-		//var tabTitle = $(this).children('.nav').text();
 		var tabTitle = $(this).attr("title");
 		var url = $(this).attr("rel");
 		var menuid = $(this).attr("ref");
