@@ -16,7 +16,6 @@ import com.tyk.pojo.User;
 import com.tyk.service.BaseService;
 import com.tyk.service.UserService;
 import com.tyk.util.DataGridResultInfo;
-import com.tyk.util.MD5;
 import com.tyk.util.ResultInfo;
 import com.tyk.vo.ActiveUser;
 import com.tyk.vo.UserCustom;
